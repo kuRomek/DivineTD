@@ -8,6 +8,7 @@ public static class InputInterpreter
         {
             PointerPosition = actions.Player.Drag.ReadValue<Vector2>(),
             Pressing = actions.Player.Click.IsPressed(),
+            PressedThisFrame = actions.Player.Click.WasPressedThisFrame(),
         };
     }
 }

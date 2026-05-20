@@ -4,4 +4,5 @@ public struct PlayerInput
 {
     public Vector2 PointerPosition;
     public bool Pressing;
+    public bool PressedThisFrame;
 }

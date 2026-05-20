@@ -1,15 +1,23 @@
 using kuRomek.SimpleVG;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class MainCamera : Model, IUpdatable
 {
+    private bool _isDragging = false;
+
     public MainCamera(Transform transform) : base(transform)
     {
     }
 
     public void Update(float deltaTime)
     {
-        if (InputController.Current.Pressing)
+        if (InputController.Current.PressedThisFrame)
+            _isDragging = EventSystem.current.IsPointerOverGameObject() == false;
+        else if (_isDragging)
+            _isDragging = InputController.Current.Pressing;
+
+        if (_isDragging)
             Move(deltaTime);
     }
 
