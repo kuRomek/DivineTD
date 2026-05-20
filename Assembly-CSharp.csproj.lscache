@@ -50,7 +50,9 @@ TemporaryDependencyNodeTargetIdentifier=netstandard2.1
 /warnaserror+:NU1605
 
 [sourceFiles]
-Assets/TutorialInfo/Scripts/Readme.cs
+Assets/
+ ExternalAssets/QuickOutline/Scripts/Outline.cs
+ Source/Misc/BackgroundWiggler.cs
 Temp/obj/Assembly-CSharp/.NETStandard,Version=v2.1.AssemblyAttributes.cs
 
 [metadataReferences]
@@ -323,7 +325,15 @@ Library/PackageCache/
  com.unity.nuget.mono-cecil@ecb9724e46ff/Mono.Cecil.dll
  com.unity.visualscripting@191c0d7e3b69/Runtime/VisualScripting.Flow/Dependencies/NCalc/Unity.VisualScripting.Antlr3.Runtime.dll
 Library/ScriptAssemblies/
+ kuRomek.SimpleVg.dll
  PPv2URPConverters.dll
+ UniTask.Addressables.dll
+ UniTask.dll
+ UniTask.DOTween.dll
+ UniTask.Linq.dll
+ UniTask.TextMeshPro.dll
+ Unity.2D.Sprite.AIIntegration.Editor.dll
+ Unity.2D.Sprite.Editor.dll
  Unity.AI.Navigation.dll
  Unity.AI.Navigation.Editor.ConversionSystem.dll
  Unity.AI.Navigation.Editor.dll
@@ -378,6 +388,9 @@ Library/ScriptAssemblies/
  UnityEditor.UI.Analytics.dll
  UnityEditor.UI.dll
  UnityEngine.UI.dll
+Temp/bin/Debug/
+ Google.Play.Games.dll
+ Google.Play.Games.Editor.dll
 
 [analyzerReferences]
 ../

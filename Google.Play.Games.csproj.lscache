@@ -379,9 +379,12 @@ Temp/obj/Google.Play.Games/.NETStandard,Version=v2.1.AssemblyAttributes.cs
   UnityEditor.iOS.Extensions.Xcode.dll
   UnityEditor.OSXStandalone.Extensions.dll
  WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Assets/ExternalDependencyManager/Editor/
- 1.2.182/Google.VersionHandlerImpl.dll
- Google.VersionHandler.dll
+Assets/ExternalDependencyManager/Editor/1.2.182/
+ Google.IOSResolver.dll
+ Google.JarResolver.dll
+ Google.PackageManagerResolver.dll
+ Google.VersionHandlerImpl.dll
+Assets/ExternalDependencyManager/Editor/Google.VersionHandler.dll
 Library/PackageCache/com.unity.collab-proxy@e566cd3e7623/Lib/Editor/
  log4netPlastic.dll
  Unity.Plastic.Antlr3.Runtime.dll
