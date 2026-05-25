@@ -19,7 +19,7 @@ public class BuildingSystem
     {
         _mainCamera.ToggleControlBlock(true);
         _towerDraft = _towerFactory.CreateTower(isHeavenFaction, type, true);
-        _towerDraft.Transform.position = _gridSystem.GetSnappedPosition(isHeavenFaction);
+        _towerDraft.MoveAt(_gridSystem.GetSnappedPosition(isHeavenFaction));
     }
 
     public bool TryBuildTower(bool isHeavenSide)

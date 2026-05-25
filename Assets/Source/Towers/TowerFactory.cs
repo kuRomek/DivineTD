@@ -39,6 +39,7 @@ public class TowerFactory : MonoBehaviour
         TowerView tower = Instantiate(isHeavenFaction ? _heavenTowers[type] : _hellTowers[type]);
         TowerModel towerModel = new(tower.transform, isDraft, isHeavenFaction);
         tower.AttachPresenter(new Tower(tower, towerModel, _gridSystem));
+        tower.ToggleBuildingIndicator(isDraft);
 
         return towerModel;
     }

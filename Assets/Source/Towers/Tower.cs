@@ -8,6 +8,7 @@ public class Tower : GridObject
     }
 
     public new TowerModel Model => base.Model as TowerModel;
+    public new TowerView View => base.View as TowerView;
 
     private void OnDestroyed()
     {

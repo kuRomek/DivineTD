@@ -1,5 +1,3 @@
-using kuRomek.SimpleVG;
-
-public class TowerView : View
+public class TowerView : GridObjectView
 {
 }
