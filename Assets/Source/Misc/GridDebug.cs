@@ -6,26 +6,26 @@ public class GridDebug : MonoBehaviour
     [SerializeField] private GridCellCoord _cellViewPrefab;
     [SerializeField] private Color _color;
 
-    private GridCellCoord[,] _cells = new GridCellCoord[11, 20];
+    private readonly GridCellCoord[,] _cells = new GridCellCoord[11, 20];
 
     private void Awake()
     {
         UpdateView();
 
-        for (int row = 0; row <= _cells.GetLength(0); row++)
+        for (int column = 0; column <= _cells.GetLength(0); column++)
         {
             Debug.DrawLine(
-                _grid.CellToWorld(new(row, 0)) + Vector3.back,
-                _grid.CellToWorld(new(row, _cells.GetLength(1))) + Vector3.back,
-                Color.red, 1000f);
+                _grid.CellToWorld(new(column, 0)),
+                _grid.CellToWorld(new(column, _cells.GetLength(1))),
+                _color, 1000f);
         }
 
-        for (int column = 0; column <= _cells.GetLength(1); column++)
+        for (int row = 0; row <= _cells.GetLength(1); row++)
         {
             Debug.DrawLine(
-                _grid.CellToWorld(new(0, column)) + Vector3.back,
-                _grid.CellToWorld(new(_cells.GetLength(0), column)) + Vector3.back,
-                Color.red, 1000f);
+                _grid.CellToWorld(new(0, row)),
+                _grid.CellToWorld(new(_cells.GetLength(0), row)),
+                _color, 1000f);
         }
     }
 

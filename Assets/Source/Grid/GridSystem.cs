@@ -53,12 +53,9 @@ public class GridSystem
 
     public Vector3 GetSnappedPosition(bool isHeavenSide, Vector3 worldPosition)
     {
-        Grid grid = isHeavenSide ? _heavenGrid : _hellGrid;
+        Vector3Int cell = (isHeavenSide ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
 
-        Vector3Int cell = grid.WorldToCell(worldPosition);
-
-        return grid.CellToWorld(cell) +
-            grid.transform.rotation * new Vector3(grid.cellSize.x, -0.001f, grid.cellSize.y) / 2f;
+        return GetWorldPosition(isHeavenSide, (Vector2Int)cell);
     }
 
     public Vector3 GetSnappedPosition(bool isHeavenSide)
@@ -72,6 +69,21 @@ public class GridSystem
         return -Vector3.one;
     }
 
+    public Vector2Int GetCell(bool isHeavenFaction, Vector3 worldPosition)
+    {
+        return (Vector2Int)(isHeavenFaction ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
+    }
+
+    public Vector3 GetWorldPosition(bool isHeavenFaction, Vector2Int cell)
+    {
+        Grid grid = isHeavenFaction ? _heavenGrid : _hellGrid;
+
+        Vector3 position = grid.CellToWorld((Vector3Int)cell) +
+            grid.transform.rotation * new Vector3(grid.cellSize.x, 0f, grid.cellSize.y) / 2f;
+
+        return position;
+    }
+
     public bool CheckAvailability(Vector2Int cell, bool isHeavenSide)
     {
         if (isHeavenSide)
@@ -82,8 +94,7 @@ public class GridSystem
 
     public bool CheckAvailability(Vector3 worldPosition, bool isHeavenSide)
     {
-        Grid grid = isHeavenSide ? _heavenGrid : _hellGrid;
-        Vector2Int cell = (Vector2Int)grid.WorldToCell(worldPosition);
+        Vector2Int cell = (Vector2Int)(isHeavenSide ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
         return CheckAvailability(cell, isHeavenSide);
     }
 }
