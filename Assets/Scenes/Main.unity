@@ -1097,6 +1097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafa13eb8a6c6309a984caf8e525ab34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerDetector
+  _collider: {fileID: 0}
 --- !u!1 &444141630
 GameObject:
   m_ObjectHideFlags: 0
@@ -1531,6 +1532,7 @@ MonoBehaviour:
   _mainCamera: {fileID: 330585545}
   _heavenGrid: {fileID: 1644402444}
   _hellGrid: {fileID: 1806628557}
+  _projectilePrefab: {fileID: 0}
   _heavenTowers:
     _serializedList:
     - Key: 0
@@ -2104,6 +2106,51 @@ MonoBehaviour:
   _buildingButtons: {fileID: 1778090172}
   _acceptBuildingButton: {fileID: 1492322065}
   _cancelBuildingButton: {fileID: 1916065731}
+--- !u!1 &965623867
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 965623869}
+  - component: {fileID: 965623868}
+  m_Layer: 0
+  m_Name: Pools
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &965623868
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965623867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc5fe5389c5890cc896ccbecf2cc654, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pools
+  _bullet: {fileID: 3080183593047234231, guid: 8ce554acdd7f110d59d0a2fbb6c93298, type: 3}
+--- !u!4 &965623869
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 965623867}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1025884673
 GameObject:
   m_ObjectHideFlags: 0
@@ -2249,6 +2296,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafa13eb8a6c6309a984caf8e525ab34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerDetector
+  _collider: {fileID: 0}
 --- !u!1 &1059798187
 GameObject:
   m_ObjectHideFlags: 0
@@ -3657,3 +3705,4 @@ SceneRoots:
   - {fileID: 2118009708}
   - {fileID: 538979139}
   - {fileID: 1059798188}
+  - {fileID: 965623869}

@@ -34,8 +34,8 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
-        HealthAmount: 500
-        Speed: 0
+        HealthAmount: 10
+        Speed: 2
     - Key: 1
       Value:
         HealthAmount: 20

@@ -5,11 +5,13 @@ using UnityEngine;
 public class Tower : GridObject, IInteractable
 {
     private Tween _shooting;
+    private readonly Transform _gunTip;
 
-    public Tower(View view, Model model, GridSystem gridSystem, TriggerDetector triggerDetector)
+    public Tower(View view, Model model, GridSystem gridSystem, TriggerDetector triggerDetector, Transform gunTip)
         : base(view, model, gridSystem)
     {
         TriggerDetector = triggerDetector;
+        _gunTip = gunTip;
         triggerDetector.SetTriggerRadius(Model.Params.Radius);
         triggerDetector.Toggle(Model.IsDraft == false);
 
@@ -58,6 +60,7 @@ public class Tower : GridObject, IInteractable
     private void RemoveTarget(IDamageable damageable)
     {
         Model.DequeueTarget(damageable);
+        damageable.Died -= RemoveTarget;
 
         if (Model.AttackTargets.Count == 0)
             StopShooting();
@@ -73,7 +76,14 @@ public class Tower : GridObject, IInteractable
 
     private void Shoot()
     {
-        Model.CurrentAttackTarget?.TakeDamage(Model.Params.Damage);
+        if (Model.CurrentAttackTarget is Model model)
+        {
+            Pools.Bullets.Get().Launch(
+                _gunTip.position,
+                new Vector3(model.Transform.position.x, _gunTip.position.y, model.Transform.position.z),
+                Model.Params.Damage,
+                Model.IsHeavenFaction == false);
+        }
     }
 
     private void StopShooting()

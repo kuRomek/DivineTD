@@ -7,6 +7,7 @@ public class TowerFactory : MonoBehaviour
     [SerializeField] private Camera _mainCamera;
     [SerializeField] private Grid _heavenGrid;
     [SerializeField] private Grid _hellGrid;
+    [SerializeField] private Projectile _projectilePrefab;
 
     [Header("Heaven Tower Prefabs")]
     [SerializeField] private SerializedDictionary<TowerType, TowerView> _heavenTowers;
@@ -43,7 +44,7 @@ public class TowerFactory : MonoBehaviour
         if (triggerDetector != null)
             triggerDetector.AttachComponents(null, towerModel);
 
-        tower.AttachPresenter(new Tower(tower, towerModel, _gridSystem, triggerDetector));
+        tower.AttachPresenter(new Tower(tower, towerModel, _gridSystem, triggerDetector, tower.GunTip));
 
         tower.ToggleBuildingIndicator(isDraft);
 

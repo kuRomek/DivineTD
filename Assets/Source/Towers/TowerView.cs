@@ -4,6 +4,8 @@ public class TowerView : GridObjectView
 {
     [SerializeField] private Transform _towerHead;
 
+    [field: SerializeField] public Transform GunTip { get; private set; }
+
     public void LookAt(Vector3 target)
     {
         target = new(target.x, _towerHead.transform.position.y, target.z);
