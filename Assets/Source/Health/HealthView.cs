@@ -22,7 +22,7 @@ public class HealthView : View
 
     public void Show()
     {
-        _sliderBar.gameObject.SetActive(false);
+        _sliderBar.gameObject.SetActive(true);
     }
 
     public void Hide()

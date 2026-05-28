@@ -1,3 +1,4 @@
+using System;
 using kuRomek.SimpleVG;
 using UnityEngine;
 
@@ -7,7 +8,11 @@ public class CastleModel : Model, IDamageable, IFactionRelated
     {
         Health = healthModel;
         IsHeavenFaction = isHeavenFaction;
+
+        Health.Died += () => Died?.Invoke(this);
     }
+
+    public event Action<IDamageable> Died;
 
     public bool IsHeavenFaction { get; }
     public HealthModel Health { get; }

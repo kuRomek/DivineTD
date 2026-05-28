@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed9b9caa67cebc26cbb83bb727644307, type: 3}
+  m_Name: Towers
+  m_EditorClassIdentifier: kuRomek.SimpleVg.Configs::TowersConfig
+  _heavenData:
+    _serializedList:
+    - Key: 0
+      Value:
+        AttackRate: 1
+        Radius: 3
+        Damage: 4
+    - Key: 1
+      Value:
+        AttackRate: 2
+        Radius: 4
+        Damage: 1
+    - Key: 2
+      Value:
+        AttackRate: 0.5
+        Radius: 3
+        Damage: 8
+    - Key: 3
+      Value:
+        AttackRate: 0.8
+        Radius: 3
+        Damage: 8
+  _hellData:
+    _serializedList:
+    - Key: 0
+      Value:
+        AttackRate: 1
+        Radius: 3
+        Damage: 4
+    - Key: 1
+      Value:
+        AttackRate: 2
+        Radius: 4
+        Damage: 1
+    - Key: 2
+      Value:
+        AttackRate: 0.5
+        Radius: 3
+        Damage: 8
+    - Key: 3
+      Value:
+        AttackRate: 0.8
+        Radius: 3
+        Damage: 8

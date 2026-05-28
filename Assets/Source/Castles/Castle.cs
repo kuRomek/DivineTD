@@ -1,6 +1,6 @@
 using kuRomek.SimpleVG;
 
-public class Castle : Presenter
+public class Castle : Presenter, IInteractable
 {
     public Castle(View view, Model model) : base(view, model)
     {
@@ -10,4 +10,14 @@ public class Castle : Presenter
 
     protected new CastleModel Model => base.Model as CastleModel;
     protected new CastleView View => base.View as CastleView;
+
+    TriggerDetector IInteractable.TriggerDetector => null;
+
+    void IInteractable.OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
+    {
+    }
+
+    void IInteractable.OnTriggerExited(IDamageable damageable, IFactionRelated faction)
+    {
+    }
 }

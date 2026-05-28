@@ -1,15 +1,13 @@
-using System;
 using System.Collections.Generic;
 using kuRomek.SimpleVG;
 using UnityEngine;
 
-public class Unit : Presenter, IUpdatable
+public class Unit : Presenter, IUpdatable, IInteractable
 {
     private const float DistanceTolerance = 0.01f;
 
     private readonly IReadOnlyDictionary<Vector2Int, GridObjectModel> _grid;
     private readonly GridSystem _gridSystem;
-    private readonly TriggerDetector _triggerDetector;
 
     private Vector3 _currentTargetWorld;
 
@@ -22,16 +20,18 @@ public class Unit : Presenter, IUpdatable
     {
         _grid = grid;
         _gridSystem = gridSystem;
-        _triggerDetector = triggerDetector;
+        TriggerDetector = triggerDetector;
 
         _currentTargetWorld = _gridSystem.GetWorldPosition(Model.IsHeavenFaction == false, Model.CurrentTarget);
 
-        _triggerDetector.EnteredTrigger += OnTriggerEnter;
+        TriggerDetector.EnteredTrigger += (this as IInteractable).OnTriggerEnter;
         Model.Health.Died += View.OnDestroyed;
     }
 
     protected new UnitModel Model => base.Model as UnitModel;
     protected new UnitView View => base.View as UnitView;
+
+    public TriggerDetector TriggerDetector { get; }
 
     public void Update(float deltaTime)
     {
@@ -42,12 +42,17 @@ public class Unit : Presenter, IUpdatable
                 _currentTargetWorld = _gridSystem.GetWorldPosition(Model.IsHeavenFaction, Model.CurrentTarget);
     }
 
-    private void OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
+    void IInteractable.OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
     {
-        if (faction.IsHeavenFaction != Model.IsHeavenFaction)
+        if (faction.IsHeavenFaction != Model.IsHeavenFaction && damageable is CastleModel)
         {
             damageable.TakeDamage(5f);
             (Model as IDamageable).Die();
         }
+    }
+
+    void IInteractable.OnTriggerExited(IDamageable damageable, IFactionRelated faction)
+    {
+
     }
 }

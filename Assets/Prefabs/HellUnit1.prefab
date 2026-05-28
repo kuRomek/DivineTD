@@ -243,6 +243,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bafa13eb8a6c6309a984caf8e525ab34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TriggerDetector
+  _collider: {fileID: 6706597837758167454}
 --- !u!4 &6812344066046984603 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a4c2dc87540d4d30d805a15a23308351, type: 3}

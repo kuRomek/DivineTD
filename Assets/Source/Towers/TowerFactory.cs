@@ -37,8 +37,14 @@ public class TowerFactory : MonoBehaviour
     public TowerModel CreateTower(bool isHeavenFaction, TowerType type, bool isDraft)
     {
         TowerView tower = Instantiate(isHeavenFaction ? _heavenTowers[type] : _hellTowers[type]);
-        TowerModel towerModel = new(tower.transform, isDraft, isHeavenFaction);
-        tower.AttachPresenter(new Tower(tower, towerModel, _gridSystem));
+        TowerModel towerModel = new(tower.transform, isDraft, isHeavenFaction, type);
+        TriggerDetector triggerDetector = tower.GetComponentInChildren<TriggerDetector>();
+
+        if (triggerDetector != null)
+            triggerDetector.AttachComponents(null, towerModel);
+
+        tower.AttachPresenter(new Tower(tower, towerModel, _gridSystem, triggerDetector));
+
         tower.ToggleBuildingIndicator(isDraft);
 
         return towerModel;

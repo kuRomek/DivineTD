@@ -73,7 +73,9 @@ public class UnitFactory : MonoBehaviour
 
         if (healthView != null)
         {
-            HealthModel unitHealthModel = new(healthView.transform, 100f, 100f);
+            float healthPoints = Configs.Units.GetHealthPoints(isHeavenFaction, type);
+
+            HealthModel unitHealthModel = new(healthView.transform, healthPoints, healthPoints);
             healthView.AttachPresenter(new Health(healthView, unitHealthModel));
             unitModel = new(unit.transform, unitHealthModel, isHeavenFaction, type, targets);
 

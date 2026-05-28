@@ -1,9 +1,13 @@
+using System;
+
 public interface IDamageable
 {
-    public HealthModel Health { get; }
+    event Action<IDamageable> Died;
 
-    public void TakeDamage(float amount);
+    HealthModel Health { get; }
+    bool IsDead => Health.IsDead;
 
-    public void Die()
-        => TakeDamage(Health.CurrentAmount);
+    void TakeDamage(float amount);
+
+    void Die() => TakeDamage(Health.CurrentAmount);
 }

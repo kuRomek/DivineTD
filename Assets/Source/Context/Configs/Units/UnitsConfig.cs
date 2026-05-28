@@ -11,4 +11,9 @@ public class UnitsConfig : ScriptableObject
     {
         return isHeavenFaction ? _heavenData[unitType].Speed : _hellData[unitType].Speed;
     }
+
+    public float GetHealthPoints(bool isHeavenFaction, UnitType unitType)
+    {
+        return isHeavenFaction ? _heavenData[unitType].HealthAmount : _hellData[unitType].HealthAmount;
+    }
 }

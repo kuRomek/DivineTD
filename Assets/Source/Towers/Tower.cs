@@ -1,17 +1,88 @@
 using kuRomek.SimpleVG;
+using DG.Tweening;
+using UnityEngine;
 
-public class Tower : GridObject
+public class Tower : GridObject, IInteractable
 {
-    public Tower(View view, Model model, GridSystem gridSystem) : base(view, model, gridSystem)
+    private Tween _shooting;
+
+    public Tower(View view, Model model, GridSystem gridSystem, TriggerDetector triggerDetector)
+        : base(view, model, gridSystem)
     {
+        TriggerDetector = triggerDetector;
+        triggerDetector.SetTriggerRadius(Model.Params.Radius);
+        triggerDetector.Toggle(Model.IsDraft == false);
+
         Model.Destroyed += OnDestroyed;
+        Model.ToggledDrafting += (isDraft) => triggerDetector.Toggle(isDraft == false);
+        triggerDetector.EnteredTrigger += (this as IInteractable).OnTriggerEnter;
+        triggerDetector.ExitedTrigger += (this as IInteractable).OnTriggerExited;
     }
 
     public new TowerModel Model => base.Model as TowerModel;
     public new TowerView View => base.View as TowerView;
 
+    public TriggerDetector TriggerDetector { get; }
+
+    void IInteractable.OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
+    {
+        if (damageable is UnitModel && faction.IsHeavenFaction != Model.IsHeavenFaction)
+        {
+            AddTarget(damageable);
+            damageable.Died += RemoveTarget;
+        }
+    }
+
+    void IInteractable.OnTriggerExited(IDamageable damageable, IFactionRelated faction)
+    {
+        if (damageable is UnitModel && faction.IsHeavenFaction != Model.IsHeavenFaction)
+            RemoveTarget(damageable);
+    }
+
+    protected override void OnUpdate(float deltaTime)
+    {
+        if (Model.CurrentAttackTarget != null && Model.CurrentAttackTarget is Model model)
+            View.LookAt(model.Transform.position);
+        else
+            View.LookForward();
+    }
+
+    private void AddTarget(IDamageable damageable)
+    {
+        Model.EnqueueTarget(damageable);
+
+        if (Model.AttackTargets.Count == 1)
+            StartShooting();
+    }
+
+    private void RemoveTarget(IDamageable damageable)
+    {
+        Model.DequeueTarget(damageable);
+
+        if (Model.AttackTargets.Count == 0)
+            StopShooting();
+    }
+
+    private void StartShooting()
+    {
+        StopShooting();
+
+        Shoot();
+        _shooting = DOVirtual.DelayedCall(1f / Model.Params.AttackRate, Shoot).SetLoops(-1, LoopType.Restart);
+    }
+
+    private void Shoot()
+    {
+        Model.CurrentAttackTarget?.TakeDamage(Model.Params.Damage);
+    }
+
+    private void StopShooting()
+    {
+        _shooting.Kill();
+    }
+
     private void OnDestroyed()
     {
-        UnityEngine.Object.Destroy(View.gameObject);
+        Object.Destroy(View.gameObject);
     }
 }

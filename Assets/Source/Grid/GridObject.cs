@@ -19,6 +19,12 @@ public class GridObject : Presenter, IUpdatable
     {
         if (Model.IsDraft && InputController.Current.Pressing && EventSystem.current.IsPointerOverGameObject() == false)
             _gridSystem.Drag(Model);
+
+        OnUpdate(deltaTime);
+    }
+
+    protected virtual void OnUpdate(float deltaTime)
+    {
     }
 
     private void OnMoved(bool differentPosition)

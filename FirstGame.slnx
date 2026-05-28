@@ -5,7 +5,7 @@
   <Project Path="kuRomek.SimpleVg.Configs.csproj" />
   <Project Path="Google.Play.Games.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.Editor.csproj" />
-  <Project Path="kuRomek.SimpleVg.Input.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />
+  <Project Path="kuRomek.SimpleVg.Input.csproj" />
   <Project Path="kuRomek.SimpleVG.Keys.csproj" />
 </Solution>
