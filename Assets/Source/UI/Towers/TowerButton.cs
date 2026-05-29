@@ -22,7 +22,7 @@ public class TowerButton : MonoBehaviour
 
     private void OnBuildButtonClicked()
     {
-        _buildingSystem.CreateTowerDraft(true, _type);
+        _buildingSystem.CreateTowerDraft(GameState.IsCurrentFactionHeaven, _type);
         _widgetCanvas.ToggleBuildingMode(true);
     }
 }

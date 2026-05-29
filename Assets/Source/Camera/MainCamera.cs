@@ -69,7 +69,10 @@ public class MainCamera : MonoBehaviour
         Vector3 delta = Configs.MainCamera.Sensitivity * Time.deltaTime *
             new Vector3(InputController.Current.DeltaPosition.x, 0f, InputController.Current.DeltaPosition.y);
 
-        _accumDelta += delta;
+        if (GameState.IsCurrentFactionHeaven)
+            _accumDelta += delta;
+        else
+            _accumDelta -= delta;
 
         _targetPosition = new Vector3(
             Mathf.Clamp(_positionOnClicked.x - _accumDelta.x, _fieldWidthMin, _fieldWidthMax),

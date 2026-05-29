@@ -25,6 +25,12 @@ public class Root : MonoBehaviour
     {
         Container = new SimpleDI();
 
+        if (GameState.IsCurrentFactionHeaven == false)
+        {
+            _mainCamera.transform.position = new(0f, _mainCamera.transform.position.y, -_mainCamera.transform.position.z);
+            _mainCamera.transform.Rotate(new(0f, 180f, 0f), Space.World);
+        }
+
         GridSystem gridSystem = new(_heavenGrid, _hellGrid, _mainCamera.Camera);
         BuildingSystem buildingSystem = new(gridSystem, _towerFactory, _mainCamera);
 
@@ -52,22 +58,20 @@ public class Root : MonoBehaviour
     private void InitializeCastle(CastleView castleView, bool isHeavenFaction)
     {
         HealthView healthView = castleView.GetComponentInChildren<HealthView>(true);
+        TriggerDetector triggerDetector = castleView.GetComponentInChildren<TriggerDetector>();
 
-        if (healthView != null)
+        if (healthView != null || triggerDetector != null)
         {
             HealthModel castleHealthModel = new(healthView.transform, 100f, 100f);
             healthView.AttachPresenter(new Health(healthView, castleHealthModel));
             CastleModel castleModel = new(castleView.transform, castleHealthModel, isHeavenFaction);
             castleView.AttachPresenter(new Castle(castleView, castleModel));
 
-            TriggerDetector triggerDetector = castleView.GetComponentInChildren<TriggerDetector>();
-
-            if (triggerDetector != null)
-                triggerDetector.AttachComponents(castleModel, castleModel);
+            triggerDetector.AttachComponents(castleModel, castleModel);
         }
         else
         {
-            Debug.Log($"Health view has not been assigned to {castleView.name}.");
+            Debug.Log($"Health view or trigger detector has not been assigned to {castleView.name}.");
         }
     }
 }
