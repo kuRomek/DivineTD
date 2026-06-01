@@ -7,7 +7,7 @@ public class TowerModel : GridObjectModel
     private readonly List<IDamageable> _attackTargets = new();
 
     public TowerModel(Transform transform, bool isDraft, bool isHeavenFaction, TowerType type)
-        : base(transform, isDraft, isHeavenFaction)
+        : base(transform, isHeavenFaction, isDraft)
     {
         Type = type;
     }

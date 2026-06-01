@@ -10,7 +10,22 @@ public class GridDebug : MonoBehaviour
 
     private void Awake()
     {
-        UpdateView();
+        //UpdateView();
+    }
+
+    private void UpdateView()
+    {
+        for (int i = 0; i < _cells.GetLength(0); i++)
+        {
+            for (int j = 0; j < _cells.GetLength(1); j++)
+            {
+                Vector3 localPosition = _grid.CellToLocal(new(i, j)) +
+                    new Vector3(_grid.cellSize.x, -0.001f, _grid.cellSize.y) / 2f;
+
+                GridCellCoord cell = _cells[i, j] == null ? Instantiate(_cellViewPrefab, transform) : _cells[i, j];
+                cell.Init(i, j, _color, localPosition);
+            }
+        }
 
         for (int column = 0; column <= _cells.GetLength(0); column++)
         {
@@ -26,21 +41,6 @@ public class GridDebug : MonoBehaviour
                 _grid.CellToWorld(new(0, row)),
                 _grid.CellToWorld(new(_cells.GetLength(0), row)),
                 _color, 1000f);
-        }
-    }
-
-    private void UpdateView()
-    {
-        for (int i = 0; i < _cells.GetLength(0); i++)
-        {
-            for (int j = 0; j < _cells.GetLength(1); j++)
-            {
-                Vector3 localPosition = _grid.CellToLocal(new(i, j)) +
-                    new Vector3(_grid.cellSize.x, -0.001f, _grid.cellSize.y) / 2f;
-
-                GridCellCoord cell = _cells[i, j] == null ? Instantiate(_cellViewPrefab, transform) : _cells[i, j];
-                cell.Init(i, j, _color, localPosition);
-            }
         }
     }
 }

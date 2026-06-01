@@ -42,6 +42,9 @@
 # Visual Studio cache directory
 .vs/
 
+# AI tools
+.continue/
+
 # Gradle cache directory
 .gradle/
 
