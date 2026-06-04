@@ -49,35 +49,23 @@ public class UnitFactory : MonoBehaviour
         unit.Transform.position = _gridSystem.GetWorldPosition(false, new(5, 0));
     }
 
-    public UnitModel CreateUnit(bool isHeavenFaction, UnitType type, List<Vector2Int> targets)
+    public UnitModel CreateUnit(bool heavenFaction, UnitType type, List<Vector2Int> targets)
     {
         UnitModel unitModel = null;
         UnitView unit;
-        IReadOnlyDictionary<Vector2Int, GridObjectModel> walkingGrid;
-
-        Debug.Log($"Target: {targets[0]}");
-
-        if (isHeavenFaction)
-        {
-            unit = Instantiate(_heavenUnits[type]);
-            walkingGrid = _gridSystem.CellsHeaven;
-        }
-        else
-        {
-            unit = Instantiate(_hellUnits[type]);
-            walkingGrid = _gridSystem.CellsHell;
-        }
+        IReadOnlyDictionary<Vector2Int, Tile> walkingGrid = _gridSystem.Map[heavenFaction];
+        unit = heavenFaction ? Instantiate(_heavenUnits[type]) : Instantiate(_hellUnits[type]);
 
         HealthView healthView = unit.GetComponentInChildren<HealthView>(true);
         TriggerDetector triggerDetector = unit.GetComponentInChildren<TriggerDetector>(true);
 
         if (healthView != null)
         {
-            float healthPoints = Configs.Units.GetHealthPoints(isHeavenFaction, type);
+            float healthPoints = Configs.Units.GetHealthPoints(heavenFaction, type);
 
             HealthModel unitHealthModel = new(healthView.transform, healthPoints, healthPoints);
             healthView.AttachPresenter(new Health(healthView, unitHealthModel));
-            unitModel = new(unit.transform, unitHealthModel, isHeavenFaction, type, targets);
+            unitModel = new(unit.transform, unitHealthModel, heavenFaction, type, targets);
 
             unit.AttachPresenter(new Unit(unit, unitModel, walkingGrid, _gridSystem, triggerDetector));
 

@@ -6,14 +6,14 @@ public class Unit : Presenter, IUpdatable, IInteractable
 {
     private const float DistanceTolerance = 0.01f;
 
-    private readonly IReadOnlyDictionary<Vector2Int, GridObjectModel> _grid;
+    private readonly IReadOnlyDictionary<Vector2Int, Tile> _grid;
     private readonly GridSystem _gridSystem;
 
     private Vector3 _currentTargetWorld;
 
     public Unit(View view,
         Model model,
-        IReadOnlyDictionary<Vector2Int, GridObjectModel> grid,
+        IReadOnlyDictionary<Vector2Int, Tile> grid,
         GridSystem gridSystem,
         TriggerDetector triggerDetector)
         : base(view, model)

@@ -11,13 +11,13 @@ public class UnitModel : Model, IDamageable, IFactionRelated
     public UnitModel(
         Transform transform,
         HealthModel health,
-        bool isHeavenFaction,
+        bool heavenFaction,
         UnitType type,
         IReadOnlyList<Vector2Int> targets)
         : base(transform)
     {
         Health = health;
-        IsHeavenFaction = isHeavenFaction;
+        IsHeavenFaction = heavenFaction;
         Type = type;
         _targets = targets;
         _currentTargetIndex = 0;

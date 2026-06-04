@@ -1,4 +1,5 @@
 using kuRomek.SimpleVG;
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class GridObject : Presenter, IUpdatable
@@ -10,6 +11,7 @@ public class GridObject : Presenter, IUpdatable
         _gridSystem = gridSystem;
         Model.ToggledDrafting += View.ToggleBuildingIndicator;
         Model.Moved += OnMoved;
+        Model.Destroyed += OnDestroyed;
     }
 
     protected new GridObjectModel Model => base.Model as GridObjectModel;
@@ -31,5 +33,10 @@ public class GridObject : Presenter, IUpdatable
     {
         if (differentPosition)
             View.SetBuildingIndicatorColor(_gridSystem.CheckAvailability(Model.Transform.position, Model.IsHeavenFaction));
+    }
+
+    private void OnDestroyed()
+    {
+        Object.Destroy(View.gameObject);
     }
 }

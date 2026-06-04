@@ -1,20 +1,19 @@
 using System;
-using kuRomek.SimpleVG;
 using UnityEngine;
 
-public class CastleModel : Model, IDamageable, IFactionRelated
+[Serializable]
+public class CastleModel : GridObjectModel, IDamageable, IFactionRelated
 {
-    public CastleModel(Transform transform, HealthModel healthModel, bool isHeavenFaction) : base(transform)
+    public CastleModel(Transform transform, HealthModel healthModel, bool heavenFaction, bool isDraft)
+        : base(transform, heavenFaction, isDraft)
     {
         Health = healthModel;
-        IsHeavenFaction = isHeavenFaction;
 
         Health.Died += () => Died?.Invoke(this);
     }
 
     public event Action<IDamageable> Died;
 
-    public bool IsHeavenFaction { get; }
     public HealthModel Health { get; }
 
     public void TakeDamage(float amount)

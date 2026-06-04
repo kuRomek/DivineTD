@@ -15,7 +15,6 @@ public class Tower : GridObject, IInteractable
         triggerDetector.SetTriggerRadius(Model.Params.Radius);
         triggerDetector.Toggle(Model.IsDraft == false);
 
-        Model.Destroyed += OnDestroyed;
         Model.ToggledDrafting += (isDraft) => triggerDetector.Toggle(isDraft == false);
         triggerDetector.EnteredTrigger += (this as IInteractable).OnTriggerEnter;
         triggerDetector.ExitedTrigger += (this as IInteractable).OnTriggerExited;
@@ -89,10 +88,5 @@ public class Tower : GridObject, IInteractable
     private void StopShooting()
     {
         _shooting.Kill();
-    }
-
-    private void OnDestroyed()
-    {
-        Object.Destroy(View.gameObject);
     }
 }

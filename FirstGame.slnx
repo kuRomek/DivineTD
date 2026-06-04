@@ -2,7 +2,6 @@
   <Project Path="Assembly-CSharp.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.csproj" />
   <Project Path="Google.Play.Games.Editor.csproj" />
-  <Project Path="kuRomek.SimpleVg.Configs.csproj" />
   <Project Path="Google.Play.Games.csproj" />
   <Project Path="AYellowpaper.SerializedCollections.Editor.csproj" />
   <Project Path="Assembly-CSharp-firstpass.csproj" />

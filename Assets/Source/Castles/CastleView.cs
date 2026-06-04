@@ -1,9 +1,12 @@
 using System;
-using kuRomek.SimpleVG;
 using NaughtyAttributes;
+using UnityEngine;
 
-public class CastleView : View
+public class CastleView : GridObjectView
 {
+    [field: SerializeField] public HealthView HealthBar { get; private set; }
+    [field: SerializeField] public TriggerDetector TriggerDetector { get; private set; }
+
     public event Action<float> TookDamage;
 
     public void OnDestroyed()

@@ -7,10 +7,11 @@ public class Root : MonoBehaviour
     [Header("Grids")]
     [SerializeField] private Grid _heavenGrid;
     [SerializeField] private Grid _hellGrid;
+    [SerializeField] private Map _map;
 
     [Header("Castles")]
-    [SerializeField] private CastleView _heavenCastle;
-    [SerializeField] private CastleView _hellCastle;
+    [SerializeField] private Transform _heavenCameraInitialSpot;
+    [SerializeField] private Transform _hellCameraInitialSpot;
 
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
@@ -21,30 +22,45 @@ public class Root : MonoBehaviour
 
     public static SimpleDI Container;
 
+    private LevelsSystem _levelsSystem;
+
     private void Awake()
     {
         Container = new SimpleDI();
 
-        if (GameState.IsCurrentFactionHeaven == false)
-        {
-            _mainCamera.transform.position = new(0f, _mainCamera.transform.position.y, -_mainCamera.transform.position.z);
-            _mainCamera.transform.Rotate(new(0f, 180f, 0f), Space.World);
-        }
+        GameState.LoadSave();
 
-        GridSystem gridSystem = new(_heavenGrid, _hellGrid, _mainCamera.Camera);
-        BuildingSystem buildingSystem = new(gridSystem, _towerFactory, _mainCamera);
+        _levelsSystem = new();
 
-        Container.Register(gridSystem);
-        Container.Register(buildingSystem);
+        GridSystem grid = new(_levelsSystem, _heavenGrid, _hellGrid, _map, _mainCamera.Camera);
+        BuildingSystem building = new(grid, _towerFactory, _mainCamera);
+
+        Container.Register(grid);
+        Container.Register(building);
+        Container.Register(_levelsSystem);
         Container.Register(_widgetCanvas);
         Container.Register(_mainCamera);
         Container.Register(_towerFactory);
         Container.Register(_unitFactory);
 
-        InitializeCastle(_heavenCastle, true);
-        InitializeCastle(_hellCastle, false);
-
         InjectScene(Container);
+    }
+
+    private void OnEnable()
+    {
+        _levelsSystem.LevelStarted += OnLevelStarted;
+        _levelsSystem.LevelEnded += OnLevelEnded;
+    }
+
+    private void OnDisable()
+    {
+        _levelsSystem.LevelStarted -= OnLevelStarted;
+        _levelsSystem.LevelEnded -= OnLevelEnded;
+    }
+
+    private void Start()
+    {
+        _levelsSystem.StartLevel();
     }
 
     private void InjectScene(SimpleDI di)
@@ -55,23 +71,16 @@ public class Root : MonoBehaviour
             di.InjectConstructors(@object);
     }
 
-    private void InitializeCastle(CastleView castleView, bool isHeavenFaction)
+    private void OnLevelStarted()
     {
-        HealthView healthView = castleView.GetComponentInChildren<HealthView>(true);
-        TriggerDetector triggerDetector = castleView.GetComponentInChildren<TriggerDetector>();
-
-        if (healthView != null || triggerDetector != null)
-        {
-            HealthModel castleHealthModel = new(healthView.transform, 100f, 100f);
-            healthView.AttachPresenter(new Health(healthView, castleHealthModel));
-            CastleModel castleModel = new(castleView.transform, castleHealthModel, isHeavenFaction);
-            castleView.AttachPresenter(new Castle(castleView, castleModel));
-
-            triggerDetector.AttachComponents(castleModel, castleModel);
-        }
+        if (GameState.IsCurrentFactionHeaven)
+            _mainCamera.transform.position = _heavenCameraInitialSpot.position;
         else
-        {
-            Debug.Log($"Health view or trigger detector has not been assigned to {castleView.name}.");
-        }
+            _mainCamera.transform.position = _hellCameraInitialSpot.position;
+    }
+
+    private void OnLevelEnded()
+    {
+
     }
 }

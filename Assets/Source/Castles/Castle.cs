@@ -1,8 +1,8 @@
 using kuRomek.SimpleVG;
 
-public class Castle : Presenter, IInteractable
+public class Castle : GridObject, IInteractable
 {
-    public Castle(View view, Model model) : base(view, model)
+    public Castle(View view, Model model, GridSystem gridSystem) : base(view, model, gridSystem)
     {
         Model.Health.Died += View.OnDestroyed;
         View.TookDamage += Model.TakeDamage;

@@ -7,13 +7,13 @@ public class UnitsConfig : ScriptableObject
     [SerializeField] private SerializedDictionary<UnitType, UnitData> _heavenData;
     [SerializeField] private SerializedDictionary<UnitType, UnitData> _hellData;
 
-    public float GetSpeed(bool isHeavenFaction, UnitType unitType)
+    public float GetSpeed(bool heavenFaction, UnitType unitType)
     {
-        return isHeavenFaction ? _heavenData[unitType].Speed : _hellData[unitType].Speed;
+        return heavenFaction ? _heavenData[unitType].Speed : _hellData[unitType].Speed;
     }
 
-    public float GetHealthPoints(bool isHeavenFaction, UnitType unitType)
+    public float GetHealthPoints(bool heavenFaction, UnitType unitType)
     {
-        return isHeavenFaction ? _heavenData[unitType].HealthAmount : _hellData[unitType].HealthAmount;
+        return heavenFaction ? _heavenData[unitType].HealthAmount : _hellData[unitType].HealthAmount;
     }
 }
