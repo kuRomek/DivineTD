@@ -4,8 +4,8 @@ using UnityEngine;
 [Serializable]
 public class CastleModel : GridObjectModel, IDamageable, IFactionRelated
 {
-    public CastleModel(Transform transform, HealthModel healthModel, bool heavenFaction, bool isDraft)
-        : base(transform, heavenFaction, isDraft)
+    public CastleModel(Transform transform, HealthModel healthModel, Faction faction, bool isDraft)
+        : base(transform, faction, isDraft)
     {
         Health = healthModel;
 

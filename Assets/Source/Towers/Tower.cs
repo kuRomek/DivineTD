@@ -27,7 +27,7 @@ public class Tower : GridObject, IInteractable
 
     void IInteractable.OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
     {
-        if (damageable is UnitModel && faction.IsHeavenFaction != Model.IsHeavenFaction)
+        if (damageable is UnitModel && faction.Faction != Model.Faction)
         {
             AddTarget(damageable);
             damageable.Died += RemoveTarget;
@@ -36,7 +36,7 @@ public class Tower : GridObject, IInteractable
 
     void IInteractable.OnTriggerExited(IDamageable damageable, IFactionRelated faction)
     {
-        if (damageable is UnitModel && faction.IsHeavenFaction != Model.IsHeavenFaction)
+        if (damageable is UnitModel && faction.Faction != Model.Faction)
             RemoveTarget(damageable);
     }
 
@@ -81,7 +81,7 @@ public class Tower : GridObject, IInteractable
                 _gunTip.position,
                 new Vector3(model.Transform.position.x, _gunTip.position.y, model.Transform.position.z),
                 Model.Params.Damage,
-                Model.IsHeavenFaction == false);
+                1 - Model.Faction);
         }
     }
 

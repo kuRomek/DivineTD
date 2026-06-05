@@ -11,13 +11,13 @@ public class UnitModel : Model, IDamageable, IFactionRelated
     public UnitModel(
         Transform transform,
         HealthModel health,
-        bool heavenFaction,
+        Faction faction,
         UnitType type,
         IReadOnlyList<Vector2Int> targets)
         : base(transform)
     {
         Health = health;
-        IsHeavenFaction = heavenFaction;
+        Faction = faction;
         Type = type;
         _targets = targets;
         _currentTargetIndex = 0;
@@ -28,10 +28,10 @@ public class UnitModel : Model, IDamageable, IFactionRelated
     public event Action<IDamageable> Died;
 
     public HealthModel Health { get; }
-    public bool IsHeavenFaction { get; }
+    public Faction Faction { get; }
     public UnitType Type { get; }
     public Vector2Int CurrentTarget => _targets[_currentTargetIndex];
-    public float Speed => Configs.Units.GetSpeed(IsHeavenFaction, Type);
+    public float Speed => Configs.Units.GetSpeed(Faction, Type);
 
     void IDamageable.TakeDamage(float amount)
     {

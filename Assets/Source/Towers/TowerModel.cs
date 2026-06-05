@@ -6,8 +6,8 @@ public class TowerModel : GridObjectModel
 {
     private readonly List<IDamageable> _attackTargets = new();
 
-    public TowerModel(Transform transform, bool isDraft, bool heavenFaction, TowerType type)
-        : base(transform, heavenFaction, isDraft)
+    public TowerModel(Transform transform, bool isDraft, Faction faction, TowerType type)
+        : base(transform, faction, isDraft)
     {
         Type = type;
     }
@@ -16,7 +16,7 @@ public class TowerModel : GridObjectModel
     public TargetPriorityType TargetPriorityType { get; private set; }
     public IDamageable CurrentAttackTarget { get; private set; }
     public IReadOnlyList<IDamageable> AttackTargets => _attackTargets;
-    public TowerData Params => Configs.Buildings.GetTowerParams(IsHeavenFaction, Type);
+    public TowerData Params => Configs.Buildings.GetTowerData(Faction, Type);
 
     public void SetTargetPriority(TargetPriorityType type)
     {

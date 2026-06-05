@@ -5,38 +5,56 @@ using UnityEngine;
 public class GridInitializer
 {
     private readonly GridSystem _gridSystem;
+    private readonly TowerFactory _towerFactory;
 
-    public GridInitializer(GridSystem gridSystem)
+    public GridInitializer(GridSystem gridSystem, TowerFactory towerFactory)
     {
         _gridSystem = gridSystem;
+        _towerFactory = towerFactory;
     }
 
     public void InitializeMap()
     {
-        Map mapPrefab = Configs.Levels.GetMapPrefab(GameState.IsCurrentFactionHeaven, GameState.CurrentLevel);
+        MapData mapData = Configs.Levels.GetMapData(GameState.CurrentPlayerFaction, GameState.CurrentLevel);
 
-        InitializeFactionTiles(mapPrefab[true], true, _gridSystem.Map);
-        InitializeFactionTiles(mapPrefab[false], false, _gridSystem.Map);
+        InitializeFactionTiles(mapData[Faction.Heaven], Faction.Heaven, _gridSystem.Map);
+        InitializeFactionTiles(mapData[Faction.Hell], Faction.Hell, _gridSystem.Map);
     }
 
-    private void InitializeFactionTiles(IEnumerable<KeyValuePair<Vector2Int, Tile>> cells, bool heaven, Map mapToInit)
+    private void InitializeFactionTiles(IEnumerable<KeyValuePair<Vector2Int, TileData>> cells, Faction faction, Map mapToInit)
     {
-        while (mapToInit[heaven].Count != 0)
-            mapToInit.RemoveTile(heaven, mapToInit[heaven].First().Key);
+        while (mapToInit[faction].Count != 0)
+            mapToInit.RemoveTile(faction, mapToInit[faction].First().Key);
 
         foreach (var (cell, tile) in cells)
-            mapToInit.PlaceTile(heaven, cell, (cell) => _gridSystem.GetWorldPosition(heaven, cell));
+        {
+            mapToInit.PlaceTile(faction, cell, (cell) => _gridSystem.GetWorldPosition(faction, cell));
+            mapToInit.PlaceObjectOnTile(faction, cell, tile.Object switch
+            {
+                MapCastleData castle => InitializeCastle(castle),
+                MapTowerData tower => InitializeTower(tower),
+                _ => null,
+            });
+        }
     }
 
-
-    private void InitializeCastle(Vector2Int cell, CastleModel castleModel)
+    private GridObjectModel InitializeCastle(MapCastleData data)
     {
         CastleView castleView = Object.Instantiate(Configs.Buildings.CastlePrefab);
 
         HealthModel castleHealthModel = new(castleView.HealthBar.transform, 100f, 100f);
         castleView.HealthBar.AttachPresenter(new Health(castleView.HealthBar, castleHealthModel));
+
+        CastleModel castleModel = new(castleView.transform, castleHealthModel, data.Faction, false);
         castleView.AttachPresenter(new Castle(castleView, castleModel, _gridSystem));
 
         castleView.TriggerDetector.AttachComponents(castleModel, castleModel);
+
+        return castleModel;
+    }
+
+    private GridObjectModel InitializeTower(MapTowerData data)
+    {
+        return _towerFactory.CreateTower(data.Faction, data.Type, false);
     }
 }

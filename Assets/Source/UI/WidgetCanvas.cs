@@ -31,7 +31,7 @@ public class WidgetCanvas : MonoBehaviour
 
     private void OnAcceptBuildingButtonClicked()
     {
-        if (_buildingSystem.TryBuildTower(true))
+        if (_buildingSystem.TryBuildTower(GameState.CurrentPlayerFaction))
             ToggleBuildingMode(false);
     }
 

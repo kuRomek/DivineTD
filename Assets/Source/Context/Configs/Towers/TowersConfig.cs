@@ -9,8 +9,8 @@ public class BuildingsConfig : ScriptableObject
 
     [field: SerializeField] public CastleView CastlePrefab { get; private set; }
 
-    public TowerData GetTowerParams(bool heavenFaction, TowerType towerType)
+    public TowerData GetTowerData(Faction faction, TowerType towerType)
     {
-        return heavenFaction ? _heavenData[towerType] : _hellData[towerType];
+        return faction == Faction.Heaven ? _heavenData[towerType] : _hellData[towerType];
     }
 }

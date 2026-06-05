@@ -22,7 +22,7 @@ public class Unit : Presenter, IUpdatable, IInteractable
         _gridSystem = gridSystem;
         TriggerDetector = triggerDetector;
 
-        _currentTargetWorld = _gridSystem.GetWorldPosition(Model.IsHeavenFaction == false, Model.CurrentTarget);
+        _currentTargetWorld = _gridSystem.GetWorldPosition(1 - Model.Faction, Model.CurrentTarget);
 
         TriggerDetector.EnteredTrigger += (this as IInteractable).OnTriggerEnter;
         Model.Health.Died += View.OnDestroyed;
@@ -39,12 +39,12 @@ public class Unit : Presenter, IUpdatable, IInteractable
 
         if (Vector3.SqrMagnitude(Model.Transform.position - _currentTargetWorld) < DistanceTolerance)
             if (Model.TrySetNextTarget())
-                _currentTargetWorld = _gridSystem.GetWorldPosition(Model.IsHeavenFaction, Model.CurrentTarget);
+                _currentTargetWorld = _gridSystem.GetWorldPosition(Model.Faction, Model.CurrentTarget);
     }
 
     void IInteractable.OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
     {
-        if (faction.IsHeavenFaction != Model.IsHeavenFaction && damageable is CastleModel)
+        if (faction.Faction != Model.Faction && damageable is CastleModel)
         {
             damageable.TakeDamage(5f);
             (Model as IDamageable).Die();

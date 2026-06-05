@@ -10,7 +10,7 @@ public class Projectile : MonoBehaviour, IPooledObject, IInteractable
     private float _secondsLeft;
     private float _lifeTime = 1f;
 
-    public bool IsTargetHeavenFaction { get; private set; }
+    public Faction TargetFaction { get; private set; }
 
     private void OnEnable()
     {
@@ -49,7 +49,7 @@ public class Projectile : MonoBehaviour, IPooledObject, IInteractable
 
     void IInteractable.OnTriggerEnter(IDamageable damageable, IFactionRelated faction)
     {
-        if (damageable is UnitModel && faction.IsHeavenFaction == IsTargetHeavenFaction)
+        if (damageable is UnitModel && faction.Faction == TargetFaction)
         {
             damageable.TakeDamage(_damage);
             Pools.Bullets.Release(this);
@@ -60,7 +60,7 @@ public class Projectile : MonoBehaviour, IPooledObject, IInteractable
     {
     }
 
-    public Projectile Launch(Vector3 position, Vector3 target, float damage, bool isTargetHeavenFaction)
+    public Projectile Launch(Vector3 position, Vector3 target, float damage, Faction targetFaction)
     {
         Vector3 direction = target - position;
 
@@ -68,7 +68,7 @@ public class Projectile : MonoBehaviour, IPooledObject, IInteractable
         transform.LookAt(target, Vector3.up);
         _rigidbody.linearVelocity = direction.normalized * 10f;
         _damage = damage;
-        IsTargetHeavenFaction = isTargetHeavenFaction;
+        TargetFaction = targetFaction;
 
         return this;
     }

@@ -9,30 +9,32 @@ public class GridSystem
     private readonly Camera _camera;
     private readonly GridInitializer _gridInitializer;
 
-    public GridSystem(LevelsSystem levelsSystem, Grid heavenGrid, Grid hellGrid, Map map, Camera camera)
+    public GridSystem(LevelsSystem levelsSystem, Grid heavenGrid, Grid hellGrid,
+        Map map, TowerFactory towerFactory, Camera camera)
     {
         _levelsSystem = levelsSystem;
         _heavenGrid = heavenGrid;
         _hellGrid = hellGrid;
         _camera = camera;
-        _gridInitializer = new(this);
+        _gridInitializer = new(this, towerFactory);
 
         Map = map;
 
-        _levelsSystem.LevelStarted += OnLevelStarted;
+        if (_levelsSystem != null)
+            _levelsSystem.LevelStarted += OnLevelStarted;
     }
 
     public Map Map { get; }
 
-    public bool TryPlace(GridObjectModel gridObject, bool heavenSide)
+    public bool TryPlace(GridObjectModel gridObject, Faction faction)
     {
-        Grid grid = heavenSide ? _heavenGrid : _hellGrid;
+        Grid grid = faction == Faction.Heaven ? _heavenGrid : _hellGrid;
 
         Vector2Int cell = (Vector2Int)grid.WorldToCell(gridObject.Transform.position);
 
-        if (CheckAvailability(cell, heavenSide))
+        if (CheckAvailability(cell, faction))
         {
-            Map.PlaceObjectOnTile(heavenSide, cell, gridObject);
+            Map.PlaceObjectOnTile(faction, cell, gridObject);
         }
         else
         {
@@ -55,35 +57,35 @@ public class GridSystem
         Ray ray = _camera.ScreenPointToRay(InputController.Current.Position);
 
         if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, LayerMask.GetMask("Ground")))
-            gridObject.MoveAt(GetSnappedPosition(gridObject.IsHeavenFaction, hit.point));
+            gridObject.MoveAt(GetSnappedPosition(gridObject.Faction, hit.point));
     }
 
-    public Vector3 GetSnappedPosition(bool heavenSide, Vector3 worldPosition)
+    public Vector3 GetSnappedPosition(Faction faction, Vector3 worldPosition)
     {
-        Vector3Int cell = (heavenSide ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
+        Vector3Int cell = (faction == Faction.Heaven ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
 
-        return GetWorldPosition(heavenSide, (Vector2Int)cell);
+        return GetWorldPosition(faction, (Vector2Int)cell);
     }
 
-    public Vector3 GetSnappedPosition(bool heavenSide)
+    public Vector3 GetSnappedPosition(Faction faction)
     {
         Ray ray = _camera.ViewportPointToRay(Vector2.one * 0.5f);
 
         if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, LayerMask.GetMask("Ground")))
-            return GetSnappedPosition(heavenSide, hit.point);
+            return GetSnappedPosition(faction, hit.point);
 
         Debug.LogWarning("Beyond ground edges.");
         return -Vector3.one;
     }
 
-    public Vector2Int GetCell(bool heavenFaction, Vector3 worldPosition)
+    public Vector2Int GetCell(Faction faction, Vector3 worldPosition)
     {
-        return (Vector2Int)(heavenFaction ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
+        return (Vector2Int)(faction == Faction.Heaven ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
     }
 
-    public Vector3 GetWorldPosition(bool heavenFaction, Vector2Int cell)
+    public Vector3 GetWorldPosition(Faction faction, Vector2Int cell)
     {
-        Grid grid = heavenFaction ? _heavenGrid : _hellGrid;
+        Grid grid = faction == Faction.Heaven ? _heavenGrid : _hellGrid;
 
         Vector3 position = grid.CellToWorld((Vector3Int)cell) +
             grid.transform.rotation * new Vector3(grid.cellSize.x, 0f, grid.cellSize.y) / 2f;
@@ -91,15 +93,15 @@ public class GridSystem
         return position;
     }
 
-    public bool CheckAvailability(Vector2Int cell, bool heavenSide)
+    public bool CheckAvailability(Vector2Int cell, Faction faction)
     {
-        return Map[heavenSide].ContainsKey(cell) && Map[heavenSide][cell] == null;
+        return Map[faction].ContainsKey(cell) && Map[faction][cell] == null;
     }
 
-    public bool CheckAvailability(Vector3 worldPosition, bool heavenSide)
+    public bool CheckAvailability(Vector3 worldPosition, Faction faction)
     {
-        Vector2Int cell = (Vector2Int)(heavenSide ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
-        return CheckAvailability(cell, heavenSide);
+        Vector2Int cell = (Vector2Int)(faction == Faction.Heaven ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
+        return CheckAvailability(cell, faction);
     }
 
     private void OnLevelStarted()

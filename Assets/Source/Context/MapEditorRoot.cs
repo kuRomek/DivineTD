@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Root : MonoBehaviour
+public class MapEditorRoot : MonoBehaviour
 {
     [SerializeField] private MainCamera _mainCamera;
 
@@ -22,22 +22,19 @@ public class Root : MonoBehaviour
 
     public static SimpleDI Container;
 
-    private LevelsSystem _levelsSystem;
-
     private void Awake()
     {
         Container = new SimpleDI();
 
         GameState.LoadSave();
 
-        _levelsSystem = new();
+        _mainCamera.transform.position = _heavenCameraInitialSpot.position;
 
-        GridSystem grid = new(_levelsSystem, _heavenGrid, _hellGrid, _map, _towerFactory, _mainCamera.Camera);
+        GridSystem grid = new(null, _heavenGrid, _hellGrid, _map, _towerFactory, _mainCamera.Camera);
         BuildingSystem building = new(grid, _towerFactory, _mainCamera);
 
         Container.Register(grid);
         Container.Register(building);
-        Container.Register(_levelsSystem);
         Container.Register(_widgetCanvas);
         Container.Register(_mainCamera);
         Container.Register(_towerFactory);
@@ -46,41 +43,11 @@ public class Root : MonoBehaviour
         InjectScene(Container);
     }
 
-    private void OnEnable()
-    {
-        _levelsSystem.LevelStarted += OnLevelStarted;
-        _levelsSystem.LevelEnded += OnLevelEnded;
-    }
-
-    private void OnDisable()
-    {
-        _levelsSystem.LevelStarted -= OnLevelStarted;
-        _levelsSystem.LevelEnded -= OnLevelEnded;
-    }
-
-    private void Start()
-    {
-        _levelsSystem.StartLevel();
-    }
-
     private void InjectScene(SimpleDI di)
     {
         var objects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
 
         foreach (var @object in objects)
             di.InjectConstructors(@object);
-    }
-
-    private void OnLevelStarted()
-    {
-        if (GameState.CurrentPlayerFaction == Faction.Heaven)
-            _mainCamera.transform.position = _heavenCameraInitialSpot.position;
-        else
-            _mainCamera.transform.position = _hellCameraInitialSpot.position;
-    }
-
-    private void OnLevelEnded()
-    {
-
     }
 }

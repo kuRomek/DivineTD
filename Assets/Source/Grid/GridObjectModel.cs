@@ -5,9 +5,9 @@ using UnityEngine;
 [Serializable]
 public class GridObjectModel : Model, IFactionRelated
 {
-    public GridObjectModel(Transform transform, bool heavenFaction, bool isDraft) : base(transform)
+    public GridObjectModel(Transform transform, Faction faction, bool isDraft) : base(transform)
     {
-        IsHeavenFaction = heavenFaction;
+        Faction = faction;
         IsDraft = isDraft;
     }
 
@@ -16,7 +16,7 @@ public class GridObjectModel : Model, IFactionRelated
     public event Action Destroyed;
 
     public bool IsDraft { get; private set; }
-    public bool IsHeavenFaction { get; private set; }
+    public Faction Faction { get; private set; }
 
     public void MoveAt(Vector3 worldPosition)
     {

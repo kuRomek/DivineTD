@@ -22,7 +22,6 @@ public class MainMenu : MonoBehaviour
     {
         _heavenScreen.anchoredPosition = default;
         _hellScreen.anchoredPosition = new Vector2(0, -((RectTransform)transform).rect.height);
-        GameState.IsCurrentFactionHeaven = true;
 
         _playButton.onClick.AddListener(LoadGameplayScene);
         _switchFactionButton.onClick.AddListener(SwitchFaction);
@@ -30,7 +29,7 @@ public class MainMenu : MonoBehaviour
 
     private void SwitchFaction()
     {
-        GameState.IsCurrentFactionHeaven = !GameState.IsCurrentFactionHeaven;
+        GameState.CurrentPlayerFaction = 1 - GameState.CurrentPlayerFaction;
         ShiftFactionScreen(true);
     }
 
@@ -42,7 +41,7 @@ public class MainMenu : MonoBehaviour
     private void ShiftFactionScreen(bool withAnimation)
     {
         float height = ((RectTransform)transform).rect.height;
-        bool toHeaven = GameState.IsCurrentFactionHeaven;
+        bool toHeaven = GameState.CurrentPlayerFaction == Faction.Hell;
 
         _screenShifting?.Kill();
         _switchButtonRotation?.Complete();

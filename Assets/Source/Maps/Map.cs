@@ -18,21 +18,21 @@ public class Map : MonoBehaviour
     public IReadOnlyDictionary<Vector2Int, Tile> CellsHeaven => _cellsHeaven;
     public IReadOnlyDictionary<Vector2Int, Tile> CellsHell => _cellsHell;
 
-    public void PlaceTile(bool heaven, Vector2Int cell, Func<Vector2Int, Vector3> convertPosition)
+    public void PlaceTile(Faction faction, Vector2Int cell, Func<Vector2Int, Vector3> convertPosition)
     {
-        var cells = heaven ? _cellsHeaven : _cellsHell;
+        var cells = faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
 
         if (cells.TryGetValue(cell, out Tile tile))
-            RemoveTile(heaven, cell, tile, cells);
+            RemoveTile(faction, cell, tile, cells);
 
         tile = Instantiate(Configs.Grid.TilePrefab, convertPosition(cell), default);
 
         cells[cell] = tile;
     }
 
-    public void RemoveTile(bool heaven, Vector2Int cell, Tile tile = null, Dictionary<Vector2Int, Tile> cells = null)
+    public void RemoveTile(Faction faction, Vector2Int cell, Tile tile = null, Dictionary<Vector2Int, Tile> cells = null)
     {
-        cells ??= heaven ? _cellsHeaven : _cellsHell;
+        cells ??= faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
 
         if (tile == null && cells.TryGetValue(cell, out tile) == false)
             return;
@@ -43,15 +43,15 @@ public class Map : MonoBehaviour
         cells.Remove(cell);
     }
 
-    public void PlaceObjectOnTile(bool heaven, Vector2Int cell, GridObjectModel @object)
+    public void PlaceObjectOnTile(Faction faction, Vector2Int cell, GridObjectModel @object)
     {
-        if (this[heaven].TryGetValue(cell, out Tile tile))
+        if (this[faction].TryGetValue(cell, out Tile tile))
         {
             tile.SetObject(@object);
 
             if (@object is CastleModel castle)
             {
-                if (castle.IsHeavenFaction)
+                if (faction == Faction.Heaven)
                     HeavenCastle = castle;
                 else
                     HellCastle = castle;
@@ -59,14 +59,14 @@ public class Map : MonoBehaviour
         }
     }
 
-    public void RemoveObjectFromTile(bool heaven, Vector2Int cell, bool destroy = true)
+    public void RemoveObjectFromTile(Faction faction, Vector2Int cell, bool destroy = true)
     {
-        if (this[heaven].TryGetValue(cell, out Tile tile))
+        if (this[faction].TryGetValue(cell, out Tile tile))
             tile.RemoveObject().Destroy();
     }
 
-    public IReadOnlyDictionary<Vector2Int, Tile> this[bool heaven]
-        => heaven ? CellsHeaven : CellsHell;
+    public IReadOnlyDictionary<Vector2Int, Tile> this[Faction faction]
+        => faction == Faction.Heaven ? CellsHeaven : CellsHell;
 
     public bool CheckIfHeavenCastleNull()
         => HeavenCastle != null;

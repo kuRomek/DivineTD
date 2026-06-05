@@ -1,21 +1,34 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Levels", menuName = "Configs/Levels")]
 public class LevelsConfig : ScriptableObject
 {
-    [SerializeField] private List<LevelData> _dataHeaven;
-    [SerializeField] private List<LevelData> _dataHell;
+    [SerializeField] private List<LevelData> _heavenSectionData;
+    [SerializeField] private List<LevelData> _hellSectionData;
 
-    public IReadOnlyList<LevelData> DataHeaven => _dataHeaven;
-    public IReadOnlyList<LevelData> DataHell => _dataHell;
+    public IReadOnlyList<LevelData> HeavenSection => _heavenSectionData;
+    public IReadOnlyList<LevelData> HellSection => _hellSectionData;
 
-    public Map GetMapPrefab(bool heaven, int levelNumber)
+    public MapData GetMapData(Faction faction, int levelNumber)
     {
-        var dataList = heaven ? _dataHeaven : _dataHell;
+        var dataList = faction == Faction.Heaven ? _heavenSectionData : _hellSectionData;
 
-        levelNumber = (levelNumber - 1) % dataList.Count;
+        return dataList[GetLevelIndex(levelNumber, dataList)].Map;
+    }
 
-        return dataList[levelNumber].Map;
+    public void SaveMapData(MapData data, int levelNumber, bool heaven)
+    {
+        var dataList = heaven ? _heavenSectionData : _hellSectionData;
+
+        var levelData = dataList[GetLevelIndex(levelNumber, dataList)];
+        levelData.Map = data;
+        dataList[GetLevelIndex(levelNumber, dataList)] = levelData;
+    }
+
+    private int GetLevelIndex(int levelNumber, ICollection dataList)
+    {
+        return (levelNumber - 1) % dataList.Count;
     }
 }

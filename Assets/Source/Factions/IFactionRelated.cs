@@ -1,4 +1,4 @@
 public interface IFactionRelated
 {
-    public bool IsHeavenFaction { get; }
+    public Faction Faction { get; }
 }

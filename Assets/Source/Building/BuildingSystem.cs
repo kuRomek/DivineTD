@@ -15,16 +15,16 @@ public class BuildingSystem
         _mainCamera = mainCamera;
     }
 
-    public void CreateTowerDraft(bool heavenFaction, TowerType type)
+    public void CreateTowerDraft(Faction faction, TowerType type)
     {
         _mainCamera.ToggleControlBlock(true);
-        _towerDraft = _towerFactory.CreateTower(heavenFaction, type, true);
-        _towerDraft.MoveAt(_gridSystem.GetSnappedPosition(heavenFaction));
+        _towerDraft = _towerFactory.CreateTower(faction, type, true);
+        _towerDraft.MoveAt(_gridSystem.GetSnappedPosition(faction));
     }
 
-    public bool TryBuildTower(bool heavenSide)
+    public bool TryBuildTower(Faction faction)
     {
-        if (_gridSystem.TryPlace(_towerDraft, heavenSide))
+        if (_gridSystem.TryPlace(_towerDraft, faction))
         {
             _towerDraft.ToggleDrafting(false);
             _towerDraft = null;

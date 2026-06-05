@@ -32,7 +32,7 @@ public class GridObject : Presenter, IUpdatable
     private void OnMoved(bool differentPosition)
     {
         if (differentPosition)
-            View.SetBuildingIndicatorColor(_gridSystem.CheckAvailability(Model.Transform.position, Model.IsHeavenFaction));
+            View.SetBuildingIndicatorColor(_gridSystem.CheckAvailability(Model.Transform.position, Model.Faction));
     }
 
     private void OnDestroyed()

@@ -34,10 +34,10 @@ public class TowerFactory : MonoBehaviour
         _gridSystem = gridSystem;
     }
 
-    public TowerModel CreateTower(bool heavenFaction, TowerType type, bool isDraft)
+    public TowerModel CreateTower(Faction faction, TowerType type, bool isDraft)
     {
-        TowerView tower = Instantiate(heavenFaction ? _heavenTowers[type] : _hellTowers[type]);
-        TowerModel towerModel = new(tower.transform, isDraft, heavenFaction, type);
+        TowerView tower = Instantiate(faction == Faction.Heaven ? _heavenTowers[type] : _hellTowers[type]);
+        TowerModel towerModel = new(tower.transform, isDraft, faction, type);
         TriggerDetector triggerDetector = tower.GetComponentInChildren<TriggerDetector>();
 
         if (triggerDetector != null)
