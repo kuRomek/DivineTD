@@ -95,7 +95,7 @@ public class GridSystem
 
     public bool CheckAvailability(Vector2Int cell, Faction faction)
     {
-        return Map[faction].ContainsKey(cell) && Map[faction][cell] == null;
+        return Map[faction].ContainsKey(cell) && Map[faction][cell].Object == null;
     }
 
     public bool CheckAvailability(Vector3 worldPosition, Faction faction)

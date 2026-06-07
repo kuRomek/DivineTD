@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class UnitFactory : MonoBehaviour
 {
-    [Header("Essentials")]
-    [SerializeField] private Transform _heavenCastle;
-    [SerializeField] private Transform _hellCastle;
-
     [Header("Heaven Unit Prefabs")]
     [SerializeField] private SerializedDictionary<UnitType, UnitView> _heavenUnits;
 
@@ -38,14 +34,18 @@ public class UnitFactory : MonoBehaviour
     [Button]
     public void LaunchTestUnitToHeaven()
     {
-        var unit = CreateUnit(Faction.Hell, UnitType.Type1, new() { _gridSystem.GetCell(Faction.Heaven, _heavenCastle.transform.position) });
+        var unit = CreateUnit(Faction.Hell, UnitType.Type1,
+            new() { _gridSystem.GetCell(Faction.Heaven, _gridSystem.Map.HeavenCastle.Transform.position) });
+
         unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Hell, new(5, 0));
     }
 
     [Button]
     public void LaunchTestUnitToHell()
     {
-        var unit = CreateUnit(Faction.Heaven, UnitType.Type1, new() { _gridSystem.GetCell(Faction.Hell, _hellCastle.transform.position) });
+        var unit = CreateUnit(Faction.Heaven, UnitType.Type1,
+            new() { _gridSystem.GetCell(Faction.Hell, _gridSystem.Map.HellCastle.Transform.position) });
+
         unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Heaven, new(5, 0));
     }
 

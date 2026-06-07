@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a10630ca77b7b2a39a59a26b12468444, type: 3}
   m_Name: Grid
   m_EditorClassIdentifier: Assembly-CSharp::GridConfig
-  <TilePrefab>k__BackingField: {fileID: 0}
+  <TilePrefab>k__BackingField: {fileID: 2908452449240115638, guid: 5c303332dc70482bebd1b6162b420716, type: 3}

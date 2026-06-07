@@ -41,7 +41,7 @@ public class MainMenu : MonoBehaviour
     private void ShiftFactionScreen(bool withAnimation)
     {
         float height = ((RectTransform)transform).rect.height;
-        bool toHeaven = GameState.CurrentPlayerFaction == Faction.Hell;
+        bool toHeaven = GameState.CurrentPlayerFaction == Faction.Heaven;
 
         _screenShifting?.Kill();
         _switchButtonRotation?.Complete();

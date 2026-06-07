@@ -31,21 +31,21 @@ public class GridInitializer
             mapToInit.PlaceTile(faction, cell, (cell) => _gridSystem.GetWorldPosition(faction, cell));
             mapToInit.PlaceObjectOnTile(faction, cell, tile.Object switch
             {
-                MapCastleData castle => InitializeCastle(castle),
-                MapTowerData tower => InitializeTower(tower),
+                MapCastleData castle => InitializeCastle(castle, faction),
+                MapTowerData tower => InitializeTower(tower, faction),
                 _ => null,
             });
         }
     }
 
-    private GridObjectModel InitializeCastle(MapCastleData data)
+    private GridObjectModel InitializeCastle(MapCastleData data, Faction faction)
     {
         CastleView castleView = Object.Instantiate(Configs.Buildings.CastlePrefab);
 
         HealthModel castleHealthModel = new(castleView.HealthBar.transform, 100f, 100f);
         castleView.HealthBar.AttachPresenter(new Health(castleView.HealthBar, castleHealthModel));
 
-        CastleModel castleModel = new(castleView.transform, castleHealthModel, data.Faction, false);
+        CastleModel castleModel = new(castleView.transform, castleHealthModel, faction, false);
         castleView.AttachPresenter(new Castle(castleView, castleModel, _gridSystem));
 
         castleView.TriggerDetector.AttachComponents(castleModel, castleModel);
@@ -53,8 +53,8 @@ public class GridInitializer
         return castleModel;
     }
 
-    private GridObjectModel InitializeTower(MapTowerData data)
+    private GridObjectModel InitializeTower(MapTowerData data, Faction faction)
     {
-        return _towerFactory.CreateTower(data.Faction, data.Type, false);
+        return _towerFactory.CreateTower(faction, data.Type, false);
     }
 }

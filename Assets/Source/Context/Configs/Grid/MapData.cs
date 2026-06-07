@@ -36,7 +36,7 @@ public struct MapData
             tile.Object = @object;
 
             if (@object is MapCastleData castle)
-                FillCastleData(castle);
+                FillCastleData(castle, faction);
         }
     }
 
@@ -55,9 +55,9 @@ public struct MapData
     private readonly bool CheckIfHellCastleNull()
         => HellCastle != null;
 
-    private void FillCastleData(MapCastleData castle)
+    private void FillCastleData(MapCastleData castle, Faction faction)
     {
-        if (castle.Faction == Faction.Heaven)
+        if (faction == Faction.Heaven)
         {
             if (HeavenCastle != null)
                 Debug.LogError("There is already a Heaven castle set up.");

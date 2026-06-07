@@ -14,9 +14,9 @@ public class Tile : MonoBehaviour
 
     public void SetObject(GridObjectModel @object)
     {
-        RemoveObject().Destroy();
+        RemoveObject()?.Destroy();
         Object = @object;
-        @object.Transform.SetParent(transform);
+        @object?.Transform.SetParent(transform);
     }
 
     public GridObjectModel RemoveObject()

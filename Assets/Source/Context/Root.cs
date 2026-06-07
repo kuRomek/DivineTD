@@ -9,10 +9,6 @@ public class Root : MonoBehaviour
     [SerializeField] private Grid _hellGrid;
     [SerializeField] private Map _map;
 
-    [Header("Camera Spots")]
-    [SerializeField] private Transform _heavenCameraInitialSpot;
-    [SerializeField] private Transform _hellCameraInitialSpot;
-
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
 
@@ -46,18 +42,6 @@ public class Root : MonoBehaviour
         InjectScene(Container);
     }
 
-    private void OnEnable()
-    {
-        _levelsSystem.LevelStarted += OnLevelStarted;
-        _levelsSystem.LevelEnded += OnLevelEnded;
-    }
-
-    private void OnDisable()
-    {
-        _levelsSystem.LevelStarted -= OnLevelStarted;
-        _levelsSystem.LevelEnded -= OnLevelEnded;
-    }
-
     private void Start()
     {
         _levelsSystem.StartLevel();
@@ -69,18 +53,5 @@ public class Root : MonoBehaviour
 
         foreach (var @object in objects)
             di.InjectConstructors(@object);
-    }
-
-    private void OnLevelStarted()
-    {
-        if (GameState.CurrentPlayerFaction == Faction.Heaven)
-            _mainCamera.transform.position = _heavenCameraInitialSpot.position;
-        else
-            _mainCamera.transform.position = _hellCameraInitialSpot.position;
-    }
-
-    private void OnLevelEnded()
-    {
-
     }
 }
