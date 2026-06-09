@@ -6,10 +6,7 @@ public class Tile : MonoBehaviour
 
     public GridObjectModel Object { get; private set; }
 
-    public void Initialize(bool heaven)
-    {
-        //_mesh.material = Configs.Grid.GetTileMaterial(heaven);
-    }
+    public bool Walkable => Object == null;
 
     public void SetObject(GridObjectModel @object)
     {

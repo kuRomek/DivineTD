@@ -6,9 +6,11 @@ public class WidgetsCanvasEditor : WidgetCanvas
 {
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _eraserButton;
+    [SerializeField] private Button _objectEraserButton;
     [SerializeField] private Button _noneButton;
     [SerializeField] private Button _tileButton;
     [SerializeField] private Button _castleButton;
+    [SerializeField] private Button _obstacleButton;
     [SerializeField] private List<Button> _towerButtons;
 
     private MapEditingSystem _mapEditingSystem;
@@ -22,8 +24,10 @@ public class WidgetsCanvasEditor : WidgetCanvas
     {
         _noneButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.None));
         _eraserButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Eraser));
+        _objectEraserButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.ObjectEraser));
         _tileButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Tile));
         _castleButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Castle));
+        _obstacleButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Obstacle));
 
         for (int i = 0; i < _towerButtons.Count; i++)
         {

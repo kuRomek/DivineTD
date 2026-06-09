@@ -6,7 +6,7 @@ public class MapEditingSystem : IUpdatable
 {
     private readonly MainCamera _camera;
     private readonly GridSystem _gridSystem;
-    private readonly TowerFactory _towerFactory;
+    private readonly GridObjectsFactory _gridObjectsFactory;
     private readonly Transform _cursor;
 
     private Brush _brush;
@@ -14,11 +14,11 @@ public class MapEditingSystem : IUpdatable
 
     private GridObjectModel _draft;
 
-    public MapEditingSystem(MainCamera mainCamera, GridSystem gridSystem, TowerFactory towerFactory, Transform cursor)
+    public MapEditingSystem(MainCamera mainCamera, GridSystem gridSystem, GridObjectsFactory gridObjectsFactory, Transform cursor)
     {
         _camera = mainCamera;
         _gridSystem = gridSystem;
-        _towerFactory = towerFactory;
+        _gridObjectsFactory = gridObjectsFactory;
         _cursor = cursor;
     }
 
@@ -40,6 +40,10 @@ public class MapEditingSystem : IUpdatable
                 OnGroundHit(Erase);
                 break;
 
+            case Brush.ObjectEraser:
+                OnGroundHit(EraseObject);
+                break;
+
             case Brush.Tower:
                 OnGroundHit(CreateTower);
                 break;
@@ -47,20 +51,23 @@ public class MapEditingSystem : IUpdatable
             case Brush.Castle:
                 OnGroundHit(CreateCastle);
                 break;
+
+            case Brush.Obstacle:
+                OnGroundHit(CreateObstacle);
+                break;
         }
     }
 
-    private void OnGroundHit(System.Action<Vector3> action)
+    private void OnGroundHit(System.Action<Vector2Int> onHit)
     {
         Ray ray = _camera.Camera.ScreenPointToRay(InputController.Current.Position);
 
         if (Physics.Raycast(ray, out RaycastHit hit, 25f, LayerMask.GetMask(Layers.Ground.ToString())))
-            action(hit.point);
+            onHit(_gridSystem.GetCell(_camera.TargetFaction, hit.point));
     }
 
-    private void DrawTile(Vector3 position)
+    private void DrawTile(Vector2Int cell)
     {
-        var cell = _gridSystem.GetCell(_camera.TargetFaction, position);
         var snappedPosition = _gridSystem.GetWorldPosition(_camera.TargetFaction, cell);
 
         if (_gridSystem.CheckIfTileExist(cell, _camera.TargetFaction) == false)
@@ -70,35 +77,44 @@ public class MapEditingSystem : IUpdatable
         }
     }
 
-    private void Erase(Vector3 position)
+    private void Erase(Vector2Int cell)
     {
-        var cell = _gridSystem.GetCell(_camera.TargetFaction, position);
-
         if (_gridSystem.CheckIfTileExist(cell, _camera.TargetFaction))
             _gridSystem.Map.RemoveTile(_camera.TargetFaction, cell);
     }
 
-    private void CreateTower(Vector3 position)
+    private void EraseObject(Vector2Int cell)
     {
-        var cell = _gridSystem.GetCell(_camera.TargetFaction, position);
+        if (_gridSystem.CheckIfTileExist(cell, _camera.TargetFaction))
+            _gridSystem.Map.RemoveObjectFromTile(_camera.TargetFaction, cell, true);
+    }
 
+    private void CreateTower(Vector2Int cell)
+    {
         if (_gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
         {
-            TowerModel tower = _towerFactory.CreateTower(_camera.TargetFaction, _towerType, false);
+            TowerModel tower = _gridObjectsFactory.CreateTower(_camera.TargetFaction, _towerType, false);
             _gridSystem.Map.PlaceObjectOnTile(_camera.TargetFaction, cell, tower);
         }
     }
 
-    private void CreateCastle(Vector3 position)
+    private void CreateCastle(Vector2Int cell)
     {
-        var cell = _gridSystem.GetCell(_camera.TargetFaction, position);
-
         var targetCastle = _camera.TargetFaction == Faction.Heaven ? _gridSystem.Map.HeavenCastle : _gridSystem.Map.HellCastle;
 
         if (targetCastle == null && _gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
         {
-            CastleModel castle = CreateCastle(false);
+            CastleModel castle = _gridObjectsFactory.CreateCastle(_camera.TargetFaction, false);
             _gridSystem.Map.PlaceObjectOnTile(_camera.TargetFaction, cell, castle);
+        }
+    }
+
+    public void CreateObstacle(Vector2Int cell)
+    {
+        if (_gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
+        {
+            ObstacleModel obstacle = _gridObjectsFactory.CreateObstacle(_camera.TargetFaction, false);
+            _gridSystem.Map.PlaceObjectOnTile(_camera.TargetFaction, cell, obstacle);
         }
     }
 
@@ -112,16 +128,22 @@ public class MapEditingSystem : IUpdatable
         _camera.ToggleControlBlock(_brush != Brush.None);
         _cursor.gameObject.SetActive(_brush != Brush.None);
 
-        if (brush == Brush.Tower)
+        switch (brush)
         {
-            _draft = _towerFactory.CreateTower(_camera.TargetFaction, _towerType, true);
-            _draft.SetCursorFollowing(true);
+            case Brush.Tower:
+                _draft = _gridObjectsFactory.CreateTower(_camera.TargetFaction, _towerType, true);
+                break;
+
+            case Brush.Castle:
+                _draft = _gridObjectsFactory.CreateCastle(_camera.TargetFaction, true);
+                break;
+
+            case Brush.Obstacle:
+                _draft = _gridObjectsFactory.CreateObstacle(_camera.TargetFaction, true);
+                break;
         }
-        else if (brush == Brush.Castle)
-        {
-            _draft = CreateCastle(true);
-            _draft.SetCursorFollowing(true);
-        }
+
+        _draft?.SetCursorFollowing(true);
     }
 
     public void SaveMap()
@@ -151,28 +173,13 @@ public class MapEditingSystem : IUpdatable
             MapGridObjectData @object = cell.Value.Object switch
             {
                 TowerModel tower => new MapTowerData() { Type = tower.Type },
-                CastleModel => new MapCastleData(),
+                CastleModel castle => new MapCastleData() { HealthPoints = castle.Health.MaxAmount },
+                ObstacleModel => new MapObstacleData(),
                 _ => null,
             };
 
             mapData.PlaceTile(faction, cell.Key, @object);
         }
-    }
-
-    private CastleModel CreateCastle(bool draft)
-    {
-        var castlesData = Configs.Levels.GetCastleData(GameState.CurrentPlayerFaction, GameState.CurrentLevel);
-        int healthAmount = castlesData[_camera.TargetFaction];
-
-        CastleView castleView = Object.Instantiate(Configs.Buildings.CastlePrefab);
-
-        HealthModel health = new(castleView.HealthBar.transform, healthAmount, healthAmount);
-        castleView.HealthBar.AttachPresenter(new Health(castleView.HealthBar, health));
-
-        CastleModel castle = new(castleView.transform, health, _camera.TargetFaction, draft);
-        castleView.AttachPresenter(new Castle(castleView, castle, _gridSystem));
-
-        return castle;
     }
 
     public enum Brush
@@ -183,5 +190,6 @@ public class MapEditingSystem : IUpdatable
         Tile,
         Tower,
         Castle,
+        Obstacle,
     }
 }

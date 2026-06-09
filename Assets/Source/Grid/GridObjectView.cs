@@ -9,7 +9,12 @@ public class GridObjectView : View
     public void ToggleBuildingIndicator(bool isActive)
     {
         Color color = _mesh.material.color;
-        color.a = isActive ? 0.5f : 1f;
+
+        if (isActive == false)
+            color = Color.white;
+        else
+            color.a = 0.5f;
+
         _mesh.material.color = color;
 
         if (_buildingIndicator != null)

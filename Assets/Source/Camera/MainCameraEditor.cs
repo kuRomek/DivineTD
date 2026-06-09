@@ -2,9 +2,12 @@ using UnityEngine;
 
 public class MainCameraEditor : MainCamera
 {
-    [Header("Camera Spots")]
-    [SerializeField] private Transform _heavenCameraInitialSpot;
-    [SerializeField] private Transform _hellCameraInitialSpot;
+    private GridSystem _gridSystem;
+
+    private void Construct(GridSystem gridSystem)
+    {
+        _gridSystem = gridSystem;
+    }
 
     private void Start()
     {
@@ -17,9 +20,9 @@ public class MainCameraEditor : MainCamera
         var constraints = new Constraints();
 
         if (faction == Faction.Heaven)
-            constraints.Offset = _heavenCameraInitialSpot.position;
+            constraints.Offset = _gridSystem.Map.HeavenCameraSpot.position;
         else
-            constraints.Offset = _hellCameraInitialSpot.position;
+            constraints.Offset = _gridSystem.Map.HellCameraSpot.position;
 
         constraints.FieldWidth = new(-50f, 50f);
         constraints.FieldHeight = new(-50f, 50f);

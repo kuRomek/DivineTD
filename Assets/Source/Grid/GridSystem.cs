@@ -9,14 +9,13 @@ public class GridSystem
     private readonly Camera _camera;
     private readonly GridInitializer _gridInitializer;
 
-    public GridSystem(LevelsSystem levelsSystem, Grid heavenGrid, Grid hellGrid,
-        Map map, TowerFactory towerFactory, Camera camera)
+    public GridSystem(LevelsSystem levelsSystem, Map map, GridObjectsFactory gridObjectsFactory, Camera camera)
     {
         _levelsSystem = levelsSystem;
-        _heavenGrid = heavenGrid;
-        _hellGrid = hellGrid;
+        _heavenGrid = map.HeavenGrid;
+        _hellGrid = map.HellGrid;
         _camera = camera;
-        _gridInitializer = new(this, towerFactory);
+        _gridInitializer = new(this, gridObjectsFactory);
 
         Map = map;
 

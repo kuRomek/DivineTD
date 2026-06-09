@@ -7,9 +7,13 @@ using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
 {
-    [Header("Tiles Parents")]
-    [field: SerializeField] public Transform HeavenGrid { get; private set; }
-    [field: SerializeField] public Transform HellGrid { get; private set; }
+    [field: Header("Grids")]
+    [field: SerializeField] public Grid HeavenGrid { get; private set; }
+    [field: SerializeField] public Grid HellGrid { get; private set; }
+
+    [field: Header("Camera Spots")]
+    [field: SerializeField] public Transform HeavenCameraSpot { get; private set; }
+    [field: SerializeField] public Transform HellCameraSpot { get; private set; }
 
     [Header("Tilemaps")]
     [SerializeField] private Tilemap _heavenTilemap;
@@ -44,7 +48,7 @@ public class Map : MonoBehaviour
             RemoveTile(faction, cell, tile, cells);
 
         tile = Instantiate(Configs.Grid.TilePrefab, convertPosition(cell), default);
-        tile.transform.SetParent(faction == Faction.Heaven ? HeavenGrid : HellGrid, true);
+        tile.transform.SetParent(faction == Faction.Heaven ? HeavenGrid.transform : HellGrid.transform, true);
         tilemap.SetTile((Vector3Int)cell, faction == Faction.Heaven ? Configs.Grid.HeavenTile : Configs.Grid.HellTile);
 
         cells[cell] = tile;
@@ -81,7 +85,7 @@ public class Map : MonoBehaviour
 
     public void RemoveObjectFromTile(Faction faction, Vector2Int cell, bool destroy = true)
     {
-        if (this[faction].TryGetValue(cell, out Tile tile))
+        if (this[faction].TryGetValue(cell, out Tile tile) && tile.Object != null)
             tile.RemoveObject().Destroy();
     }
 

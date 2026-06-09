@@ -1,4 +1,3 @@
-using kuRomek.SimpleVG;
 using UnityEngine;
 
 public class Pools : MonoBehaviour
@@ -16,7 +15,7 @@ public class Pools : MonoBehaviour
     {
         if (_instance != null)
         {
-            Debug.LogError($"Multiple instances of {nameof(TowerFactory)} detected. Leaving the last instantiated one.");
+            Debug.LogError($"Multiple instances of {nameof(Pools)} detected. Leaving the last instantiated one.");
             Destroy(_instance.gameObject);
         }
 

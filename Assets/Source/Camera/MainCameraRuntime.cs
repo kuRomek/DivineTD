@@ -3,10 +3,6 @@ using UnityEngine;
 
 public class MainCameraRuntime : MainCamera
 {
-    [Header("Camera Spots")]
-    [SerializeField] private Transform _heavenCameraInitialSpot;
-    [SerializeField] private Transform _hellCameraInitialSpot;
-
     private GridSystem _gridSystem;
     private LevelsSystem _levelsSystem;
 
@@ -29,9 +25,9 @@ public class MainCameraRuntime : MainCamera
         var constraints = new Constraints();
 
         if (faction == Faction.Heaven)
-            constraints.Offset = _heavenCameraInitialSpot.position;
+            constraints.Offset = _gridSystem.Map.HeavenCameraSpot.position;
         else
-            constraints.Offset = _hellCameraInitialSpot.position;
+            constraints.Offset = _gridSystem.Map.HellCameraSpot.position;
 
         if (_gridSystem.Map[faction].Count == 0)
         {

@@ -5,12 +5,12 @@ using UnityEngine;
 public class GridInitializer
 {
     private readonly GridSystem _gridSystem;
-    private readonly TowerFactory _towerFactory;
+    private readonly GridObjectsFactory _gridObjectFactory;
 
-    public GridInitializer(GridSystem gridSystem, TowerFactory towerFactory)
+    public GridInitializer(GridSystem gridSystem, GridObjectsFactory gridObjectFactory)
     {
         _gridSystem = gridSystem;
-        _towerFactory = towerFactory;
+        _gridObjectFactory = gridObjectFactory;
     }
 
     public void InitializeMap()
@@ -31,30 +31,11 @@ public class GridInitializer
             mapToInit.PlaceTile(faction, cell, (cell) => _gridSystem.GetWorldPosition(faction, cell));
             mapToInit.PlaceObjectOnTile(faction, cell, tile.Object switch
             {
-                MapCastleData castle => InitializeCastle(castle, faction),
-                MapTowerData tower => InitializeTower(tower, faction),
+                MapCastleData => _gridObjectFactory.CreateCastle(faction, false),
+                MapTowerData tower => _gridObjectFactory.CreateTower(faction, tower.Type, false),
+                MapObstacleData => _gridObjectFactory.CreateObstacle(faction, false),
                 _ => null,
             });
         }
-    }
-
-    private GridObjectModel InitializeCastle(MapCastleData data, Faction faction)
-    {
-        CastleView castleView = Object.Instantiate(Configs.Buildings.CastlePrefab);
-
-        HealthModel castleHealthModel = new(castleView.HealthBar.transform, 100f, 100f);
-        castleView.HealthBar.AttachPresenter(new Health(castleView.HealthBar, castleHealthModel));
-
-        CastleModel castleModel = new(castleView.transform, castleHealthModel, faction, false);
-        castleView.AttachPresenter(new Castle(castleView, castleModel, _gridSystem));
-
-        castleView.TriggerDetector.AttachComponents(castleModel, castleModel);
-
-        return castleModel;
-    }
-
-    private GridObjectModel InitializeTower(MapTowerData data, Faction faction)
-    {
-        return _towerFactory.CreateTower(faction, data.Type, false);
     }
 }

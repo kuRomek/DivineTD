@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4460486275240179928
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5100606507904037466}
+  - component: {fileID: 5324096339636582517}
+  m_Layer: 0
+  m_Name: GridObjectsFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5100606507904037466
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460486275240179928}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5324096339636582517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4460486275240179928}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7584a24629ce234648913bb60b324eef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TowersFactory
+  _heavenTowers:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -2098143830184028786, guid: 6fed471e9e44eac22bd0caef40c4fc26, type: 3}
+    - Key: 1
+      Value: {fileID: 8046322611807670685, guid: 368fc60c5d679e749bca1e3843fdca9e, type: 3}
+    - Key: 2
+      Value: {fileID: -8843677853962846270, guid: 3fb82c23e169f7b3180165424a6fa056, type: 3}
+    - Key: 3
+      Value: {fileID: 1405525336065484746, guid: 6aa50f18a3a92dad8a511e2050f4aed6, type: 3}
+  _hellTowers:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: -2098143830184028786, guid: 6fed471e9e44eac22bd0caef40c4fc26, type: 3}
+    - Key: 1
+      Value: {fileID: 8046322611807670685, guid: 368fc60c5d679e749bca1e3843fdca9e, type: 3}
+    - Key: 2
+      Value: {fileID: -8843677853962846270, guid: 3fb82c23e169f7b3180165424a6fa056, type: 3}
+    - Key: 3
+      Value: {fileID: 1405525336065484746, guid: 6aa50f18a3a92dad8a511e2050f4aed6, type: 3}
+  _castlePrefab: {fileID: 8304011636067976286, guid: eb5ca0e84c32a38bdb548592258309a7, type: 3}
+  _obstaclePrefab: {fileID: 3057740881490290585, guid: 51139aa6b21656571bca2084bf256888, type: 3}

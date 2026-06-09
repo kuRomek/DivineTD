@@ -28,6 +28,13 @@ MonoBehaviour:
               rid: -2
     HeavenCastleHealth: 100
     HellCastleHealth: 100
+  - Map:
+      _cellsHeaven:
+        _serializedList: []
+      _cellsHell:
+        _serializedList: []
+    HeavenCastleHealth: 100
+    HellCastleHealth: 100
   _hellSectionData: []
   <LevelButtonPrefab>k__BackingField: {fileID: 1760751679759957783, guid: f6bc39b54a3d9aa74b81672a2c7262b4, type: 3}
   references:

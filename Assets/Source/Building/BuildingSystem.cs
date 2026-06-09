@@ -3,41 +3,22 @@ using UnityEngine;
 public class BuildingSystem
 {
     private readonly GridSystem _gridSystem;
-    private readonly TowerFactory _towerFactory;
+    private readonly GridObjectsFactory _gridObjectsFactory;
     private readonly MainCamera _mainCamera;
 
     private GridObjectModel _draft = null;
 
-    public BuildingSystem(GridSystem gridSystem, TowerFactory towerFactory, MainCamera mainCamera)
+    public BuildingSystem(GridSystem gridSystem, GridObjectsFactory gridObjectsFactory, MainCamera mainCamera)
     {
         _gridSystem = gridSystem;
-        _towerFactory = towerFactory;
+        _gridObjectsFactory = gridObjectsFactory;
         _mainCamera = mainCamera;
     }
 
     public void CreateTowerDraft(Faction faction, TowerType type)
     {
         _mainCamera.ToggleControlBlock(true);
-        _draft = _towerFactory.CreateTower(faction, type, true);
-        _draft.MoveAt(_gridSystem.GetSnappedPosition(faction));
-    }
-
-    public void CreateCastleDraft(Faction faction)
-    {
-        _mainCamera.ToggleControlBlock(true);
-
-        var castlesData = Configs.Levels.GetCastleData(GameState.CurrentPlayerFaction, GameState.CurrentLevel);
-        int healthAmount = castlesData[_mainCamera.TargetFaction];
-
-        CastleView castleView = Object.Instantiate(Configs.Buildings.CastlePrefab);
-
-        HealthModel health = new(castleView.HealthBar.transform, healthAmount, healthAmount);
-        castleView.HealthBar.AttachPresenter(new Health(castleView.HealthBar, health));
-
-        CastleModel castle = new(castleView.transform, health, _mainCamera.TargetFaction, true);
-        castleView.AttachPresenter(new Castle(castleView, castle, _gridSystem));
-
-        _draft = castle;
+        _draft = _gridObjectsFactory.CreateTower(faction, type, true);
         _draft.MoveAt(_gridSystem.GetSnappedPosition(faction));
     }
 

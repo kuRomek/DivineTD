@@ -19,7 +19,7 @@ public class UnitFactory : MonoBehaviour
     {
         if (_instance != null)
         {
-            Debug.LogError($"Multiple instances of {nameof(TowerFactory)} detected. Leaving the last instantiated one.");
+            Debug.LogError($"Multiple instances of {nameof(UnitFactory)} detected. Leaving the last instantiated one.");
             Destroy(_instance.gameObject);
         }
 

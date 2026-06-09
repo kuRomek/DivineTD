@@ -2,18 +2,16 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
-    [SerializeField] private MainCameraRuntime _mainCamera;
+    [SerializeField] private MainCamera _mainCamera;
 
-    [Header("Grids")]
-    [SerializeField] private Grid _heavenGrid;
-    [SerializeField] private Grid _hellGrid;
+    [Header("Map")]
     [SerializeField] private Map _map;
 
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
 
     [Header("Factories")]
-    [SerializeField] private TowerFactory _towerFactory;
+    [SerializeField] private GridObjectsFactory _gridObjectsFactory;
     [SerializeField] private UnitFactory _unitFactory;
 
     public static SimpleDI Container;
@@ -28,15 +26,15 @@ public class Root : MonoBehaviour
 
         _levelsSystem = new();
 
-        GridSystem grid = new(_levelsSystem, _heavenGrid, _hellGrid, _map, _towerFactory, _mainCamera.Camera);
-        BuildingSystem building = new(grid, _towerFactory, _mainCamera);
+        GridSystem grid = new(null, _map, _gridObjectsFactory, _mainCamera.Camera);
+        BuildingSystem building = new(grid, _gridObjectsFactory, _mainCamera);
 
         Container.Register(grid);
         Container.Register(building);
         Container.Register(_levelsSystem);
         Container.Register(_widgetCanvas);
         Container.Register(_mainCamera);
-        Container.Register(_towerFactory);
+        Container.Register(_gridObjectsFactory);
         Container.Register(_unitFactory);
 
         InjectScene(Container);
