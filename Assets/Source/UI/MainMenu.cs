@@ -1,6 +1,4 @@
-using NaughtyAttributes;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using DG.Tweening;
 
@@ -9,11 +7,12 @@ public class MainMenu : MonoBehaviour
     private const float ShiftAnimationDuration = 0.2f;
 
     [SerializeField] private Button _playButton;
+    [SerializeField] private Button _editorButton;
     [SerializeField] private Button _switchFactionButton;
     [SerializeField] private RectTransform _switchButtonSprite;
     [SerializeField] private RectTransform _heavenScreen;
     [SerializeField] private RectTransform _hellScreen;
-    [Scene, SerializeField] private string _gameplayScene;
+    [SerializeField] private LevelsScreen _levelsScreen;
 
     private Tween _screenShifting;
     private Tween _switchButtonRotation;
@@ -23,7 +22,8 @@ public class MainMenu : MonoBehaviour
         _heavenScreen.anchoredPosition = default;
         _hellScreen.anchoredPosition = new Vector2(0, -((RectTransform)transform).rect.height);
 
-        _playButton.onClick.AddListener(LoadGameplayScene);
+        _playButton.onClick.AddListener(OnPlayButtonClicked);
+        _editorButton.onClick.AddListener(OnEditorButtonClicked);
         _switchFactionButton.onClick.AddListener(SwitchFaction);
     }
 
@@ -33,9 +33,14 @@ public class MainMenu : MonoBehaviour
         ShiftFactionScreen(true);
     }
 
-    private void LoadGameplayScene()
+    private void OnPlayButtonClicked()
     {
-        SceneManager.LoadScene(_gameplayScene);
+        _levelsScreen.Open(false);
+    }
+
+    private void OnEditorButtonClicked()
+    {
+        _levelsScreen.Open(true);
     }
 
     private void ShiftFactionScreen(bool withAnimation)

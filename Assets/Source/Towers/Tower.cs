@@ -7,7 +7,8 @@ public class Tower : GridObject, IInteractable
     private Tween _shooting;
     private readonly Transform _gunTip;
 
-    public Tower(View view, Model model, GridSystem gridSystem, TriggerDetector triggerDetector, Transform gunTip)
+    public Tower(View view, Model model, GridSystem gridSystem, TriggerDetector
+        triggerDetector, Transform gunTip)
         : base(view, model, gridSystem)
     {
         TriggerDetector = triggerDetector;

@@ -10,6 +10,23 @@ public struct MapData
     [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, TileData> _cellsHeaven;
     [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, TileData> _cellsHell;
 
+    public MapData(bool initializeCells)
+    {
+        if (initializeCells)
+        {
+            _cellsHeaven = new SerializedDictionary<Vector2Int, TileData>();
+            _cellsHell = new SerializedDictionary<Vector2Int, TileData>();
+        }
+        else
+        {
+            _cellsHeaven = null;
+            _cellsHell = null;
+        }
+
+        HeavenCastle = null;
+        HellCastle = null;
+    }
+
     [field: ValidateInput(nameof(CheckIfHeavenCastleNull), "The Heaven castle cannot be null")]
     [field: SerializeField, ReadOnly] public MapCastleData HeavenCastle { get; private set; }
 
@@ -21,7 +38,20 @@ public struct MapData
 
     public readonly void PlaceTile(Faction faction, Vector2Int cell)
     {
-        (faction == Faction.Heaven ? _cellsHeaven : _cellsHell)[cell] = new TileData();
+        var cells = faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
+        cells[cell] = new TileData();
+    }
+
+    public void PlaceTile(Faction faction, Vector2Int cell, MapGridObjectData @object)
+    {
+        var cells = faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
+
+        TileData tile = new TileData { Object = @object };
+
+        if (@object is MapCastleData castle)
+            FillCastleData(castle, faction);
+
+        cells[cell] = tile;
     }
 
     public readonly void RemoveTile(Faction faction, Vector2Int cell)

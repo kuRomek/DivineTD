@@ -2,76 +2,38 @@ using DG.Tweening;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WidgetCanvas : MonoBehaviour
+public abstract class WidgetCanvas : MonoBehaviour
 {
     private const float ShiftAnimationDuration = 0.2f;
 
-    [SerializeField] private RectTransform _towerButtons;
-    [SerializeField] private RectTransform _buildingButtons;
     [SerializeField] private Button _switchFactionButton;
     [SerializeField] private RectTransform _switchButtonSprite;
 
-    [Space(3f)]
-    [SerializeField] private Button _acceptBuildingButton;
-    [SerializeField] private Button _cancelBuildingButton;
-
-    private BuildingSystem _buildingSystem;
-    private LevelsSystem _levelsSystem;
-    private MainCamera _mainCamera;
-
-    private Faction _currentTargetFaction;
+    [field: SerializeField] public MainCamera MainCamera { get; private set; }
 
     private Tween _switchButtonRotation;
 
-    public void Construct(BuildingSystem buildingSystem, LevelsSystem levelsSystem, MainCamera mainCamera)
-    {
-        _buildingSystem = buildingSystem;
-        _levelsSystem = levelsSystem;
-        _mainCamera = mainCamera;
-
-        _levelsSystem.LevelStarted += OnLevelStarted;
-    }
+    protected abstract void SubscribeToButtons();
 
     private void Start()
     {
-        _acceptBuildingButton.onClick.AddListener(OnAcceptBuildingButtonClicked);
-        _cancelBuildingButton.onClick.AddListener(OnCancelBuildingButtonClicked);
-        _switchFactionButton.onClick.AddListener(SwitchCameraTarget);
+        _switchFactionButton.onClick.AddListener(() => SwitchCameraTarget(1 - MainCamera.TargetFaction));
+
+        SubscribeToButtons();
     }
 
-    public void ToggleBuildingMode(bool isActive)
+    protected void SwitchCameraTarget(Faction faction)
     {
-        _towerButtons.gameObject.SetActive(isActive == false);
-        _buildingButtons.gameObject.SetActive(isActive);
-    }
+        if (MainCamera.IsControlBlocked)
+            return;
 
-    private void OnAcceptBuildingButtonClicked()
-    {
-        if (_buildingSystem.TryBuildTower(GameState.CurrentPlayerFaction))
-            ToggleBuildingMode(false);
-    }
+        _switchButtonRotation?.Kill();
 
-    private void OnCancelBuildingButtonClicked()
-    {
-        _buildingSystem.CancelBuilding();
-        ToggleBuildingMode(false);
-    }
+        MainCamera.SwitchTargetFactionTo(faction, false);
 
-    private void SwitchCameraTarget()
-    {
-        _switchButtonRotation?.Complete();
+        float rotation = faction == Faction.Heaven ? 0f : 180f;
 
-        _switchButtonRotation = _switchButtonSprite.DORotate(Vector3.forward * 180f, ShiftAnimationDuration).
-            SetEase(Ease.OutBack).SetRelative();
-
-        _mainCamera.SwitchTargetFactionTo(1 - _currentTargetFaction);
-        _currentTargetFaction = 1 - _currentTargetFaction;
-    }
-
-    private void OnLevelStarted()
-    {
-        _currentTargetFaction = GameState.CurrentPlayerFaction;
-
-        _switchButtonSprite.rotation = Quaternion.Euler(0f, 0f, _currentTargetFaction == Faction.Heaven ? 0f : 180f);
+        _switchButtonRotation = _switchButtonSprite.DORotate(Vector3.forward * rotation, ShiftAnimationDuration).
+            SetEase(Ease.OutBack);
     }
 }

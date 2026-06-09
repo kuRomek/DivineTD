@@ -3,29 +3,49 @@ using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
 {
+    [Header("Tiles Parents")]
+    [field: SerializeField] public Transform HeavenGrid { get; private set; }
+    [field: SerializeField] public Transform HellGrid { get; private set; }
+
+    [Header("Tilemaps")]
+    [SerializeField] private Tilemap _heavenTilemap;
+    [SerializeField] private Tilemap _hellTilemap;
+
     [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, Tile> _cellsHeaven;
     [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, Tile> _cellsHell;
 
-    [field: ValidateInput(nameof(CheckIfHeavenCastleNull), "The Heaven castle cannot be null")]
-    [field: SerializeField, ReadOnly] public CastleModel HeavenCastle { get; private set; }
-
-    [field: ValidateInput(nameof(CheckIfHellCastleNull), "The Hell castle cannot be null")]
-    [field: SerializeField, ReadOnly] public CastleModel HellCastle { get; private set; }
+    public CastleModel HeavenCastle { get; private set; }
+    public CastleModel HellCastle { get; private set; }
 
     public IReadOnlyDictionary<Vector2Int, Tile> CellsHeaven => _cellsHeaven;
     public IReadOnlyDictionary<Vector2Int, Tile> CellsHell => _cellsHell;
 
     public void PlaceTile(Faction faction, Vector2Int cell, Func<Vector2Int, Vector3> convertPosition)
     {
-        var cells = faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
+        Dictionary<Vector2Int, Tile> cells;
+        Tilemap tilemap;
+
+        if (faction == Faction.Heaven)
+        {
+            cells = _cellsHeaven;
+            tilemap = _heavenTilemap;
+        }
+        else
+        {
+            cells = _cellsHell;
+            tilemap = _hellTilemap;
+        }
 
         if (cells.TryGetValue(cell, out Tile tile))
             RemoveTile(faction, cell, tile, cells);
 
         tile = Instantiate(Configs.Grid.TilePrefab, convertPosition(cell), default);
+        tile.transform.SetParent(faction == Faction.Heaven ? HeavenGrid : HellGrid, true);
+        tilemap.SetTile((Vector3Int)cell, faction == Faction.Heaven ? Configs.Grid.HeavenTile : Configs.Grid.HellTile);
 
         cells[cell] = tile;
     }

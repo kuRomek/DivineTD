@@ -1,11 +1,10 @@
-using NaughtyAttributes;
 using UnityEngine;
 
 public class Tile : MonoBehaviour
 {
     [SerializeField] private MeshRenderer _mesh;
 
-    [field: ReadOnly, SerializeField] public GridObjectModel Object { get; private set; }
+    public GridObjectModel Object { get; private set; }
 
     public void Initialize(bool heaven)
     {
@@ -16,7 +15,12 @@ public class Tile : MonoBehaviour
     {
         RemoveObject()?.Destroy();
         Object = @object;
-        @object?.Transform.SetParent(transform);
+
+        if (@object != null)
+        {
+            @object.Transform.SetParent(transform, false);
+            @object.Transform.localPosition = default;
+        }
     }
 
     public GridObjectModel RemoveObject()

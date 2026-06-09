@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Root : MonoBehaviour
 {
-    [SerializeField] private MainCamera _mainCamera;
+    [SerializeField] private MainCameraRuntime _mainCamera;
 
     [Header("Grids")]
     [SerializeField] private Grid _heavenGrid;
@@ -45,6 +45,11 @@ public class Root : MonoBehaviour
     private void Start()
     {
         _levelsSystem.StartLevel();
+    }
+
+    private void Update()
+    {
+        Container.Update(Time.deltaTime);
     }
 
     private void InjectScene(SimpleDI di)

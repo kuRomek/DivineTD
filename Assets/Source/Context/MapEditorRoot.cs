@@ -3,6 +3,7 @@ using UnityEngine;
 public class MapEditorRoot : MonoBehaviour
 {
     [SerializeField] private MainCamera _mainCamera;
+    [SerializeField] private Transform _cursor;
 
     [Header("Grids")]
     [SerializeField] private Grid _heavenGrid;
@@ -32,15 +33,22 @@ public class MapEditorRoot : MonoBehaviour
 
         GridSystem grid = new(null, _heavenGrid, _hellGrid, _map, _towerFactory, _mainCamera.Camera);
         BuildingSystem building = new(grid, _towerFactory, _mainCamera);
+        MapEditingSystem mapEditing = new(_mainCamera, grid, _towerFactory, _cursor);
 
         Container.Register(grid);
         Container.Register(building);
-        Container.Register(_widgetCanvas);
+        Container.Register(mapEditing);
         Container.Register(_mainCamera);
+        Container.Register(_widgetCanvas);
         Container.Register(_towerFactory);
         Container.Register(_unitFactory);
 
         InjectScene(Container);
+    }
+
+    private void Update()
+    {
+        Container.Update(Time.deltaTime);
     }
 
     private void InjectScene(SimpleDI di)

@@ -37,7 +37,7 @@ public class UnitFactory : MonoBehaviour
         var unit = CreateUnit(Faction.Hell, UnitType.Type1,
             new() { _gridSystem.GetCell(Faction.Heaven, _gridSystem.Map.HeavenCastle.Transform.position) });
 
-        unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Hell, new(5, 0));
+        unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Heaven, default);
     }
 
     [Button]
@@ -46,7 +46,7 @@ public class UnitFactory : MonoBehaviour
         var unit = CreateUnit(Faction.Heaven, UnitType.Type1,
             new() { _gridSystem.GetCell(Faction.Hell, _gridSystem.Map.HellCastle.Transform.position) });
 
-        unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Heaven, new(5, 0));
+        unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Hell, default);
     }
 
     public UnitModel CreateUnit(Faction faction, UnitType type, List<Vector2Int> targets)

@@ -6,7 +6,7 @@ public class BuildingSystem
     private readonly TowerFactory _towerFactory;
     private readonly MainCamera _mainCamera;
 
-    private TowerModel _towerDraft = null;
+    private GridObjectModel _draft = null;
 
     public BuildingSystem(GridSystem gridSystem, TowerFactory towerFactory, MainCamera mainCamera)
     {
@@ -18,16 +18,35 @@ public class BuildingSystem
     public void CreateTowerDraft(Faction faction, TowerType type)
     {
         _mainCamera.ToggleControlBlock(true);
-        _towerDraft = _towerFactory.CreateTower(faction, type, true);
-        _towerDraft.MoveAt(_gridSystem.GetSnappedPosition(faction));
+        _draft = _towerFactory.CreateTower(faction, type, true);
+        _draft.MoveAt(_gridSystem.GetSnappedPosition(faction));
     }
 
-    public bool TryBuildTower(Faction faction)
+    public void CreateCastleDraft(Faction faction)
     {
-        if (_gridSystem.TryPlace(_towerDraft, faction))
+        _mainCamera.ToggleControlBlock(true);
+
+        var castlesData = Configs.Levels.GetCastleData(GameState.CurrentPlayerFaction, GameState.CurrentLevel);
+        int healthAmount = castlesData[_mainCamera.TargetFaction];
+
+        CastleView castleView = Object.Instantiate(Configs.Buildings.CastlePrefab);
+
+        HealthModel health = new(castleView.HealthBar.transform, healthAmount, healthAmount);
+        castleView.HealthBar.AttachPresenter(new Health(castleView.HealthBar, health));
+
+        CastleModel castle = new(castleView.transform, health, _mainCamera.TargetFaction, true);
+        castleView.AttachPresenter(new Castle(castleView, castle, _gridSystem));
+
+        _draft = castle;
+        _draft.MoveAt(_gridSystem.GetSnappedPosition(faction));
+    }
+
+    public bool TryBuild(Faction faction)
+    {
+        if (_gridSystem.TryPlace(_draft, faction))
         {
-            _towerDraft.ToggleDrafting(false);
-            _towerDraft = null;
+            _draft.ToggleDrafting(false);
+            _draft = null;
             _mainCamera.ToggleControlBlock(false);
             return true;
         }
@@ -41,10 +60,10 @@ public class BuildingSystem
     {
         _mainCamera.ToggleControlBlock(false);
 
-        if (_towerDraft != null)
+        if (_draft != null)
         {
-            _towerDraft.Destroy();
-            _towerDraft = null;
+            _draft.Destroy();
+            _draft = null;
         }
         else
         {

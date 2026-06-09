@@ -1,37 +1,36 @@
 using System;
-using System.Linq;
+using DG.Tweening;
 using kuRomek.SimpleVG;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class MainCamera : MonoBehaviour
+public abstract class MainCamera : MonoBehaviour
 {
-    [Range(0f, 1f), SerializeField] private float _smoothness;
+    private const float CameraLiftingDuration = 0.3f;
 
-    [Header("Camera Spots")]
-    [SerializeField] private Transform _heavenCameraInitialSpot;
-    [SerializeField] private Transform _hellCameraInitialSpot;
+    [Range(0f, 1f), SerializeField] private float _smoothness;
 
     [field: SerializeField] public Camera Camera { get; private set; }
 
     private Vector3 _accumDelta;
     private Vector3 _positionOnClicked;
     private Vector3 _targetPosition;
-    private GridSystem _gridSystem;
-    private LevelsSystem _levelsSystem;
-    private Constraints _constraints;
-    private Constraints _heavenConstraints;
-    private Constraints _hellConstraints;
+    private float _currentCameraHeight;
+    private Tween _cameraLifting;
+    private bool _instantMove;
 
     public bool IsDragging { get; private set; }
+    public Faction TargetFaction { get; private set; }
     public bool IsControlBlocked { get; private set; }
 
-    private void Construct(GridSystem gridSystem, LevelsSystem levelsSystem)
-    {
-        _gridSystem = gridSystem;
-        _levelsSystem = levelsSystem;
+    protected Constraints CurrentConstraints { get; private set; }
+    protected Constraints HeavenConstraints { get; private set; }
+    protected Constraints HellConstraints { get; private set; }
+    protected float HeavenHellDistance { get; private set; }
 
-        _levelsSystem.LevelStarted += OnLevelStarted;
+    private void Awake()
+    {
+        _positionOnClicked = transform.position;
     }
 
     private void Update()
@@ -56,12 +55,41 @@ public class MainCamera : MonoBehaviour
         if (IsDragging)
             CalculateTargetPosition();
 
-        transform.position = Vector3.Lerp(transform.position, _targetPosition, _smoothness);
+        Vector3 targetPosition = Vector3.Lerp(transform.position, _targetPosition, _smoothness);
+
+        if (_instantMove)
+            transform.position = _targetPosition;
+        else
+            transform.position = new Vector3(targetPosition.x, _currentCameraHeight, targetPosition.z);
+
+        _instantMove = false;
+
+        float deepnessRatio = ((_currentCameraHeight - HellConstraints.Offset.y) / HeavenHellDistance);
+        RenderSettings.skybox.SetFloat("_Exposure", deepnessRatio);
     }
 
-    public void SwitchTargetFactionTo(Faction faction)
+    public void SwitchTargetFactionTo(Faction faction, bool instant)
     {
-        _constraints = faction == Faction.Heaven ? _heavenConstraints : _hellConstraints;
+        if (IsControlBlocked)
+            return;
+
+        TargetFaction = faction;
+        CurrentConstraints = faction == Faction.Heaven ? HeavenConstraints : HellConstraints;
+
+        _cameraLifting?.Kill();
+
+        _instantMove = instant;
+
+        if (_instantMove)
+        {
+            _currentCameraHeight = CurrentConstraints.Offset.y;
+        }
+        else
+        {
+            _cameraLifting = DOVirtual.Float(_currentCameraHeight, CurrentConstraints.Offset.y, CameraLiftingDuration,
+                (value) => _currentCameraHeight = value);
+        }
+
         CalculateTargetPosition();
     }
 
@@ -83,50 +111,25 @@ public class MainCamera : MonoBehaviour
         _targetPosition = new Vector3(
             Mathf.Clamp(
                 _positionOnClicked.x - _accumDelta.x,
-                _constraints.FieldWidth.x,
-                _constraints.FieldWidth.y),
-            _constraints.Offset.y,
+                CurrentConstraints.FieldWidth.x,
+                CurrentConstraints.FieldWidth.y),
+            CurrentConstraints.Offset.y,
             Mathf.Clamp(
                 _positionOnClicked.z - _accumDelta.z,
-                _constraints.FieldHeight.x + _constraints.Offset.z,
-                _constraints.FieldHeight.y + _constraints.Offset.z));
+                CurrentConstraints.FieldHeight.x + CurrentConstraints.Offset.z,
+                CurrentConstraints.FieldHeight.y + CurrentConstraints.Offset.z));
     }
 
-    private void OnLevelStarted()
+    public void CalculateConstraints()
     {
-        _heavenConstraints = CalculateConstraints(Faction.Heaven);
-        _hellConstraints = CalculateConstraints(Faction.Hell);
-
-        SwitchTargetFactionTo(GameState.CurrentPlayerFaction);
+        HeavenConstraints = CalculateConstraints(Faction.Heaven);
+        HellConstraints = CalculateConstraints(Faction.Hell);
+        HeavenHellDistance = HeavenConstraints.Offset.y - HellConstraints.Offset.y;
     }
 
-    private Constraints CalculateConstraints(Faction faction)
-    {
-        var constraints = new Constraints();
+    protected abstract Constraints CalculateConstraints(Faction faction);
 
-        if (faction == Faction.Heaven)
-            constraints.Offset = _heavenCameraInitialSpot.position;
-        else
-            constraints.Offset = _hellCameraInitialSpot.position;
-
-        var width = new Vector2Int(
-            _gridSystem.Map[faction].Min(cell => cell.Key.x),
-            _gridSystem.Map[faction].Max(cell => cell.Key.x));
-
-        var height = new Vector2Int(
-            _gridSystem.Map[faction].Min(cell => cell.Key.y),
-            _gridSystem.Map[faction].Max(cell => cell.Key.y));
-
-        // ! This assumes that the grid is a square. (overall some bullshit solution, gotta refactor)
-        Vector3 convertedWidth = _gridSystem.GetWorldPosition(faction, width);
-        Vector3 convertedHeight = _gridSystem.GetWorldPosition(faction, height);
-        constraints.FieldWidth = new(-convertedWidth.x, -convertedWidth.z);
-        constraints.FieldHeight = new(convertedHeight.z, convertedHeight.x);
-
-        return constraints;
-    }
-
-    private struct Constraints
+    protected struct Constraints
     {
         public Vector2 FieldWidth;
         public Vector2 FieldHeight;

@@ -26,21 +26,5 @@ public class GridDebug : MonoBehaviour
                 cell.Init(i, j, _color, localPosition);
             }
         }
-
-        for (int column = 0; column <= _cells.GetLength(0); column++)
-        {
-            Debug.DrawLine(
-                _grid.CellToWorld(new(column, 0)),
-                _grid.CellToWorld(new(column, _cells.GetLength(1))),
-                _color, 1000f);
-        }
-
-        for (int row = 0; row <= _cells.GetLength(1); row++)
-        {
-            Debug.DrawLine(
-                _grid.CellToWorld(new(0, row)),
-                _grid.CellToWorld(new(_cells.GetLength(0), row)),
-                _color, 1000f);
-        }
     }
 }

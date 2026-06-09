@@ -6,10 +6,12 @@ public class GridObject : Presenter, IUpdatable
 {
     private readonly GridSystem _gridSystem;
 
-    public GridObject(View view, Model model, GridSystem gridSystem) : base(view, model)
+    public GridObject(View view, Model model, GridSystem gridSystem)
+        : base(view, model)
     {
         _gridSystem = gridSystem;
         Model.ToggledDrafting += View.ToggleBuildingIndicator;
+
         Model.Moved += OnMoved;
         Model.Destroyed += OnDestroyed;
     }
@@ -19,8 +21,12 @@ public class GridObject : Presenter, IUpdatable
 
     public void Update(float deltaTime)
     {
-        if (Model.IsDraft && InputController.Current.Pressing && EventSystem.current.IsPointerOverGameObject() == false)
-            _gridSystem.Drag(Model);
+        if (Model.IsDraft)
+        {
+            if (EventSystem.current.IsPointerOverGameObject() == false &&
+                (Model.AlwaysFollowCursor || InputController.Current.Pressing))
+                _gridSystem.Drag(Model);
+        }
 
         OnUpdate(deltaTime);
     }
@@ -32,7 +38,7 @@ public class GridObject : Presenter, IUpdatable
     private void OnMoved(bool differentPosition)
     {
         if (differentPosition)
-            View.SetBuildingIndicatorColor(_gridSystem.CheckAvailability(Model.Transform.position, Model.Faction));
+            View.SetBuildingIndicatorColor(_gridSystem.CheckTileAvailability(Model.Transform.position, Model.Faction));
     }
 
     private void OnDestroyed()

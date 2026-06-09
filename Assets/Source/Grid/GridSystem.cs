@@ -22,6 +22,8 @@ public class GridSystem
 
         if (_levelsSystem != null)
             _levelsSystem.LevelStarted += OnLevelStarted;
+        else
+            OnLevelStarted();
     }
 
     public Map Map { get; }
@@ -32,7 +34,7 @@ public class GridSystem
 
         Vector2Int cell = (Vector2Int)grid.WorldToCell(gridObject.Transform.position);
 
-        if (CheckAvailability(cell, faction))
+        if (CheckTileAvailability(cell, faction))
         {
             Map.PlaceObjectOnTile(faction, cell, gridObject);
         }
@@ -58,6 +60,14 @@ public class GridSystem
 
         if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, LayerMask.GetMask("Ground")))
             gridObject.MoveAt(GetSnappedPosition(gridObject.Faction, hit.point));
+    }
+
+    public void Drag(Transform @object, Faction faction)
+    {
+        Ray ray = _camera.ScreenPointToRay(InputController.Current.Position);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, float.PositiveInfinity, LayerMask.GetMask("Ground")))
+            @object.position = GetSnappedPosition(faction, hit.point);
     }
 
     public Vector3 GetSnappedPosition(Faction faction, Vector3 worldPosition)
@@ -93,15 +103,19 @@ public class GridSystem
         return position;
     }
 
-    public bool CheckAvailability(Vector2Int cell, Faction faction)
+    public bool CheckIfTileExist(Vector2Int cell, Faction faction)
+    {
+        return Map[faction].ContainsKey(cell);
+    }
+
+    public bool CheckTileAvailability(Vector2Int cell, Faction faction)
     {
         return Map[faction].ContainsKey(cell) && Map[faction][cell].Object == null;
     }
 
-    public bool CheckAvailability(Vector3 worldPosition, Faction faction)
+    public bool CheckTileAvailability(Vector3 worldPosition, Faction faction)
     {
-        Vector2Int cell = (Vector2Int)(faction == Faction.Heaven ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
-        return CheckAvailability(cell, faction);
+        return CheckTileAvailability(GetCell(faction, worldPosition), faction);
     }
 
     private void OnLevelStarted()

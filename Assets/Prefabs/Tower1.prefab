@@ -175,6 +175,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerView
   _buildingIndicator: {fileID: 1224886754726037374}
+  _mesh: {fileID: 2275166502102144234}
   _towerHead: {fileID: 3821538431573122444}
   <GunTip>k__BackingField: {fileID: 4094660406280812303}
 --- !u!1001 &2275166502099979400
@@ -237,6 +238,11 @@ PrefabInstance:
 --- !u!4 &2275166502100375048 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: b033c863a55c94b0faefde576ffd460a, type: 3}
+  m_PrefabInstance: {fileID: 2275166502099979400}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &2275166502102144234 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2300002, guid: b033c863a55c94b0faefde576ffd460a, type: 3}
   m_PrefabInstance: {fileID: 2275166502099979400}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3821538431573247756

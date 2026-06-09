@@ -7,12 +7,12 @@ public class TowerButton : MonoBehaviour
     [SerializeField] private TowerType _type;
 
     private BuildingSystem _buildingSystem;
-    private WidgetCanvas _widgetCanvas;
+    private WidgetCanvasRuntime _widgetCanvas;
 
     public void Construct(BuildingSystem buildingSystem, WidgetCanvas widgetCanvas)
     {
         _buildingSystem = buildingSystem;
-        _widgetCanvas = widgetCanvas;
+        _widgetCanvas = widgetCanvas as WidgetCanvasRuntime;
     }
 
     private void Start()

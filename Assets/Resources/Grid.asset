@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: Grid
   m_EditorClassIdentifier: Assembly-CSharp::GridConfig
   <TilePrefab>k__BackingField: {fileID: 2908452449240115638, guid: 5c303332dc70482bebd1b6162b420716, type: 3}
+  <HeavenTile>k__BackingField: {fileID: 11400000, guid: dc0522a950f61b8b4bc7a686987377e5, type: 2}
+  <HellTile>k__BackingField: {fileID: 11400000, guid: 1621b3106370365f687e1d36b0883811, type: 2}
