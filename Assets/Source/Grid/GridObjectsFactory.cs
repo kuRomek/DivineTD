@@ -74,6 +74,7 @@ public class GridObjectsFactory : MonoBehaviour
 
         CastleModel castle = new(castleView.transform, health, faction, draft);
         castleView.AttachPresenter(new Castle(castleView, castle, _gridSystem));
+        castleView.TriggerDetector.AttachComponents(castle, castle);
 
         return castle;
     }
