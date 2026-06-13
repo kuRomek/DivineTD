@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WidgetsCanvasEditor : WidgetCanvas
+public class WidgetCanvasEditor : WidgetCanvas
 {
     [SerializeField] private Button _saveButton;
     [SerializeField] private Button _eraserButton;
@@ -11,6 +11,8 @@ public class WidgetsCanvasEditor : WidgetCanvas
     [SerializeField] private Button _tileButton;
     [SerializeField] private Button _castleButton;
     [SerializeField] private Button _obstacleButton;
+    [SerializeField] private Button _spawnPointButton;
+    [SerializeField] private Button _checkpointButton;
     [SerializeField] private List<Button> _towerButtons;
 
     private MapEditingSystem _mapEditingSystem;
@@ -28,6 +30,8 @@ public class WidgetsCanvasEditor : WidgetCanvas
         _tileButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Tile));
         _castleButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Castle));
         _obstacleButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Obstacle));
+        _spawnPointButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.SpawnPoint));
+        _checkpointButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Checkpoint));
 
         for (int i = 0; i < _towerButtons.Count; i++)
         {

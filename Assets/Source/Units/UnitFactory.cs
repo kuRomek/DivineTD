@@ -34,26 +34,25 @@ public class UnitFactory : MonoBehaviour
     [Button]
     public void LaunchTestUnitToHeaven()
     {
-        var unit = CreateUnit(Faction.Hell, UnitType.Type1,
-            new() { _gridSystem.GetCell(Faction.Heaven, _gridSystem.Map.HeavenCastle.Transform.position) });
+        var unit = CreateUnit(Faction.Hell, UnitType.Type1, _gridSystem.Map.GetCheckpoints(Faction.Heaven));
 
-        unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Heaven, default);
+        Faction enemyFaction = 1 - unit.Faction;
+        unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.GetSpawnPosition(enemyFaction));
     }
 
     [Button]
     public void LaunchTestUnitToHell()
     {
-        var unit = CreateUnit(Faction.Heaven, UnitType.Type1,
-            new() { _gridSystem.GetCell(Faction.Hell, _gridSystem.Map.HellCastle.Transform.position) });
+        var unit = CreateUnit(Faction.Heaven, UnitType.Type1, _gridSystem.Map.GetCheckpoints(Faction.Hell));
 
-        unit.Transform.position = _gridSystem.GetWorldPosition(Faction.Hell, default);
+        Faction enemyFaction = 1 - unit.Faction;
+        unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.GetSpawnPosition(enemyFaction));
     }
 
-    public UnitModel CreateUnit(Faction faction, UnitType type, List<Vector2Int> targets)
+    public UnitModel CreateUnit(Faction faction, UnitType type, IReadOnlyList<Vector2Int> checkpoints)
     {
         UnitModel unitModel = null;
         UnitView unit;
-        IReadOnlyDictionary<Vector2Int, Tile> walkingGrid = _gridSystem.Map[faction];
         unit = faction == Faction.Heaven ? Instantiate(_heavenUnits[type]) : Instantiate(_hellUnits[type]);
 
         HealthView healthView = unit.GetComponentInChildren<HealthView>(true);
@@ -65,9 +64,9 @@ public class UnitFactory : MonoBehaviour
 
             HealthModel unitHealthModel = new(healthView.transform, healthPoints, healthPoints);
             healthView.AttachPresenter(new Health(healthView, unitHealthModel));
-            unitModel = new(unit.transform, unitHealthModel, faction, type, targets);
+            unitModel = new(unit.transform, unitHealthModel, faction, type, checkpoints);
 
-            unit.AttachPresenter(new Unit(unit, unitModel, walkingGrid, _gridSystem, triggerDetector));
+            unit.AttachPresenter(new Unit(unit, unitModel, _gridSystem, triggerDetector));
 
             if (triggerDetector != null)
                 triggerDetector.AttachComponents(unitModel, unitModel);

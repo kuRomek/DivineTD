@@ -9,11 +9,11 @@ public class GridObjectsFactory : MonoBehaviour
     [Header("Hell Tower Prefabs")]
     [SerializeField] private SerializedDictionary<TowerType, TowerView> _hellTowers;
 
-    [Header("Castle Prefab")]
+    [Header("Other Prefabs")]
     [SerializeField] private CastleView _castlePrefab;
-
-    [Header("Obstacle Prefabs")]
     [SerializeField] private ObstacleView _obstaclePrefab;
+    [SerializeField] private SpawnPointView _spawnPointPrefab;
+    [SerializeField] private CheckpointView _checkpointPrefab;
 
     private static GridObjectsFactory _instance;
 
@@ -77,5 +77,27 @@ public class GridObjectsFactory : MonoBehaviour
         castleView.TriggerDetector.AttachComponents(castle, castle);
 
         return castle;
+    }
+
+    public SpawnPointModel CreateSpawnPoint(Faction faction, bool draft)
+    {
+        SpawnPointView spawnPoint = Instantiate(_spawnPointPrefab);
+        SpawnPointModel spawnPointModel = new(spawnPoint.transform, faction, draft);
+
+        spawnPoint.AttachPresenter(new SpawnPoint(spawnPoint, spawnPointModel, _gridSystem));
+        spawnPoint.ToggleBuildingIndicator(draft);
+
+        return spawnPointModel;
+    }
+
+    public CheckpointModel CreateCheckpoint(Faction faction, bool draft)
+    {
+        CheckpointView checkpoint = Instantiate(_checkpointPrefab);
+        CheckpointModel checkpointModel = new(checkpoint.transform, faction, draft);
+
+        checkpoint.AttachPresenter(new Checkpoint(checkpoint, checkpointModel, _gridSystem));
+        checkpoint.ToggleBuildingIndicator(draft);
+
+        return checkpointModel;
     }
 }

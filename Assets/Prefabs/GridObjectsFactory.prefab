@@ -66,3 +66,5 @@ MonoBehaviour:
       Value: {fileID: 1405525336065484746, guid: 6aa50f18a3a92dad8a511e2050f4aed6, type: 3}
   _castlePrefab: {fileID: 8304011636067976286, guid: eb5ca0e84c32a38bdb548592258309a7, type: 3}
   _obstaclePrefab: {fileID: 3057740881490290585, guid: 51139aa6b21656571bca2084bf256888, type: 3}
+  _spawnPointPrefab: {fileID: 2082778186514455466, guid: 45329aa6de204af0eb3f308be1c03c43, type: 3}
+  _checkpointPrefab: {fileID: 794407816293762164, guid: f9ccf286f66421f96ae7d64fd315ceea, type: 3}

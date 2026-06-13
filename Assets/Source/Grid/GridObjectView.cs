@@ -8,14 +8,17 @@ public class GridObjectView : View
 
     public void ToggleBuildingIndicator(bool isActive)
     {
-        Color color = _mesh.material.color;
+        if (_mesh != null)
+        {
+            Color color = _mesh.material.color;
 
-        if (isActive == false)
-            color = Color.white;
-        else
-            color.a = 0.5f;
+            if (isActive == false)
+                color = Color.white;
+            else
+                color.a = 0.5f;
 
-        _mesh.material.color = color;
+            _mesh.material.color = color;
+        }
 
         if (_buildingIndicator != null)
             _buildingIndicator.gameObject.SetActive(isActive);
@@ -23,7 +26,8 @@ public class GridObjectView : View
 
     public void SetBuildingIndicatorColor(bool isValidPosition)
     {
-        _mesh.material.color = isValidPosition ? new Color(0f, 0f, 1f, 0.5f) : new Color(1f, 0f, 0f, 0.5f);
+        if (_mesh != null)
+            _mesh.material.color = isValidPosition ? new Color(0f, 1f, 0f, 0.5f) : new Color(1f, 0f, 0f, 0.5f);
 
         if (_buildingIndicator != null)
             _buildingIndicator.material.color = isValidPosition ? new Color(0f, 1f, 0f, 0.5f) : new Color(1f, 0f, 0f, 0.5f);

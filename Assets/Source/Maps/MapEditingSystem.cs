@@ -55,6 +55,14 @@ public class MapEditingSystem : IUpdatable
             case Brush.Obstacle:
                 OnGroundHit(CreateObstacle);
                 break;
+
+            case Brush.SpawnPoint:
+                OnGroundHit(CreateSpawnPoint);
+                break;
+
+            case Brush.Checkpoint:
+                OnGroundHit(CreateCheckpoint);
+                break;
         }
     }
 
@@ -118,6 +126,26 @@ public class MapEditingSystem : IUpdatable
         }
     }
 
+    public void CreateSpawnPoint(Vector2Int cell)
+    {
+        var targetSpawnPoint = _camera.TargetFaction == Faction.Heaven ? _gridSystem.Map.HeavenSpawnPoint : _gridSystem.Map.HellSpawnPoint;
+
+        if (targetSpawnPoint == null && _gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
+        {
+            SpawnPointModel spawnPoint = _gridObjectsFactory.CreateSpawnPoint(_camera.TargetFaction, false);
+            _gridSystem.Map.PlaceObjectOnTile(_camera.TargetFaction, cell, spawnPoint);
+        }
+    }
+
+    public void CreateCheckpoint(Vector2Int cell)
+    {
+        if (_gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
+        {
+            CheckpointModel checkpoint = _gridObjectsFactory.CreateCheckpoint(_camera.TargetFaction, false);
+            _gridSystem.Map.PlaceObjectOnTile(_camera.TargetFaction, cell, checkpoint);
+        }
+    }
+
     public void SetBrush(Brush brush)
     {
         _draft?.Destroy();
@@ -140,6 +168,14 @@ public class MapEditingSystem : IUpdatable
 
             case Brush.Obstacle:
                 _draft = _gridObjectsFactory.CreateObstacle(_camera.TargetFaction, true);
+                break;
+
+            case Brush.SpawnPoint:
+                _draft = _gridObjectsFactory.CreateSpawnPoint(_camera.TargetFaction, true);
+                break;
+
+            case Brush.Checkpoint:
+                _draft = _gridObjectsFactory.CreateCheckpoint(_camera.TargetFaction, true);
                 break;
         }
 
@@ -175,6 +211,8 @@ public class MapEditingSystem : IUpdatable
                 TowerModel tower => new MapTowerData() { Type = tower.Type },
                 CastleModel castle => new MapCastleData() { HealthPoints = castle.Health.MaxAmount },
                 ObstacleModel => new MapObstacleData(),
+                SpawnPointModel => new MapSpawnPointData(),
+                CheckpointModel => new MapCheckpointData(),
                 _ => null,
             };
 
@@ -191,5 +229,7 @@ public class MapEditingSystem : IUpdatable
         Tower,
         Castle,
         Obstacle,
+        SpawnPoint,
+        Checkpoint,
     }
 }

@@ -34,6 +34,8 @@ public class GridInitializer
                 MapCastleData => _gridObjectFactory.CreateCastle(faction, false),
                 MapTowerData tower => _gridObjectFactory.CreateTower(faction, tower.Type, false),
                 MapObstacleData => _gridObjectFactory.CreateObstacle(faction, false),
+                MapSpawnPointData => _gridObjectFactory.CreateSpawnPoint(faction, false),
+                MapCheckpointData => _gridObjectFactory.CreateCheckpoint(faction, false),
                 _ => null,
             });
         }
