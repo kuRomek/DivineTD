@@ -7,59 +7,51 @@ using UnityEngine;
 [Serializable]
 public struct MapData
 {
-    [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, TileData> _cellsHeaven;
-    [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, TileData> _cellsHell;
+    [SerializeField, ReadOnly] private SerializedDictionary<Faction, SerializedDictionary<Vector2Int, TileData>> _cells;
 
     public MapData(bool initializeCells)
     {
         if (initializeCells)
         {
-            _cellsHeaven = new SerializedDictionary<Vector2Int, TileData>();
-            _cellsHell = new SerializedDictionary<Vector2Int, TileData>();
+            _cells = new()
+            {
+                { Faction.Heaven, new() { { default, new() } } },
+                { Faction.Hell, new() { { default, new() } } },
+            };
         }
         else
         {
-            _cellsHeaven = null;
-            _cellsHell = null;
+            _cells = null;
         }
     }
 
-    public readonly IReadOnlyDictionary<Vector2Int, TileData> CellsHeaven => _cellsHeaven;
-    public readonly IReadOnlyDictionary<Vector2Int, TileData> CellsHell => _cellsHell;
+    public readonly IReadOnlyDictionary<Vector2Int, TileData> this[Faction faction]
+        => _cells[faction];
 
     public readonly void PlaceTile(Faction faction, Vector2Int cell)
     {
-        var cells = faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
-        cells[cell] = new TileData();
-    }
-
-    public void PlaceTile(Faction faction, Vector2Int cell, MapGridObjectData @object)
-    {
-        var cells = faction == Faction.Heaven ? _cellsHeaven : _cellsHell;
-
-        TileData tile = new TileData { Object = @object };
-
-        cells[cell] = tile;
+        _cells[faction][cell] = new TileData();
     }
 
     public readonly void RemoveTile(Faction faction, Vector2Int cell)
     {
-        (faction == Faction.Heaven ? _cellsHeaven : _cellsHell).Remove(cell);
+        _cells[faction].Remove(cell);
     }
 
-    public void AttachObjectToTile(Faction faction, Vector2Int cell, MapGridObjectData @object)
+    public readonly void AttachObjectToTile(Faction faction, Vector2Int cell, MapGridObjectData @object)
     {
-        if (this[faction].TryGetValue(cell, out TileData tile))
+        if (_cells[faction].TryGetValue(cell, out TileData tile))
             tile.Object = @object;
     }
 
     public readonly void RemoveObjectFromTile(Faction faction, Vector2Int cell)
     {
-        if (this[faction].TryGetValue(cell, out TileData tile))
+        if (_cells[faction].TryGetValue(cell, out TileData tile))
             tile.Object = null;
     }
 
-    public readonly IReadOnlyDictionary<Vector2Int, TileData> this[Faction faction]
-        => faction == Faction.Heaven ? CellsHeaven : CellsHell;
-
+    public void PlaceTile(Faction faction, Vector2Int cell, MapGridObjectData @object)
+    {
+        _cells[faction][cell] = new() { Object = @object };
+    }
 }

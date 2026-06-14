@@ -21,10 +21,12 @@ public class GridInitializer
         InitializeFactionTiles(mapData[Faction.Hell], Faction.Hell, _gridSystem.Map);
     }
 
-    private void InitializeFactionTiles(IEnumerable<KeyValuePair<Vector2Int, TileData>> cells, Faction faction, Map mapToInit)
+    private void InitializeFactionTiles(IReadOnlyDictionary<Vector2Int, TileData> cells, Faction faction, Map mapToInit)
     {
         while (mapToInit[faction].Count != 0)
             mapToInit.RemoveTile(faction, mapToInit[faction].First().Key);
+
+        Dictionary<Vector2Int, MapCheckpointData> checkpoints = new();
 
         foreach (var (cell, tile) in cells)
         {
@@ -35,9 +37,17 @@ public class GridInitializer
                 MapTowerData tower => _gridObjectFactory.CreateTower(faction, tower.Type, false),
                 MapObstacleData => _gridObjectFactory.CreateObstacle(faction, false),
                 MapSpawnPointData => _gridObjectFactory.CreateSpawnPoint(faction, false),
-                MapCheckpointData => _gridObjectFactory.CreateCheckpoint(faction, false),
                 _ => null,
             });
+
+            if (tile.Object is MapCheckpointData checkpointData)
+                checkpoints.Add(cell, checkpointData);
+        }
+
+        foreach (var checkpoint in checkpoints.OrderBy(pair => pair.Value.Number))
+        {
+            mapToInit.PlaceObjectOnTile(faction, checkpoint.Key,
+                _gridObjectFactory.CreateCheckpoint(faction, false, checkpoint.Value.Number));
         }
     }
 }

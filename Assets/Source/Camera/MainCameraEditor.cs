@@ -17,16 +17,11 @@ public class MainCameraEditor : MainCamera
 
     protected override Constraints CalculateConstraints(Faction faction)
     {
-        var constraints = new Constraints();
-
-        if (faction == Faction.Heaven)
-            constraints.Offset = _gridSystem.Map.HeavenCameraSpot.position;
-        else
-            constraints.Offset = _gridSystem.Map.HellCameraSpot.position;
-
-        constraints.FieldWidth = new(-50f, 50f);
-        constraints.FieldHeight = new(-50f, 50f);
-
-        return constraints;
+        return new Constraints
+        {
+            Offset = _gridSystem.Map.CameraSpots[faction].position,
+            FieldWidth = new(-50f, 50f),
+            FieldHeight = new(-50f, 50f)
+        }; ;
     }
 }

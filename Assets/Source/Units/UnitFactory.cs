@@ -37,7 +37,7 @@ public class UnitFactory : MonoBehaviour
         var unit = CreateUnit(Faction.Hell, UnitType.Type1, _gridSystem.Map.GetCheckpoints(Faction.Heaven));
 
         Faction enemyFaction = 1 - unit.Faction;
-        unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.GetSpawnPosition(enemyFaction));
+        unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.SpawnPoints[enemyFaction].Item1);
     }
 
     [Button]
@@ -46,10 +46,10 @@ public class UnitFactory : MonoBehaviour
         var unit = CreateUnit(Faction.Heaven, UnitType.Type1, _gridSystem.Map.GetCheckpoints(Faction.Hell));
 
         Faction enemyFaction = 1 - unit.Faction;
-        unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.GetSpawnPosition(enemyFaction));
+        unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.SpawnPoints[enemyFaction].Item1);
     }
 
-    public UnitModel CreateUnit(Faction faction, UnitType type, IReadOnlyList<Vector2Int> checkpoints)
+    public UnitModel CreateUnit(Faction faction, UnitType type, IEnumerable<Vector2Int> checkpoints)
     {
         UnitModel unitModel = null;
         UnitView unit;

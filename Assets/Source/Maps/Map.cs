@@ -1,137 +1,107 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using AYellowpaper.SerializedCollections;
-using NaughtyAttributes;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
 public class Map : MonoBehaviour
 {
-    [field: Header("Grids")]
-    [field: SerializeField] public Grid HeavenGrid { get; private set; }
-    [field: SerializeField] public Grid HellGrid { get; private set; }
+    [Header("Grids")]
+    [SerializeField] private SerializedDictionary<Faction, Grid> _grids;
 
-    [field: Header("Camera Spots")]
-    [field: SerializeField] public Transform HeavenCameraSpot { get; private set; }
-    [field: SerializeField] public Transform HellCameraSpot { get; private set; }
+    [Header("Camera Spots")]
+    [SerializeField] private SerializedDictionary<Faction, Transform> _cameraSpots;
 
     [Header("Tilemaps")]
-    [SerializeField] private Tilemap _heavenTilemap;
-    [SerializeField] private Tilemap _hellTilemap;
+    [SerializeField] private SerializedDictionary<Faction, Tilemap> _tilemaps;
 
-    [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, Tile> _cellsHeaven;
-    [SerializeField, ReadOnly] private SerializedDictionary<Vector2Int, Tile> _cellsHell;
+    private readonly Dictionary<Faction, (Vector2Int, SpawnPointModel)> _spawnPoints = new()
+    {
+        { Faction.Heaven, default },
+        { Faction.Hell, default }
+    };
+    private readonly Dictionary<Faction, (Vector2Int, CastleModel)> _castles = new()
+    {
+        { Faction.Heaven, default },
+        { Faction.Hell, default }
+    };
+    private readonly Dictionary<Faction, List<Vector2Int>> _checkpoints = new()
+    {
+        { Faction.Heaven, new() },
+        { Faction.Hell, new() }
+    };
+    private readonly Dictionary<Faction, Dictionary<Vector2Int, Tile>> _cells = new()
+    {
+        { Faction.Heaven, new() },
+        { Faction.Hell, new() }
+    };
+    private readonly Dictionary<Faction, int> _checkpointNumbers = new()
+    {
+        { Faction.Heaven, default },
+        { Faction.Hell, default }
+    };
 
-    private readonly List<Vector2Int> _heavenCheckpoints = new();
-    private readonly List<Vector2Int> _hellCheckpoints = new();
-
-    private Vector2Int _heavenSpawnPoint;
-    private Vector2Int _hellSpawnPoint;
-
-    public SpawnPointModel HeavenSpawnPoint { get; private set; }
-    public SpawnPointModel HellSpawnPoint { get; private set; }
-
-    public CastleModel HeavenCastle { get; private set; }
-    public CastleModel HellCastle { get; private set; }
-
-    public IReadOnlyDictionary<Vector2Int, Tile> CellsHeaven => _cellsHeaven;
-    public IReadOnlyDictionary<Vector2Int, Tile> CellsHell => _cellsHell;
+    public IReadOnlyDictionary<Faction, Grid> Grids => _grids;
+    public IReadOnlyDictionary<Faction, Transform> CameraSpots => _cameraSpots;
+    public IReadOnlyDictionary<Faction, Tilemap> Tilemaps => _tilemaps;
+    public IReadOnlyDictionary<Faction, (Vector2Int, SpawnPointModel)> SpawnPoints => _spawnPoints;
+    public IReadOnlyDictionary<Faction, (Vector2Int, CastleModel)> Castles => _castles;
+    public IReadOnlyDictionary<Faction, int> CheckpointNumbers => _checkpointNumbers;
 
     public IReadOnlyDictionary<Vector2Int, Tile> this[Faction faction]
-        => faction == Faction.Heaven ? CellsHeaven : CellsHell;
+        => _cells[faction];
 
     public void PlaceTile(Faction faction, Vector2Int cell, Func<Vector2Int, Vector3> convertPosition)
     {
-        Dictionary<Vector2Int, Tile> cells;
-        Tilemap tilemap;
+        RemoveTile(faction, cell);
 
-        if (faction == Faction.Heaven)
-        {
-            cells = _cellsHeaven;
-            tilemap = _heavenTilemap;
-        }
-        else
-        {
-            cells = _cellsHell;
-            tilemap = _hellTilemap;
-        }
+        Tile tile = Instantiate(Configs.Grid.TilePrefab, convertPosition(cell), default);
+        tile.transform.SetParent(_grids[faction].transform, true);
+        _tilemaps[faction].SetTile((Vector3Int)cell, faction == Faction.Heaven ? Configs.Grid.HeavenTile : Configs.Grid.HellTile);
 
-        if (cells.TryGetValue(cell, out Tile tile))
-            RemoveTile(faction, cell, tile, cells);
-
-        tile = Instantiate(Configs.Grid.TilePrefab, convertPosition(cell), default);
-        tile.transform.SetParent(faction == Faction.Heaven ? HeavenGrid.transform : HellGrid.transform, true);
-        tilemap.SetTile((Vector3Int)cell, faction == Faction.Heaven ? Configs.Grid.HeavenTile : Configs.Grid.HellTile);
-
-        cells[cell] = tile;
+        _cells[faction][cell] = tile;
     }
 
-    public void RemoveTile(Faction faction, Vector2Int cell, Tile tile = null, Dictionary<Vector2Int, Tile> cells = null)
+    public void RemoveTile(Faction faction, Vector2Int cell)
     {
-        Tilemap tilemap;
-        List<Vector2Int> checkpoints;
-
-        if (faction == Faction.Heaven)
-        {
-            cells ??= _cellsHeaven;
-            tilemap = _heavenTilemap;
-            checkpoints = _heavenCheckpoints;
-        }
-        else
-        {
-            cells ??= _cellsHell;
-            tilemap = _hellTilemap;
-            checkpoints = _hellCheckpoints;
-        }
-
-        if (tile == null && cells.TryGetValue(cell, out tile) == false)
+        if (_cells[faction].TryGetValue(cell, out Tile tile) == false)
             return;
 
         if (tile != null)
         {
-            if (tile.Object is CheckpointModel)
-                checkpoints.Remove(cell);
+            if (tile.Object != null)
+                RemoveObjectFromTile(faction, cell, true);
 
             tile.Destroy();
-            tilemap.SetTile((Vector3Int)cell, null);
+            _tilemaps[faction].SetTile((Vector3Int)cell, null);
         }
 
-        cells.Remove(cell);
+        _cells[faction].Remove(cell);
     }
 
     public void PlaceObjectOnTile(Faction faction, Vector2Int cell, GridObjectModel @object)
     {
-        if (this[faction].TryGetValue(cell, out Tile tile) && tile.Object == null)
+        if (_cells[faction].TryGetValue(cell, out Tile tile) && tile.Object == null)
         {
             tile.SetObject(@object);
-            bool heaven = faction == Faction.Heaven;
 
             switch (@object)
             {
                 case CastleModel castle:
-                    if (heaven) HeavenCastle = castle; else HellCastle = castle;
+                    _castles[faction] = (cell, castle);
                     break;
 
                 case CheckpointModel:
-                    (heaven ? _heavenCheckpoints : _hellCheckpoints).Add(cell);
+                    _checkpoints[faction].Add(cell);
+                    UpdateCheckpointsNumber();
                     break;
 
                 case SpawnPointModel spawnPoint:
-                    if (heaven)
-                    {
-                        _heavenSpawnPoint = cell;
-                        HeavenSpawnPoint = spawnPoint;
-                    }
-                    else
-                    {
-                        _hellSpawnPoint = cell;
-                        HellSpawnPoint = spawnPoint;
-                    }
+                    _spawnPoints[faction] = (cell, spawnPoint);
                     break;
             }
         }
-
-        UpdateCheckpointsNumber();
     }
 
     public void RemoveObjectFromTile(Faction faction, Vector2Int cell, bool destroy = true)
@@ -140,72 +110,43 @@ public class Map : MonoBehaviour
         {
             GridObjectModel @object = tile.RemoveObject();
 
-            bool heaven = faction == Faction.Heaven;
-
             switch (@object)
             {
                 case CastleModel:
-                    if (heaven) HeavenCastle = null; else HellCastle = null;
+                    _castles[faction] = default;
                     break;
 
                 case CheckpointModel:
-                    (heaven ? _heavenCheckpoints : _hellCheckpoints).Remove(cell);
+                    _checkpoints[faction].Remove(cell);
+                    UpdateCheckpointsNumber();
                     break;
 
                 case SpawnPointModel:
-                    if (heaven)
-                    {
-                        _heavenSpawnPoint = cell;
-                        HeavenSpawnPoint = null;
-                    }
-                    else
-                    {
-                        _hellSpawnPoint = cell;
-                        HellSpawnPoint = null;
-                    }
+                    _spawnPoints[faction] = default;
                     break;
             }
 
             if (destroy && @object != null)
                 @object.Destroy();
         }
-
-        UpdateCheckpointsNumber();
     }
 
-    public Vector2Int GetSpawnPosition(Faction faction)
+    public IEnumerable<Vector2Int> GetCheckpoints(Faction faction)
     {
-        return faction == Faction.Heaven ? _heavenSpawnPoint : _hellSpawnPoint;
-    }
-
-    public IReadOnlyList<Vector2Int> GetCheckpoints(Faction faction)
-    {
-        return faction == Faction.Heaven ? _heavenCheckpoints : _hellCheckpoints;
+        return _castles[faction] == default ? _checkpoints[faction] : _checkpoints[faction].Append(_castles[faction].Item1);
     }
 
     private void UpdateCheckpointsNumber()
     {
         foreach (Faction faction in new Faction[2] { Faction.Heaven, Faction.Hell })
         {
-            IEnumerable<Vector2Int> checkpoints;
-            IReadOnlyDictionary<Vector2Int, Tile> cells;
-
-            if (faction == Faction.Heaven)
-            {
-                checkpoints = _heavenCheckpoints;
-                cells = _cellsHeaven;
-            }
-            else
-            {
-                checkpoints = _hellCheckpoints;
-                cells = _cellsHell;
-            }
-
             int i = 1;
 
-            foreach (Vector2Int cell in checkpoints)
-                if (cells[cell].Object is CheckpointModel checkpoint)
+            foreach (var cell in _checkpoints[faction])
+                if (_cells[faction][cell].Object is CheckpointModel checkpoint)
                     checkpoint.SetNumber(i++);
+
+            _checkpointNumbers[faction] = _castles[faction] == default ? i - 1 : i;
         }
     }
 }

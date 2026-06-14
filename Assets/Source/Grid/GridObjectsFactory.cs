@@ -90,10 +90,10 @@ public class GridObjectsFactory : MonoBehaviour
         return spawnPointModel;
     }
 
-    public CheckpointModel CreateCheckpoint(Faction faction, bool draft)
+    public CheckpointModel CreateCheckpoint(Faction faction, bool draft, int number)
     {
         CheckpointView checkpoint = Instantiate(_checkpointPrefab);
-        CheckpointModel checkpointModel = new(checkpoint.transform, faction, draft);
+        CheckpointModel checkpointModel = new(checkpoint.transform, faction, draft, number);
 
         checkpoint.AttachPresenter(new Checkpoint(checkpoint, checkpointModel, _gridSystem));
         checkpoint.ToggleBuildingIndicator(draft);

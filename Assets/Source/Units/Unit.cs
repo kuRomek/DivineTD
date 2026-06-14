@@ -57,7 +57,7 @@ public class Unit : Presenter, IUpdatable, IInteractable
 
         if (Vector3.SqrMagnitude(Model.Transform.position - _currentTarget) < DistanceTolerance)
         {
-            if (Model.TrySetNextTarget())
+            if (Model.TrySetNextTarget() == false)
             {
                 _stalled = true;
                 return;

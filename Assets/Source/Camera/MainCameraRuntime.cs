@@ -22,12 +22,10 @@ public class MainCameraRuntime : MainCamera
 
     protected override Constraints CalculateConstraints(Faction faction)
     {
-        var constraints = new Constraints();
-
-        if (faction == Faction.Heaven)
-            constraints.Offset = _gridSystem.Map.HeavenCameraSpot.position;
-        else
-            constraints.Offset = _gridSystem.Map.HellCameraSpot.position;
+        var constraints = new Constraints
+        {
+            Offset = _gridSystem.Map.CameraSpots[faction].position
+        };
 
         if (_gridSystem.Map[faction].Count == 0)
         {

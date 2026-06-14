@@ -8,7 +8,7 @@ public class UnitModel : Model, IDamageable, IFactionRelated
     private readonly IEnumerator<Vector2Int> _checkpoints;
 
     public UnitModel(Transform transform, HealthModel health, Faction faction, UnitType type,
-        IReadOnlyList<Vector2Int> checkpoints)
+        IEnumerable<Vector2Int> checkpoints)
         : base(transform)
     {
         Health = health;

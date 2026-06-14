@@ -361,7 +361,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}
@@ -478,16 +478,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f2111f447c7e0b44a94feabb5c008517, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Map
-  <HeavenGrid>k__BackingField: {fileID: 7461085065987631547}
-  <HellGrid>k__BackingField: {fileID: 6511536921080384068}
-  <HeavenCameraSpot>k__BackingField: {fileID: 2805310348067105876}
-  <HellCameraSpot>k__BackingField: {fileID: 4614632608507050018}
-  _heavenTilemap: {fileID: 7497965082816294993}
-  _hellTilemap: {fileID: 3840777155871541413}
-  _cellsHeaven:
-    _serializedList: []
-  _cellsHell:
-    _serializedList: []
+  _grids:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 7461085065987631547}
+    - Key: 1
+      Value: {fileID: 6511536921080384068}
+  _cameraSpots:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 2805310348067105876}
+    - Key: 1
+      Value: {fileID: 4614632608507050018}
+  _tilemaps:
+    _serializedList:
+    - Key: 0
+      Value: {fileID: 7497965082816294993}
+    - Key: 1
+      Value: {fileID: 3840777155871541413}
 --- !u!1 &8598150072093897695
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +644,7 @@ TilemapRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_MaskInteraction: 0
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0, y: 0, z: 0}

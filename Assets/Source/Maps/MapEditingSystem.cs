@@ -108,7 +108,7 @@ public class MapEditingSystem : IUpdatable
 
     private void CreateCastle(Vector2Int cell)
     {
-        var targetCastle = _camera.TargetFaction == Faction.Heaven ? _gridSystem.Map.HeavenCastle : _gridSystem.Map.HellCastle;
+        CastleModel targetCastle = _gridSystem.Map.Castles[_camera.TargetFaction].Item2;
 
         if (targetCastle == null && _gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
         {
@@ -128,7 +128,7 @@ public class MapEditingSystem : IUpdatable
 
     public void CreateSpawnPoint(Vector2Int cell)
     {
-        var targetSpawnPoint = _camera.TargetFaction == Faction.Heaven ? _gridSystem.Map.HeavenSpawnPoint : _gridSystem.Map.HellSpawnPoint;
+        SpawnPointModel targetSpawnPoint = _gridSystem.Map.SpawnPoints[_camera.TargetFaction].Item2;
 
         if (targetSpawnPoint == null && _gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
         {
@@ -141,7 +141,8 @@ public class MapEditingSystem : IUpdatable
     {
         if (_gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
         {
-            CheckpointModel checkpoint = _gridObjectsFactory.CreateCheckpoint(_camera.TargetFaction, false);
+            int number = _gridSystem.Map.CheckpointNumbers[_camera.TargetFaction];
+            CheckpointModel checkpoint = _gridObjectsFactory.CreateCheckpoint(_camera.TargetFaction, false, number);
             _gridSystem.Map.PlaceObjectOnTile(_camera.TargetFaction, cell, checkpoint);
         }
     }
@@ -156,28 +157,16 @@ public class MapEditingSystem : IUpdatable
         _camera.ToggleControlBlock(_brush != Brush.None);
         _cursor.gameObject.SetActive(_brush != Brush.None);
 
-        switch (brush)
+        _draft = brush switch
         {
-            case Brush.Tower:
-                _draft = _gridObjectsFactory.CreateTower(_camera.TargetFaction, _towerType, true);
-                break;
-
-            case Brush.Castle:
-                _draft = _gridObjectsFactory.CreateCastle(_camera.TargetFaction, true);
-                break;
-
-            case Brush.Obstacle:
-                _draft = _gridObjectsFactory.CreateObstacle(_camera.TargetFaction, true);
-                break;
-
-            case Brush.SpawnPoint:
-                _draft = _gridObjectsFactory.CreateSpawnPoint(_camera.TargetFaction, true);
-                break;
-
-            case Brush.Checkpoint:
-                _draft = _gridObjectsFactory.CreateCheckpoint(_camera.TargetFaction, true);
-                break;
-        }
+            Brush.Tower => _gridObjectsFactory.CreateTower(_camera.TargetFaction, _towerType, true),
+            Brush.Castle => _gridObjectsFactory.CreateCastle(_camera.TargetFaction, true),
+            Brush.Obstacle => _gridObjectsFactory.CreateObstacle(_camera.TargetFaction, true),
+            Brush.SpawnPoint => _gridObjectsFactory.CreateSpawnPoint(_camera.TargetFaction, true),
+            Brush.Checkpoint => _gridObjectsFactory.CreateCheckpoint(_camera.TargetFaction, true,
+                                _gridSystem.Map.CheckpointNumbers[_camera.TargetFaction]),
+            _ => null,
+        };
 
         _draft?.SetCursorFollowing(true);
     }
@@ -210,9 +199,9 @@ public class MapEditingSystem : IUpdatable
             {
                 TowerModel tower => new MapTowerData() { Type = tower.Type },
                 CastleModel castle => new MapCastleData() { HealthPoints = castle.Health.MaxAmount },
-                ObstacleModel => new MapObstacleData(),
-                SpawnPointModel => new MapSpawnPointData(),
-                CheckpointModel => new MapCheckpointData(),
+                ObstacleModel _ => new MapObstacleData(),
+                SpawnPointModel _ => new MapSpawnPointData(),
+                CheckpointModel checkpoint => new MapCheckpointData() { Number = checkpoint.Number },
                 _ => null,
             };
 

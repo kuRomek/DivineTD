@@ -1,21 +1,20 @@
+using System.Collections.Generic;
 using kuRomek.SimpleVG;
 using UnityEngine;
 
 public class GridSystem
 {
     private readonly LevelsSystem _levelsSystem;
-    private readonly Grid _heavenGrid;
-    private readonly Grid _hellGrid;
+    private readonly IReadOnlyDictionary<Faction, Grid> _grids;
     private readonly Camera _camera;
     private readonly GridInitializer _gridInitializer;
 
     public GridSystem(LevelsSystem levelsSystem, Map map, GridObjectsFactory gridObjectsFactory, Camera camera)
     {
         _levelsSystem = levelsSystem;
-        _heavenGrid = map.HeavenGrid;
-        _hellGrid = map.HellGrid;
-        _camera = camera;
+        _grids = map.Grids;
         _gridInitializer = new(this, gridObjectsFactory);
+        _camera = camera;
 
         Map = map;
 
@@ -29,9 +28,7 @@ public class GridSystem
 
     public bool TryPlace(GridObjectModel gridObject, Faction faction)
     {
-        Grid grid = faction == Faction.Heaven ? _heavenGrid : _hellGrid;
-
-        Vector2Int cell = (Vector2Int)grid.WorldToCell(gridObject.Transform.position);
+        Vector2Int cell = (Vector2Int)_grids[faction].WorldToCell(gridObject.Transform.position);
 
         if (CheckTileAvailability(cell, faction))
         {
@@ -44,7 +41,7 @@ public class GridSystem
         }
 
         Debug.Log($"World position: {gridObject.Transform.position}");
-        Debug.Log($"Actual cell world position: {grid.CellToWorld((Vector3Int)cell)}");
+        Debug.Log($"Actual cell world position: {_grids[faction].CellToWorld((Vector3Int)cell)}");
         Debug.Log($"Object placed onto {cell}");
 
         return true;
@@ -71,7 +68,7 @@ public class GridSystem
 
     public Vector3 GetSnappedPosition(Faction faction, Vector3 worldPosition)
     {
-        Vector3Int cell = (faction == Faction.Heaven ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
+        Vector3Int cell = _grids[faction].WorldToCell(worldPosition);
 
         return GetWorldPosition(faction, (Vector2Int)cell);
     }
@@ -89,12 +86,12 @@ public class GridSystem
 
     public Vector2Int GetCell(Faction faction, Vector3 worldPosition)
     {
-        return (Vector2Int)(faction == Faction.Heaven ? _heavenGrid : _hellGrid).WorldToCell(worldPosition);
+        return (Vector2Int)_grids[faction].WorldToCell(worldPosition);
     }
 
     public Vector3 GetWorldPosition(Faction faction, Vector2Int cell)
     {
-        Grid grid = faction == Faction.Heaven ? _heavenGrid : _hellGrid;
+        Grid grid = _grids[faction];
 
         Vector3 position = grid.CellToWorld((Vector3Int)cell) +
             grid.transform.rotation * new Vector3(grid.cellSize.x, 0f, grid.cellSize.y) / 2f;
