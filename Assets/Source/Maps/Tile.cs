@@ -6,7 +6,7 @@ public class Tile : MonoBehaviour
 
     public GridObjectModel Object { get; private set; }
 
-    public bool Walkable => Object == null;
+    public bool Walkable => Object == null || Object is CheckpointModel || Object is CastleModel;
 
     public void SetObject(GridObjectModel @object)
     {

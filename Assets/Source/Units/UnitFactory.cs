@@ -38,6 +38,7 @@ public class UnitFactory : MonoBehaviour
 
         Faction enemyFaction = 1 - unit.Faction;
         unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.SpawnPoints[enemyFaction].Item1);
+        unit.Go();
     }
 
     [Button]
@@ -47,6 +48,7 @@ public class UnitFactory : MonoBehaviour
 
         Faction enemyFaction = 1 - unit.Faction;
         unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.SpawnPoints[enemyFaction].Item1);
+        unit.Go();
     }
 
     public UnitModel CreateUnit(Faction faction, UnitType type, IEnumerable<Vector2Int> checkpoints)
@@ -64,7 +66,9 @@ public class UnitFactory : MonoBehaviour
 
             HealthModel unitHealthModel = new(healthView.transform, healthPoints, healthPoints);
             healthView.AttachPresenter(new Health(healthView, unitHealthModel));
-            unitModel = new(unit.transform, unitHealthModel, faction, type, checkpoints);
+            Path path = new(_gridSystem.Map[1 - faction]);
+            unitModel = new(unit.transform, unitHealthModel, faction, type, checkpoints,
+                (position) => _gridSystem.GetCell(1 - faction, position), path);
 
             unit.AttachPresenter(new Unit(unit, unitModel, _gridSystem, triggerDetector));
 

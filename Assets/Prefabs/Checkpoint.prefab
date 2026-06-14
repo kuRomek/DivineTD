@@ -263,6 +263,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: BuildingIndicator
       objectReference: {fileID: 0}
+    - target: {fileID: 8989968190243150542, guid: 347daab4a2d95b30ca14147be706c676, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
