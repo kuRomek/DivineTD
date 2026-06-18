@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using kuRomek.SimpleVG;
 using UnityEngine;
@@ -24,6 +25,9 @@ public class GridSystem
             OnLevelStarted();
     }
 
+    public event Action<Faction> ObjectPlaced;
+    public event Action GridInitialized;
+
     public Map Map { get; }
 
     public bool TryPlace(GridObjectModel gridObject, Faction faction)
@@ -33,6 +37,7 @@ public class GridSystem
         if (CheckTileAvailability(cell, faction))
         {
             Map.PlaceObjectOnTile(faction, cell, gridObject);
+            ObjectPlaced?.Invoke(faction);
         }
         else
         {
@@ -40,9 +45,9 @@ public class GridSystem
             return false;
         }
 
-        Debug.Log($"World position: {gridObject.Transform.position}");
-        Debug.Log($"Actual cell world position: {_grids[faction].CellToWorld((Vector3Int)cell)}");
-        Debug.Log($"Object placed onto {cell}");
+        // Debug.Log($"World position: {gridObject.Transform.position}");
+        // Debug.Log($"Actual cell world position: {_grids[faction].CellToWorld((Vector3Int)cell)}");
+        // Debug.Log($"Object placed onto {cell}");
 
         return true;
     }
@@ -117,5 +122,6 @@ public class GridSystem
     private void OnLevelStarted()
     {
         _gridInitializer.InitializeMap();
+        GridInitialized?.Invoke();
     }
 }

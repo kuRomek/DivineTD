@@ -1,4 +1,6 @@
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class MapEditorRoot : MonoBehaviour
 {
@@ -11,9 +13,11 @@ public class MapEditorRoot : MonoBehaviour
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
 
+    [Header("Path Splines")]
+    [SerializeField] private SerializedDictionary<Faction, SpriteShapeController> _pathSplines;
+
     [Header("Factories")]
     [SerializeField] private GridObjectsFactory _gridObjectsFactory;
-    [SerializeField] private UnitFactory _unitFactory;
 
     public static SimpleDI Container;
 
@@ -24,14 +28,15 @@ public class MapEditorRoot : MonoBehaviour
         GameState.LoadSave();
 
         GridSystem grid = new(null, _map, _gridObjectsFactory, _mainCamera.Camera);
+        PathFindingSystem pathFinding = new(grid, _pathSplines);
         MapEditingSystem mapEditing = new(_mainCamera, grid, _gridObjectsFactory, _cursor);
 
         Container.Register(grid);
+        Container.Register(pathFinding);
         Container.Register(mapEditing);
         Container.Register(_mainCamera);
         Container.Register(_widgetCanvas);
         Container.Register(_gridObjectsFactory);
-        Container.Register(_unitFactory);
 
         InjectScene(Container);
     }

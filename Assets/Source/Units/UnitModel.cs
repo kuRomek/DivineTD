@@ -5,19 +5,21 @@ using UnityEngine;
 
 public class UnitModel : Model, IDamageable, IFactionRelated
 {
-    private readonly IEnumerator<Vector2Int> _checkpoints;
     private readonly Func<Vector3, Vector2Int> _getCellPosition;
 
+    private Path _path;
+    private IEnumerator<Vector2Int> _pathEnumerator;
+    private bool _recalculatedPathBefore;
+
     public UnitModel(Transform transform, HealthModel health, Faction faction, UnitType type,
-        IEnumerable<Vector2Int> checkpoints, Func<Vector3, Vector2Int> getWorldPosition, Path path)
+        Func<Vector3, Vector2Int> getWorldPosition, Path path)
         : base(transform)
     {
         Health = health;
         Faction = faction;
         Type = type;
         _getCellPosition = getWorldPosition;
-        _checkpoints = checkpoints.GetEnumerator();
-        Path = path;
+        SetPath(path);
 
         Health.Died += () => Died?.Invoke(this);
     }
@@ -28,9 +30,9 @@ public class UnitModel : Model, IDamageable, IFactionRelated
     public HealthModel Health { get; }
     public Faction Faction { get; }
     public UnitType Type { get; }
-    public Path Path { get; }
 
-    public Vector2Int CurrentTarget => Path.CurrentTarget;
+    public Vector2Int CurrentTarget { get; private set; }
+    public int CurrentCheckpointNumber => _path.CheckpointNumber;
     public float Speed => Configs.Units.GetSpeed(Faction, Type);
 
     void IDamageable.TakeDamage(float amount)
@@ -38,15 +40,34 @@ public class UnitModel : Model, IDamageable, IFactionRelated
         Health.ChangeAmount(-amount);
     }
 
+    public void SetPath(Path path)
+    {
+        _path = path;
+        _pathEnumerator = _path.GetEnumerator();
+    }
+
+    public void ReCalculatePathToCheckpoint()
+    {
+        if (_recalculatedPathBefore)
+            _path.Calculate(_getCellPosition(Transform.position), _path.Checkpoint, _path.CheckpointNumber);
+        else
+            _path = new(_path.Field, _getCellPosition(Transform.position), _path.Checkpoint, _path.CheckpointNumber);
+
+        _pathEnumerator = _path.GetEnumerator();
+        _pathEnumerator.Reset();
+
+        _recalculatedPathBefore = true;
+    }
+
     public bool TrySetNextTarget()
     {
-        bool success = Path.TrySetNextTarget();
+        if (_pathEnumerator == null)
+            return false;
 
-        if (success == false && _checkpoints.MoveNext())
-        {
-            Path.Calculate(_getCellPosition(Transform.position), _checkpoints.Current);
-            success = TrySetNextTarget();
-        }
+        bool success = _pathEnumerator.MoveNext();
+
+        if (success)
+            CurrentTarget = _pathEnumerator.Current;
 
         return success;
     }

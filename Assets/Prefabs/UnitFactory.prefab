@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d37937c5ea7f5e491c570b2f40ab2f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UnitFactory
+  _cd: 20
   _heavenUnits:
     _serializedList:
     - Key: 0

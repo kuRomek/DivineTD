@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class UnitFactory : MonoBehaviour
 {
+    [SerializeField] private float _cd = 1f;
+
     [Header("Heaven Unit Prefabs")]
     [SerializeField] private SerializedDictionary<UnitType, UnitView> _heavenUnits;
 
@@ -13,7 +15,9 @@ public class UnitFactory : MonoBehaviour
 
     private static UnitFactory _instance;
 
+    private float _accumTime = 0f;
     private GridSystem _gridSystem;
+    private PathFindingSystem _pathFindingSystem;
 
     private void Awake()
     {
@@ -26,15 +30,32 @@ public class UnitFactory : MonoBehaviour
         _instance = this;
     }
 
-    private void Construct(GridSystem gridSystem)
+    private void Start()
+    {
+        LaunchTestUnitToHeaven();
+    }
+
+    private void Update()
+    {
+        _accumTime += Time.deltaTime;
+
+        if (_accumTime > _cd)
+        {
+            LaunchTestUnitToHeaven();
+            _accumTime = 0f;
+        }
+    }
+
+    private void Construct(GridSystem gridSystem, PathFindingSystem pathFindingSystem)
     {
         _gridSystem = gridSystem;
+        _pathFindingSystem = pathFindingSystem;
     }
 
     [Button]
     public void LaunchTestUnitToHeaven()
     {
-        var unit = CreateUnit(Faction.Hell, UnitType.Type1, _gridSystem.Map.GetCheckpoints(Faction.Heaven));
+        var unit = CreateUnit(Faction.Hell, UnitType.Type1);
 
         Faction enemyFaction = 1 - unit.Faction;
         unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.SpawnPoints[enemyFaction].Item1);
@@ -44,14 +65,14 @@ public class UnitFactory : MonoBehaviour
     [Button]
     public void LaunchTestUnitToHell()
     {
-        var unit = CreateUnit(Faction.Heaven, UnitType.Type1, _gridSystem.Map.GetCheckpoints(Faction.Hell));
+        var unit = CreateUnit(Faction.Heaven, UnitType.Type1);
 
         Faction enemyFaction = 1 - unit.Faction;
         unit.Transform.position = _gridSystem.GetWorldPosition(enemyFaction, _gridSystem.Map.SpawnPoints[enemyFaction].Item1);
         unit.Go();
     }
 
-    public UnitModel CreateUnit(Faction faction, UnitType type, IEnumerable<Vector2Int> checkpoints)
+    public UnitModel CreateUnit(Faction faction, UnitType type)
     {
         UnitModel unitModel = null;
         UnitView unit;
@@ -60,17 +81,21 @@ public class UnitFactory : MonoBehaviour
         HealthView healthView = unit.GetComponentInChildren<HealthView>(true);
         TriggerDetector triggerDetector = unit.GetComponentInChildren<TriggerDetector>(true);
 
+        Faction enemyFaction = 1 - faction;
+
         if (healthView != null)
         {
             float healthPoints = Configs.Units.GetHealthPoints(faction, type);
 
             HealthModel unitHealthModel = new(healthView.transform, healthPoints, healthPoints);
             healthView.AttachPresenter(new Health(healthView, unitHealthModel));
-            Path path = new(_gridSystem.Map[1 - faction]);
-            unitModel = new(unit.transform, unitHealthModel, faction, type, checkpoints,
-                (position) => _gridSystem.GetCell(1 - faction, position), path);
 
-            unit.AttachPresenter(new Unit(unit, unitModel, _gridSystem, triggerDetector));
+            Path path = _pathFindingSystem.GetPath(1, enemyFaction);
+
+            unitModel = new(unit.transform, unitHealthModel, faction, type,
+                (position) => _gridSystem.GetCell(enemyFaction, position), path);
+
+            unit.AttachPresenter(new Unit(unit, unitModel, _gridSystem, _pathFindingSystem, triggerDetector));
 
             if (triggerDetector != null)
                 triggerDetector.AttachComponents(unitModel, unitModel);

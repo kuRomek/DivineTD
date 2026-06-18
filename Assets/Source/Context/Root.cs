@@ -1,4 +1,6 @@
+using AYellowpaper.SerializedCollections;
 using UnityEngine;
+using UnityEngine.U2D;
 
 public class Root : MonoBehaviour
 {
@@ -9,6 +11,9 @@ public class Root : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
+
+    [Header("Path Splines")]
+    [SerializeField] private SerializedDictionary<Faction, SpriteShapeController> _pathSplines;
 
     [Header("Factories")]
     [SerializeField] private GridObjectsFactory _gridObjectsFactory;
@@ -26,12 +31,14 @@ public class Root : MonoBehaviour
 
         _levelsSystem = new();
 
-        GridSystem grid = new(null, _map, _gridObjectsFactory, _mainCamera.Camera);
+        GridSystem grid = new(_levelsSystem, _map, _gridObjectsFactory, _mainCamera.Camera);
+        PathFindingSystem pathFinding = new(grid, _pathSplines);
         BuildingSystem building = new(grid, _gridObjectsFactory, _mainCamera);
 
+        Container.Register(_levelsSystem);
         Container.Register(grid);
         Container.Register(building);
-        Container.Register(_levelsSystem);
+        Container.Register(pathFinding);
         Container.Register(_widgetCanvas);
         Container.Register(_mainCamera);
         Container.Register(_gridObjectsFactory);

@@ -4,6 +4,7 @@
     "com.dbrizov.naughtyattributes": "https://github.com/dbrizov/NaughtyAttributes.git#upm",
     "com.kuromek.simplevg": "https://github.com/kuRomek/SimpleVg.git?path=Packages/com.kuromek.simplevg",
     "com.unity.2d.sprite": "1.0.0",
+    "com.unity.2d.spriteshape": "13.0.0",
     "com.unity.2d.tilemap": "1.0.0",
     "com.unity.ai.navigation": "2.0.10",
     "com.unity.collab-proxy": "2.11.3",

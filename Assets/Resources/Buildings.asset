@@ -18,7 +18,7 @@ MonoBehaviour:
       Value:
         AttackRate: 10
         Radius: 3
-        Damage: 0.2
+        Damage: 0
     - Key: 1
       Value:
         AttackRate: 2
@@ -56,4 +56,3 @@ MonoBehaviour:
         AttackRate: 0.8
         Radius: 3
         Damage: 8
-  <CastlePrefab>k__BackingField: {fileID: 8304011636067976286, guid: eb5ca0e84c32a38bdb548592258309a7, type: 3}

@@ -1,39 +1,37 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Path
+public class Path : IEnumerable<Vector2Int>
 {
-    private readonly IReadOnlyDictionary<Vector2Int, Tile> _field;
-    private readonly Stack<Vector2Int> _path = new();
+    private readonly Stack<Vector2Int> _cells = new();
 
-    private IEnumerator<Vector2Int> _pathEnumerator;
-
-    public Path(IReadOnlyDictionary<Vector2Int, Tile> walkingField)
+    public Path(IReadOnlyDictionary<Vector2Int, Tile> walkingField, Vector2Int start, Vector2Int checkpoint, int checkpointNumber)
     {
-        _field = walkingField;
+        Field = walkingField;
+
+        Calculate(start, checkpoint, checkpointNumber);
     }
 
-    public Vector2Int CurrentTarget { get; private set; }
+    public IReadOnlyDictionary<Vector2Int, Tile> Field { get; }
+    public IEnumerable<Vector2Int> Cells => _cells;
+    public int CellCount => _cells.Count;
 
-    public void Calculate(Vector2Int start, Vector2Int checkpoint)
+    public Vector2Int Checkpoint { get; private set; }
+    public Vector2Int Start { get; private set; }
+    public int CheckpointNumber { get; private set; }
+
+    public Path Calculate(Vector2Int start, Vector2Int checkpoint, int checkpointNumber)
     {
-        _path.Clear();
+        _cells.Clear();
+        Start = start;
+        Checkpoint = checkpoint;
+        CheckpointNumber = checkpointNumber;
+
         PerformAStar(start, checkpoint);
-        _pathEnumerator = _path.GetEnumerator();
-    }
 
-    public bool TrySetNextTarget()
-    {
-        if (_pathEnumerator == null)
-            return false;
-
-        bool success = _pathEnumerator.MoveNext();
-
-        if (success)
-            CurrentTarget = _pathEnumerator.Current;
-
-        return success;
+        return this;
     }
 
     private void PerformAStar(Vector2Int start, Vector2Int checkpoint)
@@ -44,12 +42,11 @@ public class Path
 
         Node finishNode = null;
 
-        bool diagonalsAllowed = Configs.Pathfinding.DiagonalsAllowed;
+        bool diagonalsAllowed = Configs.PathFinding.DiagonalsAllowed;
 
-        int g = 0;
-        int h = Pathfinding.DistanceEvaluation(start, checkpoint, diagonalsAllowed);
-        int f = h;
-        openSet.Push(new(start, null, g, h, f));
+        float g = 0;
+        float h = PathFinding.DistanceEvaluation(start, checkpoint, diagonalsAllowed);
+        openSet.Push(new(start, null, g, h));
         openLookup.Add(start);
 
         int constraint = 1000;
@@ -57,7 +54,6 @@ public class Path
         while (openSet.Count > 0 && constraint-- > 0)
         {
             var current = openSet.Pop();
-            Debug.Log($"{current.Position} F={current.F}");
             openLookup.Remove(current.Position);
             closedSet.Add(current.Position);
 
@@ -69,26 +65,42 @@ public class Path
 
             foreach (var offset in GetOffsets(diagonalsAllowed))
             {
+                bool diagonal = offset.x != 0 && offset.y != 0;
+
                 var neighborPosition = current.Position + offset;
 
-                if (_field.TryGetValue(neighborPosition, out Tile tile) == false)
+                if (Field.TryGetValue(neighborPosition, out Tile tile) == false)
                     continue;
+
+                if (diagonal)
+                {
+                    Vector2Int[] adjacentCells = new Vector2Int[2]
+                    {
+                        neighborPosition + new Vector2Int(-offset.x, 0),
+                        neighborPosition + new Vector2Int(0, -offset.y)
+                    };
+
+                    if (Field.TryGetValue(adjacentCells[0], out Tile adjacentTile) == false || adjacentTile.Walkable == false)
+                        continue;
+
+                    if (Field.TryGetValue(adjacentCells[1], out adjacentTile) == false || adjacentTile.Walkable == false)
+                        continue;
+                }
 
                 if (tile.Walkable == false || closedSet.Contains(neighborPosition) || openLookup.Contains(neighborPosition))
                     continue;
 
-                g = current.G + 1;
-                h = Pathfinding.DistanceEvaluation(neighborPosition, checkpoint, diagonalsAllowed);
-                f = g + h;
+                g = current.G + 1 + Convert.ToInt32(diagonal) * 0.5f;
+                h = PathFinding.DistanceEvaluation(neighborPosition, checkpoint, diagonalsAllowed);
 
-                openSet.Push(new Node(neighborPosition, current, g, h, f));
+                openSet.Push(new Node(neighborPosition, current, g, h));
                 openLookup.Add(neighborPosition);
             }
         }
 
         while (finishNode != null && finishNode.Parent != null)
         {
-            _path.Push(finishNode.Position);
+            _cells.Push(finishNode.Position);
             finishNode = finishNode.Parent;
         }
     }
@@ -109,20 +121,30 @@ public class Path
         }
     }
 
+    public IEnumerator<Vector2Int> GetEnumerator()
+    {
+        return ((IEnumerable<Vector2Int>)_cells).GetEnumerator();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator()
+    {
+        return ((IEnumerable)_cells).GetEnumerator();
+    }
+
     private class Node : IComparable<Node>
     {
         public Vector2Int Position;
-        public int G;
-        public int H;
-        public int F;
+        public float G;
+        public float H;
+        public float F;
         public Node Parent;
 
-        public Node(Vector2Int position, Node parent, int g, int h, int f)
+        public Node(Vector2Int position, Node parent, float g, float h)
         {
             Position = position;
             G = g;
             H = h;
-            F = f;
+            F = g + h;
             Parent = parent;
         }
 

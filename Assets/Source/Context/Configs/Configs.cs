@@ -7,7 +7,7 @@ public static class Configs
     public static BuildingsConfig Buildings { get; private set; }
     public static UnitsConfig Units { get; private set; }
     public static GridConfig Grid { get; private set; }
-    public static PathfindingConfig Pathfinding { get; private set; }
+    public static PathFindingConfig PathFinding { get; private set; }
 
     public static void Load()
     {
@@ -16,6 +16,6 @@ public static class Configs
         Buildings = Resources.Load<BuildingsConfig>(nameof(Buildings));
         Units = Resources.Load<UnitsConfig>(nameof(Units));
         Grid = Resources.Load<GridConfig>(nameof(Grid));
-        Pathfinding = Resources.Load<PathfindingConfig>(nameof(Pathfinding));
+        PathFinding = Resources.Load<PathFindingConfig>(nameof(PathFinding));
     }
 }

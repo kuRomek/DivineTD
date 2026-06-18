@@ -6,22 +6,31 @@ public class Unit : Presenter, IUpdatable, IInteractable
     private const float DistanceTolerance = 0.01f;
 
     private readonly GridSystem _gridSystem;
+    private readonly PathFindingSystem _pathFindingSystem;
+    private readonly Faction _enemyFaction;
 
     private Vector3 _currentTarget;
     private bool _stalled = true;
-    private Faction _enemyFaction;
 
-    public Unit(View view, Model model, GridSystem gridSystem, TriggerDetector triggerDetector) : base(view, model)
+    public Unit(
+        View view,
+        Model model,
+        GridSystem gridSystem,
+        PathFindingSystem pathFindingSystem,
+        TriggerDetector triggerDetector)
+        : base(view, model)
     {
         _enemyFaction = 1 - Model.Faction;
 
         _gridSystem = gridSystem;
+        _pathFindingSystem = pathFindingSystem;
         TriggerDetector = triggerDetector;
 
         _currentTarget = _gridSystem.GetWorldPosition(_enemyFaction, Model.CurrentTarget);
 
+        gridSystem.ObjectPlaced += OnMapChanged;
         TriggerDetector.EnteredTrigger += (this as IInteractable).OnTriggerEnter;
-        Model.Health.Died += View.OnDestroyed;
+        Model.Health.Died += OnDied;
         Model.Launched += StartWalking;
     }
 
@@ -46,7 +55,6 @@ public class Unit : Presenter, IUpdatable, IInteractable
 
     void IInteractable.OnTriggerExited(IDamageable damageable, IFactionRelated faction)
     {
-
     }
 
     public void MoveOnPath(float deltaTime)
@@ -60,10 +68,30 @@ public class Unit : Presenter, IUpdatable, IInteractable
         {
             if (Model.TrySetNextTarget() == false)
             {
-                _stalled = true;
-                return;
+                Path path = _pathFindingSystem.GetPath(Model.CurrentCheckpointNumber + 1, _enemyFaction);
+
+                if (path != null)
+                {
+                    Model.SetPath(path);
+                    Model.TrySetNextTarget();
+                }
+                else
+                {
+                    _stalled = true;
+                    return;
+                }
             }
 
+            _currentTarget = _gridSystem.GetWorldPosition(_enemyFaction, Model.CurrentTarget);
+        }
+    }
+
+    private void OnMapChanged(Faction faction)
+    {
+        if (faction == _enemyFaction)
+        {
+            Model.ReCalculatePathToCheckpoint();
+            Model.TrySetNextTarget();
             _currentTarget = _gridSystem.GetWorldPosition(_enemyFaction, Model.CurrentTarget);
         }
     }
@@ -72,5 +100,15 @@ public class Unit : Presenter, IUpdatable, IInteractable
     {
         _stalled = false;
         _currentTarget = _gridSystem.GetWorldPosition(_enemyFaction, Model.CurrentTarget);
+    }
+
+    private void OnDied()
+    {
+        _gridSystem.ObjectPlaced -= OnMapChanged;
+        TriggerDetector.EnteredTrigger -= (this as IInteractable).OnTriggerEnter;
+        Model.Health.Died -= OnDied;
+        Model.Launched -= StartWalking;
+
+        View.OnDestroyed();
     }
 }
