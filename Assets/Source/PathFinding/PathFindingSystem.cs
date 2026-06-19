@@ -5,7 +5,7 @@ using UnityEngine.U2D;
 
 public class PathFindingSystem
 {
-    private const float MaxLittleOffset = 0.1f;
+    private const float MaxLittleOffset = 0.2f;
     private const float LineThickness = 0.3f;
     private const float AnimationDuration = 1.5f;
 
@@ -60,6 +60,7 @@ public class PathFindingSystem
     {
         _pathAnimations[faction]?.Kill();
         SpriteShapeController trajectory = _pathSplines[faction];
+        int spritesCount = trajectory.spriteShape.angleRanges[0].sprites.Count;
 
         int pathIndex = 1;
         Path currentPath = _fullPaths[faction].Get(1);
@@ -88,6 +89,8 @@ public class PathFindingSystem
                 currentPath = _fullPaths[faction].Get(++pathIndex);
                 pathEnumerator = currentPath.GetEnumerator();
                 pathEnumerator.MoveNext();
+
+                trajectory.spline.SetSpriteIndex(cellIndex - 1, (pathIndex - 1) % spritesCount);
             }
 
             position = _gridSystem.GetWorldPosition(faction, pathEnumerator.Current);
@@ -95,7 +98,7 @@ public class PathFindingSystem
 
             trajectory.spline.SetPosition(cellIndex, position + GetLittleOffset());
             trajectory.spline.SetHeight(cellIndex, LineThickness);
-            trajectory.spline.SetSpriteIndex(cellIndex, 0);
+            trajectory.spline.SetSpriteIndex(cellIndex, (pathIndex - 1) % spritesCount);
         }
 
         while (trajectory.spline.GetPointCount() < _fullPaths[faction].AllCellsCount)
@@ -105,6 +108,8 @@ public class PathFindingSystem
                 currentPath = _fullPaths[faction].Get(++pathIndex);
                 pathEnumerator = currentPath.GetEnumerator();
                 pathEnumerator.MoveNext();
+
+                trajectory.spline.SetSpriteIndex(cellIndex - 1, (pathIndex - 1) % spritesCount);
             }
 
             position = _gridSystem.GetWorldPosition(faction, pathEnumerator.Current);
@@ -112,13 +117,13 @@ public class PathFindingSystem
 
             trajectory.spline.InsertPointAt(cellIndex, position + GetLittleOffset());
             trajectory.spline.SetHeight(cellIndex, LineThickness);
-            trajectory.spline.SetSpriteIndex(cellIndex++, 0);
+            trajectory.spline.SetSpriteIndex(cellIndex++, (pathIndex - 1) % spritesCount);
         }
 
         while (trajectory.spline.GetPointCount() > _fullPaths[faction].AllCellsCount)
             trajectory.spline.RemovePointAt(trajectory.spline.GetPointCount() - 1);
 
-        float length = (trajectory.spline.GetPointCount() - 1) / AnimationDuration;
+        //float length = (trajectory.spline.GetPointCount() - 1) / AnimationDuration;
 
         // _pathAnimations[faction] = DOVirtual.Float(0f, AnimationDuration, AnimationDuration, (elapsedTime) =>
         // {
