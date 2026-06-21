@@ -2,7 +2,7 @@ using AYellowpaper.SerializedCollections;
 using UnityEngine;
 using UnityEngine.U2D;
 
-public class MapEditorRoot : MonoBehaviour
+public class EditorRoot : MonoBehaviour
 {
     [SerializeField] private MainCamera _mainCamera;
     [SerializeField] private Transform _cursor;

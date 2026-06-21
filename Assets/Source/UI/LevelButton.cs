@@ -17,12 +17,12 @@ public class LevelButton : MonoBehaviour
         _button.onClick.AddListener(OnButtonClicked);
     }
 
-    public void Initialize(bool editorMode, Faction faction, int levelNumber = -1)
+    public void Initialize(bool editorMode, Faction faction, int levelNumber, bool @new = false)
     {
         _levelNumber = levelNumber;
         _editorMode = editorMode;
         _faction = faction;
-        _label.text = levelNumber == -1 ? "new" : _levelNumber.ToString();
+        _label.text = @new ? "new" : _levelNumber.ToString();
     }
 
     private void OnButtonClicked()

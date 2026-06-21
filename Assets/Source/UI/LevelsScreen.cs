@@ -70,7 +70,7 @@ public class LevelsScreen : MonoBehaviour
 
         if (editorMode)
         {
-            _newLevelButton.Initialize(editorMode, faction, -1);
+            _newLevelButton.Initialize(editorMode, faction, levelsData.Count + 1, true);
             _newLevelButton.transform.SetAsLastSibling();
         }
 

@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 [CreateAssetMenu(fileName = "Levels", menuName = "Configs/Levels")]
 public class LevelsConfig : ScriptableObject
@@ -17,20 +17,23 @@ public class LevelsConfig : ScriptableObject
     {
         var dataList = faction == Faction.Heaven ? _heavenSectionData : _hellSectionData;
 
-        if (levelNumber == -1)
+        if (levelNumber == dataList.Count + 1)
         {
-            SaveMapData(new(true), faction);
+            SaveMapData(new(true), faction, levelNumber);
             return dataList[dataList.Count - 1].Map;
         }
 
         return dataList[GetLevelIndex(levelNumber, dataList)].Map;
     }
 
-    public void SaveMapData(MapData data, Faction faction, int levelNumber = -1)
+#if UNITY_EDITOR
+    public void SaveMapData(MapData data, Faction faction, int levelNumber)
     {
+        Undo.RecordObject(this, $"{faction} map on level {levelNumber} saved.");
+
         var dataList = faction == Faction.Heaven ? _heavenSectionData : _hellSectionData;
 
-        if (levelNumber == -1)
+        if (levelNumber == dataList.Count + 1)
         {
             dataList.Add(new LevelData() { HeavenCastleHealth = 100, HellCastleHealth = 100, Map = data });
         }
@@ -41,8 +44,10 @@ public class LevelsConfig : ScriptableObject
             dataList[GetLevelIndex(levelNumber, dataList)] = levelData;
         }
 
+        EditorUtility.SetDirty(this);
         Debug.Log("Map saved successfully");
     }
+#endif
 
     public IReadOnlyDictionary<Faction, int> GetCastleData(Faction faction, int levelNumber)
     {
