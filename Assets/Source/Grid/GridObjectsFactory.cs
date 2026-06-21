@@ -64,8 +64,7 @@ public class GridObjectsFactory : MonoBehaviour
 
     public CastleModel CreateCastle(Faction faction, bool draft)
     {
-        var castlesData = Configs.Levels.GetCastleData(GameState.CurrentPlayerFaction, GameState.CurrentLevel);
-        int healthAmount = castlesData[faction];
+        int healthAmount = Configs.Levels.GetCastleData(GameState.CurrentPlayerFaction, faction, GameState.CurrentLevel);
 
         CastleView castleView = Instantiate(_castlePrefab);
 

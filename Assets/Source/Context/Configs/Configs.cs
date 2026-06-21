@@ -8,6 +8,7 @@ public static class Configs
     public static UnitsConfig Units { get; private set; }
     public static GridConfig Grid { get; private set; }
     public static PathFindingConfig PathFinding { get; private set; }
+    public static EconomyConfig Economy { get; private set; }
 
     public static void Load()
     {
@@ -17,5 +18,6 @@ public static class Configs
         Units = Resources.Load<UnitsConfig>(nameof(Units));
         Grid = Resources.Load<GridConfig>(nameof(Grid));
         PathFinding = Resources.Load<PathFindingConfig>(nameof(PathFinding));
+        Economy = Resources.Load<EconomyConfig>(nameof(Economy));
     }
 }
