@@ -32,7 +32,7 @@ public class UnitFactory : MonoBehaviour
 
     private void Start()
     {
-        LaunchTestUnitToHeaven();
+        //LaunchTestUnitToHeaven();
     }
 
     private void Update()

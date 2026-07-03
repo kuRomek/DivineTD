@@ -31,14 +31,18 @@ public class Root : MonoBehaviour
 
         _levelsSystem = new();
 
+        EconomySystem economy = new(_levelsSystem);
         GridSystem grid = new(_levelsSystem, _map, _gridObjectsFactory, _mainCamera.Camera);
         PathFindingSystem pathFinding = new(grid, _pathSplines);
-        BuildingSystem building = new(grid, _gridObjectsFactory, _mainCamera);
+        BuildingSystem building = new(grid, _gridObjectsFactory, economy, _mainCamera);
+        RecruitingSystem recruiting = new(_unitFactory, economy, grid);
 
         Container.Register(_levelsSystem);
+        Container.Register(economy);
+        Container.Register(pathFinding);
         Container.Register(grid);
         Container.Register(building);
-        Container.Register(pathFinding);
+        Container.Register(recruiting);
         Container.Register(_widgetCanvas);
         Container.Register(_mainCamera);
         Container.Register(_gridObjectsFactory);
@@ -59,7 +63,7 @@ public class Root : MonoBehaviour
 
     private void InjectScene(SimpleDI di)
     {
-        var objects = FindObjectsByType<MonoBehaviour>(FindObjectsSortMode.None);
+        var objects = FindObjectsByType<MonoBehaviour>(FindObjectsInactive.Include, FindObjectsSortMode.None);
 
         foreach (var @object in objects)
             di.InjectConstructors(@object);

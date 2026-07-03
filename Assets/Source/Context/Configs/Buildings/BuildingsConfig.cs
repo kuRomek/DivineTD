@@ -1,3 +1,4 @@
+using System;
 using AYellowpaper.SerializedCollections;
 using UnityEngine;
 
@@ -10,5 +11,10 @@ public class BuildingsConfig : ScriptableObject
     public TowerData GetTowerData(Faction faction, TowerType towerType)
     {
         return faction == Faction.Heaven ? _heavenData[towerType] : _hellData[towerType];
+    }
+
+    public int GetCost(Faction faction, TowerType type)
+    {
+        return faction == Faction.Heaven ? _heavenData[type].Cost : _hellData[type].Cost;
     }
 }

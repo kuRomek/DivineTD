@@ -25,6 +25,7 @@ public class EconomySystem : IUpdatable
     }
 
     public IReadOnlyDictionary<Faction, (RV<int> Income, RV<int> Amount)> Funds => _funds;
+    public IReadOnlyDictionary<Faction, (float CD, RV<float> RemainingTime)> Cooldowns => _cooldowns;
 
     public void Update(float deltaTime)
     {
@@ -41,9 +42,19 @@ public class EconomySystem : IUpdatable
         }
     }
 
-    public void GetIncome(Faction faction)
+    public void ChangeFundsAmount(Faction faction, int delta)
     {
-        _funds[faction].Amount.Value += _funds[faction].Income.Value;
+        _funds[faction].Amount.Value += delta;
+    }
+
+    public void ChangeIncomeAmount(Faction faction, int delta)
+    {
+        _funds[faction].Income.Value += delta;
+    }
+
+    private void GetIncome(Faction faction)
+    {
+        ChangeFundsAmount(faction, _funds[faction].Income.Value);
     }
 
     private void OnLevelStarted()

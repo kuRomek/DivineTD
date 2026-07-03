@@ -26,6 +26,20 @@ public class LevelsConfig : ScriptableObject
         return dataList[ConvertToLevelIndex(levelNumber, dataList)].Map;
     }
 
+    public IReadOnlyList<TowerType> GetAvailableTowers(Faction levelsSection, Faction faction, int levelNumber)
+    {
+        var section = levelsSection == Faction.Heaven ? HeavenSection : HellSection;
+
+        return section[ConvertToLevelIndex(levelNumber, section)].MiscData[faction].AvailableTowerTypes;
+    }
+
+    public IReadOnlyList<UnitType> GetAvailableUnits(Faction levelsSection, Faction faction, int levelNumber)
+    {
+        var section = levelsSection == Faction.Heaven ? HeavenSection : HellSection;
+
+        return section[ConvertToLevelIndex(levelNumber, section)].MiscData[faction].AvailableUnitTypes;
+    }
+
     public int GetCastleData(Faction levelsSection, Faction faction, int levelNumber)
     {
         var section = levelsSection == Faction.Heaven ? HeavenSection : HellSection;

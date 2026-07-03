@@ -16,21 +16,25 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
+        Cost: 50
         AttackRate: 10
         Radius: 3
-        Damage: 0
+        Damage: 0.3
     - Key: 1
       Value:
+        Cost: 75
         AttackRate: 2
         Radius: 4
         Damage: 1
     - Key: 2
       Value:
+        Cost: 80
         AttackRate: 0.5
         Radius: 3
         Damage: 8
     - Key: 3
       Value:
+        Cost: 100
         AttackRate: 0.8
         Radius: 3
         Damage: 8
@@ -38,21 +42,25 @@ MonoBehaviour:
     _serializedList:
     - Key: 0
       Value:
+        Cost: 0
         AttackRate: 1
         Radius: 3
         Damage: 4
     - Key: 1
       Value:
+        Cost: 0
         AttackRate: 2
         Radius: 4
         Damage: 1
     - Key: 2
       Value:
+        Cost: 0
         AttackRate: 0.5
         Radius: 3
         Damage: 8
     - Key: 3
       Value:
+        Cost: 0
         AttackRate: 0.8
         Radius: 3
         Damage: 8

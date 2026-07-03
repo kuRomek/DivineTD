@@ -1,3 +1,4 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -5,6 +6,7 @@ public class TowerButton : MonoBehaviour
 {
     [SerializeField] private Button _buildButton;
     [SerializeField] private TowerType _type;
+    [SerializeField] private TextMeshProUGUI _costText;
 
     private BuildingSystem _buildingSystem;
     private WidgetCanvasRuntime _widgetCanvas;
@@ -15,6 +17,14 @@ public class TowerButton : MonoBehaviour
         _widgetCanvas = widgetCanvas as WidgetCanvasRuntime;
     }
 
+    public void Initialize(TowerType type)
+    {
+        _type = type;
+
+        int cost = Configs.Buildings.GetCost(GameState.CurrentPlayerFaction, _type);
+        _costText.text = cost.ToString();
+    }
+
     private void Start()
     {
         _buildButton.onClick.AddListener(OnBuildButtonClicked);
@@ -22,7 +32,7 @@ public class TowerButton : MonoBehaviour
 
     private void OnBuildButtonClicked()
     {
-        _buildingSystem.CreateTowerDraft(GameState.CurrentPlayerFaction, _type);
-        _widgetCanvas.ToggleBuildingMode(true);
+        if (_buildingSystem.TryCreateTowerDraft(GameState.CurrentPlayerFaction, _type))
+            _widgetCanvas.ToggleBuildingMode(true);
     }
 }
