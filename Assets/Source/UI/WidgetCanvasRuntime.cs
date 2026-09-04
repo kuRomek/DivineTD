@@ -43,6 +43,8 @@ public class WidgetCanvasRuntime : WidgetCanvas
 
     protected override void SubscribeToButtons()
     {
+        base.SubscribeToButtons();
+
         _acceptBuildingButton.onClick.AddListener(OnAcceptBuildingButtonClicked);
         _cancelBuildingButton.onClick.AddListener(OnCancelBuildingButtonClicked);
         _openButtonsMenuButton.onClick.AddListener(OnOpenButtonsMenuButtonClicked);
@@ -100,7 +102,7 @@ public class WidgetCanvasRuntime : WidgetCanvas
 
     private void OnLevelStarted()
     {
-        _buttonsMenu.FillButtons();
+        _buttonsMenu.InitializeButtons();
         SwitchCameraTarget(GameState.CurrentPlayerFaction);
     }
 }

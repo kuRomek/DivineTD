@@ -39,39 +39,15 @@ MonoBehaviour:
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -1, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -2}
-              Value:
-                Object:
-                  rid: 6563790284509937741
-            - Key: {x: 1, y: -2}
+            - Key: {x: 0, y: -1}
               Value:
                 Object:
                   rid: -2
             - Key: {x: 1, y: -1}
               Value:
                 Object:
-                  rid: 6563790284509937742
+                  rid: -2
             - Key: {x: 1, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -1}
-              Value:
-                Object:
-                  rid: 6563790284509937743
-            - Key: {x: 2, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: 1}
               Value:
                 Object:
                   rid: -2
@@ -79,6 +55,18 @@ MonoBehaviour:
               Value:
                 Object:
                   rid: -2
+            - Key: {x: 0, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 2}
+              Value:
+                Object:
+                  rid: 2716983489784184999
             - Key: {x: -2, y: 1}
               Value:
                 Object:
@@ -94,590 +82,23 @@ MonoBehaviour:
             - Key: {x: -2, y: -2}
               Value:
                 Object:
-                  rid: -2
-            - Key: {x: -1, y: -3}
-              Value:
-                Object:
-                  rid: 6563790284509937744
-            - Key: {x: 0, y: -3}
-              Value:
-                Object:
-                  rid: 6563790284509937745
-            - Key: {x: 1, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: 1}
-              Value:
-                Object:
-                  rid: 6563790284509937746
-            - Key: {x: 2, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: 2}
-              Value:
-                Object:
-                  rid: 6563790284509937747
-            - Key: {x: -1, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: 1}
-              Value:
-                Object:
-                  rid: 6563790284509937748
-            - Key: {x: -3, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: -2}
-              Value:
-                Object:
-                  rid: 6563790284509937749
-            - Key: {x: 3, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: -4}
-              Value:
-                Object:
-                  rid: 6563790284509937750
-            - Key: {x: -2, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -1, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -1, y: -4}
-              Value:
-                Object:
-                  rid: 6563790284509937751
-            - Key: {x: -3, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: -5}
-              Value:
-                Object:
-                  rid: 6563790284509937752
-            - Key: {x: -5, y: -5}
-              Value:
-                Object:
-                  rid: 6563790284509937753
-            - Key: {x: -4, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -1, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 6, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 6, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 6, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: 3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 3, y: 3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 4, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 2, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -7}
-              Value:
-                Object:
-                  rid: 6563790284509937754
-            - Key: {x: -1, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -6}
-              Value:
-                Object:
-                  rid: 6563790284509937755
-            - Key: {x: -6, y: -6}
-              Value:
-                Object:
-                  rid: 6563790284509937756
-            - Key: {x: -7, y: -5}
-              Value:
-                Object:
-                  rid: 6563790284509937757
-            - Key: {x: -7, y: -4}
-              Value:
-                Object:
-                  rid: 6563790284509937758
-            - Key: {x: -7, y: -3}
-              Value:
-                Object:
-                  rid: 6563790284509937759
-            - Key: {x: -7, y: -2}
-              Value:
-                Object:
-                  rid: 6563790284509937760
-            - Key: {x: -7, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: -2}
-              Value:
-                Object:
-                  rid: 6563790284509937761
-            - Key: {x: -6, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -9, y: -4}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -9, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -7, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: -8}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -8}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -9}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -8}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -3, y: -8}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -5, y: -7}
-              Value:
-                Object:
-                  rid: 6563790284509937762
-            - Key: {x: -9, y: -6}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -4, y: -7}
-              Value:
-                Object:
-                  rid: 6563790284509937763
-            - Key: {x: -7, y: -7}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -7, y: -8}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -9, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -7, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -9, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -7, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -6, y: 2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -8, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -9, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -10, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -7, y: 2}
-              Value:
-                Object:
-                  rid: -2
-        - Key: 1
-          Value:
-            _serializedList:
-            - Key: {x: 0, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -1, y: 1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: 1}
-              Value:
-                Object:
-                  rid: 6563790284509937764
-            - Key: {x: -2, y: 0}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -2, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: -1, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 0, y: -1}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 1, y: -1}
+                  rid: 2716983489784185000
+            - Key: {x: -1, y: -2}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 1, y: 0}
+            - Key: {x: 0, y: -2}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -1, y: 0}
+            - Key: {x: 1, y: -2}
               Value:
                 Object:
                   rid: -2
             - Key: {x: 2, y: -1}
               Value:
                 Object:
-                  rid: -2
+                  rid: 2716983489784185001
             - Key: {x: 2, y: 0}
               Value:
                 Object:
@@ -697,32 +118,28 @@ MonoBehaviour:
             - Key: {x: 2, y: -2}
               Value:
                 Object:
-                  rid: -2
-            - Key: {x: 3, y: -2}
-              Value:
-                Object:
-                  rid: 6563790284509937765
-            - Key: {x: 3, y: -1}
-              Value:
-                Object:
-                  rid: -2
+                  rid: 2716983489784185002
             - Key: {x: 3, y: 0}
               Value:
                 Object:
-                  rid: 6563790284509937766
+                  rid: -2
             - Key: {x: 3, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 3, y: 2}
+            - Key: {x: 3, y: -1}
               Value:
                 Object:
-                  rid: -2
-            - Key: {x: 4, y: 2}
+                  rid: 2716983489784185003
+            - Key: {x: 4, y: -1}
               Value:
                 Object:
-                  rid: -2
-            - Key: {x: 4, y: 1}
+                  rid: 2716983489784185004
+            - Key: {x: 5, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784185005
+            - Key: {x: 5, y: 0}
               Value:
                 Object:
                   rid: -2
@@ -730,47 +147,19 @@ MonoBehaviour:
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 5, y: 0}
+            - Key: {x: 4, y: 1}
               Value:
                 Object:
                   rid: -2
             - Key: {x: 4, y: 0}
               Value:
                 Object:
-                  rid: 6563790284509937767
-            - Key: {x: 4, y: -1}
-              Value:
-                Object:
-                  rid: 6563790284509937768
-            - Key: {x: 4, y: -2}
-              Value:
-                Object:
-                  rid: 6563790284509937769
-            - Key: {x: 4, y: -3}
-              Value:
-                Object:
-                  rid: 6563790284509937770
-            - Key: {x: 5, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 6, y: -3}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 6, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -2}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 5, y: -1}
-              Value:
-                Object:
-                  rid: -2
+                  rid: 2716983489784185006
             - Key: {x: 6, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 1}
               Value:
                 Object:
                   rid: -2
@@ -778,7 +167,7 @@ MonoBehaviour:
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 7, y: -1}
+            - Key: {x: 6, y: -2}
               Value:
                 Object:
                   rid: -2
@@ -790,19 +179,19 @@ MonoBehaviour:
               Value:
                 Object:
                   rid: -2
+            - Key: {x: 7, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784185007
+            - Key: {x: 8, y: -4}
+              Value:
+                Object:
+                  rid: -2
             - Key: {x: 6, y: -4}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 6, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 7, y: -5}
-              Value:
-                Object:
-                  rid: -2
-            - Key: {x: 7, y: -4}
+            - Key: {x: 6, y: -3}
               Value:
                 Object:
                   rid: -2
@@ -810,111 +199,374 @@ MonoBehaviour:
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 8, y: -4}
+            - Key: {x: 8, y: -2}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 5, y: -5}
+            - Key: {x: 8, y: -1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 4, y: -5}
+            - Key: {x: 7, y: -1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 3, y: -5}
+            - Key: {x: 7, y: 0}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 2, y: -5}
+            - Key: {x: 7, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 1, y: -5}
+            - Key: {x: 8, y: 0}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 0, y: -5}
+            - Key: {x: 8, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -1, y: -5}
+        - Key: 1
+          Value:
+            _serializedList:
+            - Key: {x: 0, y: 0}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -1, y: -6}
+            - Key: {x: 0, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 0, y: -6}
+            - Key: {x: -1, y: 0}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 1, y: -6}
+            - Key: {x: 0, y: -1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 2, y: -6}
+            - Key: {x: 1, y: -1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 3, y: -6}
+            - Key: {x: 1, y: 0}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 4, y: -6}
+            - Key: {x: 1, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 5, y: -6}
+            - Key: {x: -1, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 2, y: -7}
+            - Key: {x: -1, y: -1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 1, y: -7}
+            - Key: {x: -2, y: -1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: 0, y: -7}
+            - Key: {x: -2, y: 0}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -1, y: -7}
+            - Key: {x: -2, y: 1}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -1, y: -4}
+            - Key: {x: -3, y: 0}
+              Value:
+                Object:
+                  rid: 2716983489784185008
+            - Key: {x: -3, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784185009
+            - Key: {x: 3, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784185010
+            - Key: {x: 4, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784185011
+            - Key: {x: 5, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784185012
+            - Key: {x: 6, y: 4}
+              Value:
+                Object:
+                  rid: 2716983489784185013
+            - Key: {x: 5, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 2}
+              Value:
+                Object:
+                  rid: 2716983489784185014
+            - Key: {x: 4, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784185015
+            - Key: {x: 7, y: 4}
+              Value:
+                Object:
+                  rid: 2716983489784185016
+            - Key: {x: 8, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: -2}
               Value:
                 Object:
                   rid: -2
             - Key: {x: -2, y: -4}
               Value:
                 Object:
-                  rid: -2
-            - Key: {x: -3, y: -4}
-              Value:
-                Object:
-                  rid: 6563790284509937771
-            - Key: {x: -3, y: -5}
+                  rid: 2716983489784185017
+            - Key: {x: -1, y: -4}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -3, y: -6}
+            - Key: {x: 0, y: -4}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -2, y: -6}
+            - Key: {x: 1, y: -4}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -2, y: -7}
+            - Key: {x: 2, y: -4}
               Value:
                 Object:
                   rid: -2
-            - Key: {x: -2, y: -5}
+            - Key: {x: 3, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784185018
+            - Key: {x: 2, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784185019
+            - Key: {x: 1, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784185020
+            - Key: {x: 0, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: -5}
               Value:
                 Object:
                   rid: -2
@@ -927,8 +579,8 @@ MonoBehaviour:
           Buildings:
             CastleHealthOnStart: 100
           Economy:
-            IncomeOnStart: 10
-            FundsAmountOnStart: 100
+            IncomeOnStart: 50
+            FundsAmountOnStart: 250
       - Key: 1
         Value:
           _availableTowerTypes: 0000000001000000
@@ -936,112 +588,1166 @@ MonoBehaviour:
           Buildings:
             CastleHealthOnStart: 100
           Economy:
-            IncomeOnStart: 10
-            FundsAmountOnStart: 100
-  _hellSectionData: []
+            IncomeOnStart: 50
+            FundsAmountOnStart: 250
+  _hellSectionData:
+  - Map:
+      _cells:
+        _serializedList:
+        - Key: 0
+          Value:
+            _serializedList:
+            - Key: {x: 0, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 1}
+              Value:
+                Object:
+                  rid: 2716983489784184932
+            - Key: {x: -1, y: 0}
+              Value:
+                Object:
+                  rid: 2716983489784184933
+            - Key: {x: -1, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184934
+            - Key: {x: 0, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 1}
+              Value:
+                Object:
+                  rid: 2716983489784184935
+            - Key: {x: -3, y: 1}
+              Value:
+                Object:
+                  rid: 2716983489784184936
+            - Key: {x: -3, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184937
+            - Key: {x: -2, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184938
+            - Key: {x: -1, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184939
+            - Key: {x: 0, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184940
+            - Key: {x: 2, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184941
+            - Key: {x: 3, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 2}
+              Value:
+                Object:
+                  rid: 2716983489784184942
+            - Key: {x: 3, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 0}
+              Value:
+                Object:
+                  rid: 2716983489784184943
+            - Key: {x: 2, y: 1}
+              Value:
+                Object:
+                  rid: 2716983489784184944
+            - Key: {x: 2, y: 2}
+              Value:
+                Object:
+                  rid: 2716983489784184945
+            - Key: {x: 3, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184946
+            - Key: {x: 3, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184947
+            - Key: {x: 2, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184948
+            - Key: {x: 0, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184949
+            - Key: {x: -1, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184950
+            - Key: {x: -2, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184951
+            - Key: {x: -3, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -4, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -4, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -4, y: 1}
+              Value:
+                Object:
+                  rid: 2716983489784184952
+            - Key: {x: -4, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184953
+            - Key: {x: 4, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184954
+            - Key: {x: -4, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184955
+            - Key: {x: -4, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -4, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -4, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 4}
+              Value:
+                Object:
+                  rid: 2716983489784184956
+            - Key: {x: 5, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 0}
+              Value:
+                Object:
+                  rid: 2716983489784184957
+            - Key: {x: 5, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184958
+            - Key: {x: 5, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -5, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: 4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -7, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -7, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -7, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -6, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -7, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184959
+            - Key: {x: -7, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -7, y: 4}
+              Value:
+                Object:
+                  rid: 2716983489784184960
+            - Key: {x: -7, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -7, y: 2}
+              Value:
+                Object:
+                  rid: -2
+        - Key: 1
+          Value:
+            _serializedList:
+            - Key: {x: 0, y: 0}
+              Value:
+                Object:
+                  rid: 2716983489784184961
+            - Key: {x: 0, y: 1}
+              Value:
+                Object:
+                  rid: 2716983489784184962
+            - Key: {x: 0, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184963
+            - Key: {x: 0, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184964
+            - Key: {x: 1, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184965
+            - Key: {x: 2, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184966
+            - Key: {x: 3, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184967
+            - Key: {x: 4, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184968
+            - Key: {x: 2, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184969
+            - Key: {x: 3, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184970
+            - Key: {x: 3, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 0}
+              Value:
+                Object:
+                  rid: 2716983489784184971
+            - Key: {x: -1, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184972
+            - Key: {x: -1, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184973
+            - Key: {x: -1, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184974
+            - Key: {x: -1, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184975
+            - Key: {x: 0, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184976
+            - Key: {x: 1, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184977
+            - Key: {x: 2, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184978
+            - Key: {x: 3, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184979
+            - Key: {x: 5, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184980
+            - Key: {x: 6, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 3, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184981
+            - Key: {x: -2, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184982
+            - Key: {x: -2, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -1, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 0, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -2, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184983
+            - Key: {x: 5, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184984
+            - Key: {x: 6, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184985
+            - Key: {x: 6, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: 3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784184986
+            - Key: {x: -3, y: 3}
+              Value:
+                Object:
+                  rid: 2716983489784184987
+            - Key: {x: -3, y: 2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: 1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184988
+            - Key: {x: -3, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: -3, y: -3}
+              Value:
+                Object:
+                  rid: 2716983489784184989
+            - Key: {x: -3, y: -4}
+              Value:
+                Object:
+                  rid: 2716983489784184990
+            - Key: {x: 7, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184991
+            - Key: {x: 7, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184992
+            - Key: {x: 7, y: 0}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: -1}
+              Value:
+                Object:
+                  rid: 2716983489784184993
+            - Key: {x: 8, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 9, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 9, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 9, y: -2}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 9, y: -1}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 10, y: -3}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 10, y: -2}
+              Value:
+                Object:
+                  rid: 2716983489784184994
+            - Key: {x: 10, y: -4}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 10, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784184995
+            - Key: {x: 9, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 8, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 7, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 6, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 5, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 2, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784184996
+            - Key: {x: 3, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 4, y: -5}
+              Value:
+                Object:
+                  rid: -2
+            - Key: {x: 1, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784184997
+            - Key: {x: 0, y: -5}
+              Value:
+                Object:
+                  rid: 2716983489784184998
+    _miscData:
+      _serializedList:
+      - Key: 0
+        Value:
+          _availableTowerTypes: 
+          _availableUnitTypes: 
+          Buildings:
+            CastleHealthOnStart: 0
+          Economy:
+            IncomeOnStart: 0
+            FundsAmountOnStart: 0
+      - Key: 1
+        Value:
+          _availableTowerTypes: 
+          _availableUnitTypes: 
+          Buildings:
+            CastleHealthOnStart: 0
+          Economy:
+            IncomeOnStart: 0
+            FundsAmountOnStart: 0
   <LevelButtonPrefab>k__BackingField: {fileID: 1760751679759957783, guid: f6bc39b54a3d9aa74b81672a2c7262b4, type: 3}
   references:
     version: 2
     RefIds:
     - rid: -2
       type: {class: , ns: , asm: }
-    - rid: 6563790284509937741
+    - rid: 2716983489784184932
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937742
+    - rid: 2716983489784184933
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937743
+    - rid: 2716983489784184934
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937744
+    - rid: 2716983489784184935
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937745
+    - rid: 2716983489784184936
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937746
-      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
-      data:
-        Number: 4
-    - rid: 6563790284509937747
+    - rid: 2716983489784184937
       type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
       data:
         Number: 1
-    - rid: 6563790284509937748
-      type: {class: MapSpawnPointData, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 6563790284509937749
-      type: {class: MapCastleData, ns: , asm: Assembly-CSharp}
-      data:
-        HealthPoints: 100
-    - rid: 6563790284509937750
+    - rid: 2716983489784184938
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937751
+    - rid: 2716983489784184939
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937752
-      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 6563790284509937753
-      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
-      data: 
-    - rid: 6563790284509937754
+    - rid: 2716983489784184940
       type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
       data:
         Number: 3
-    - rid: 6563790284509937755
+    - rid: 2716983489784184941
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937756
+    - rid: 2716983489784184942
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937757
+    - rid: 2716983489784184943
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937758
+    - rid: 2716983489784184944
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937759
+    - rid: 2716983489784184945
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937760
+    - rid: 2716983489784184946
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937761
+    - rid: 2716983489784184947
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184948
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184949
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184950
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184951
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184952
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184953
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184954
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184955
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184956
+      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
+      data:
+        Number: 4
+    - rid: 2716983489784184957
+      type: {class: MapCastleData, ns: , asm: Assembly-CSharp}
+      data:
+        HealthPoints: 0
+    - rid: 2716983489784184958
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184959
+      type: {class: MapSpawnPointData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184960
       type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
       data:
         Number: 2
-    - rid: 6563790284509937762
+    - rid: 2716983489784184961
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937763
+    - rid: 2716983489784184962
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937764
+    - rid: 2716983489784184963
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184964
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184965
+      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
+      data:
+        Number: 3
+    - rid: 2716983489784184966
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184967
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184968
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184969
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184970
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184971
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184972
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184973
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184974
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184975
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184976
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184977
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184978
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184979
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184980
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184981
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184982
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184983
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184984
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184985
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184986
+      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
+      data:
+        Number: 2
+    - rid: 2716983489784184987
       type: {class: MapSpawnPointData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937765
+    - rid: 2716983489784184988
       type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
       data:
         Number: 1
-    - rid: 6563790284509937766
+    - rid: 2716983489784184989
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937767
+    - rid: 2716983489784184990
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937768
+    - rid: 2716983489784184991
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937769
+    - rid: 2716983489784184992
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937770
+    - rid: 2716983489784184993
       type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
       data: 
-    - rid: 6563790284509937771
+    - rid: 2716983489784184994
+      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
+      data:
+        Number: 4
+    - rid: 2716983489784184995
       type: {class: MapCastleData, ns: , asm: Assembly-CSharp}
       data:
-        HealthPoints: 100
+        HealthPoints: 0
+    - rid: 2716983489784184996
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184997
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184998
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784184999
+      type: {class: MapCastleData, ns: , asm: Assembly-CSharp}
+      data:
+        HealthPoints: 0
+    - rid: 2716983489784185000
+      type: {class: MapSpawnPointData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185001
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185002
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185003
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185004
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185005
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185006
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185007
+      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
+      data:
+        Number: 1
+    - rid: 2716983489784185008
+      type: {class: MapSpawnPointData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185009
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185010
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185011
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185012
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185013
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185014
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185015
+      type: {class: MapCheckpointData, ns: , asm: Assembly-CSharp}
+      data:
+        Number: 1
+    - rid: 2716983489784185016
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185017
+      type: {class: MapCastleData, ns: , asm: Assembly-CSharp}
+      data:
+        HealthPoints: 0
+    - rid: 2716983489784185018
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185019
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 
+    - rid: 2716983489784185020
+      type: {class: MapObstacleData, ns: , asm: Assembly-CSharp}
+      data: 

@@ -11,6 +11,15 @@ public class Pools : MonoBehaviour
 
     private static Pools _instance;
 
+    private LevelsSystem _levelsSystem;
+
+    private void Construct(LevelsSystem levelsSystem)
+    {
+        _levelsSystem = levelsSystem;
+
+        _levelsSystem.LevelStarted += Reset;
+    }
+
     private void Awake()
     {
         if (_instance != null)
@@ -27,5 +36,10 @@ public class Pools : MonoBehaviour
     private void InitializePools()
     {
         _bullets = new Pool<Projectile>(_bullet);
+    }
+
+    private void Reset()
+    {
+        _bullets.Reset();
     }
 }

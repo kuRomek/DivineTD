@@ -88,7 +88,9 @@ public class PathFindingSystem
             {
                 currentPath = _fullPaths[faction].Get(++pathIndex);
                 pathEnumerator = currentPath.GetEnumerator();
-                pathEnumerator.MoveNext();
+
+                if (pathEnumerator.MoveNext() == false)
+                    continue;
 
                 trajectory.spline.SetSpriteIndex(cellIndex - 1, (pathIndex - 1) % spritesCount);
             }
@@ -107,7 +109,9 @@ public class PathFindingSystem
             {
                 currentPath = _fullPaths[faction].Get(++pathIndex);
                 pathEnumerator = currentPath.GetEnumerator();
-                pathEnumerator.MoveNext();
+
+                if (pathEnumerator.MoveNext() == false)
+                    continue;
 
                 trajectory.spline.SetSpriteIndex(cellIndex - 1, (pathIndex - 1) % spritesCount);
             }

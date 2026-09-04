@@ -6,14 +6,22 @@ public abstract class WidgetCanvas : MonoBehaviour
 {
     private const float ShiftAnimationDuration = 0.2f;
 
+    [SerializeField] private Button _pauseButton;
+
+    [Space(10f)]
     [SerializeField] private Button _switchFactionButton;
     [SerializeField] private RectTransform _switchButtonSprite;
 
     [field: SerializeField] public MainCamera MainCamera { get; private set; }
 
+    private PauseSystem _pauseSystem;
+
     private Tween _switchButtonRotation;
 
-    protected abstract void SubscribeToButtons();
+    private void Construct(PauseSystem pauseSystem)
+    {
+        _pauseSystem = pauseSystem;
+    }
 
     private void Start()
     {
@@ -35,5 +43,15 @@ public abstract class WidgetCanvas : MonoBehaviour
 
         _switchButtonRotation = _switchButtonSprite.DORotate(Vector3.forward * rotation, ShiftAnimationDuration).
             SetEase(Ease.OutBack);
+    }
+
+    protected virtual void SubscribeToButtons()
+    {
+        _pauseButton.onClick.AddListener(OnPauseWindowClicked);
+    }
+
+    private void OnPauseWindowClicked()
+    {
+        _pauseSystem.Pause();
     }
 }

@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using AYellowpaper.SerializedCollections;
 using NaughtyAttributes;
 using UnityEngine;
@@ -17,6 +16,7 @@ public class UnitFactory : MonoBehaviour
 
     private float _accumTime = 0f;
     private GridSystem _gridSystem;
+    private LevelsSystem _levelsSystem;
     private PathFindingSystem _pathFindingSystem;
 
     private void Awake()
@@ -30,11 +30,6 @@ public class UnitFactory : MonoBehaviour
         _instance = this;
     }
 
-    private void Start()
-    {
-        //LaunchTestUnitToHeaven();
-    }
-
     private void Update()
     {
         _accumTime += Time.deltaTime;
@@ -46,9 +41,10 @@ public class UnitFactory : MonoBehaviour
         }
     }
 
-    private void Construct(GridSystem gridSystem, PathFindingSystem pathFindingSystem)
+    private void Construct(GridSystem gridSystem, LevelsSystem levelsSystem, PathFindingSystem pathFindingSystem)
     {
         _gridSystem = gridSystem;
+        _levelsSystem = levelsSystem;
         _pathFindingSystem = pathFindingSystem;
     }
 
@@ -95,7 +91,7 @@ public class UnitFactory : MonoBehaviour
             unitModel = new(unit.transform, unitHealthModel, faction, type,
                 (position) => _gridSystem.GetCell(enemyFaction, position), path);
 
-            unit.AttachPresenter(new Unit(unit, unitModel, _gridSystem, _pathFindingSystem, triggerDetector));
+            unit.AttachPresenter(new Unit(unit, unitModel, _gridSystem, _levelsSystem, _pathFindingSystem, triggerDetector));
 
             if (triggerDetector != null)
                 triggerDetector.AttachComponents(unitModel, unitModel);

@@ -24,6 +24,8 @@ public class WidgetCanvasEditor : WidgetCanvas
 
     protected override void SubscribeToButtons()
     {
+        base.SubscribeToButtons();
+
         _noneButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.None));
         _eraserButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.Eraser));
         _objectEraserButton.onClick.AddListener(() => _mapEditingSystem.SetBrush(MapEditingSystem.Brush.ObjectEraser));

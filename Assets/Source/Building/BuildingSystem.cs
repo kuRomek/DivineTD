@@ -1,5 +1,3 @@
-using UnityEngine;
-
 public class BuildingSystem
 {
     private readonly GridSystem _gridSystem;
@@ -19,6 +17,8 @@ public class BuildingSystem
 
     public bool TryCreateTowerDraft(Faction faction, TowerType type)
     {
+        CancelBuilding();
+
         int cost = Configs.Buildings.GetCost(faction, type);
 
         if (_economySystem.Funds[faction].Amount.Value < cost)
@@ -59,10 +59,6 @@ public class BuildingSystem
 
             _draft.Destroy();
             _draft = null;
-        }
-        else
-        {
-            Debug.LogWarning("Trying to cancel building, although there is no draft");
         }
     }
 }

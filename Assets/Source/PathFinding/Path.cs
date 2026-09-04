@@ -50,16 +50,20 @@ public class Path : IEnumerable<Vector2Int>
         openLookup.Add(start);
 
         int constraint = 1000;
+        Node current = null;
+        float minH = int.MaxValue;
+        Node closestNode = null;
+        bool success = false;
 
         while (openSet.Count > 0 && constraint-- > 0)
         {
-            var current = openSet.Pop();
+            current = openSet.Pop();
             openLookup.Remove(current.Position);
             closedSet.Add(current.Position);
 
             if (current.Position == checkpoint)
             {
-                finishNode = current;
+                success = true;
                 break;
             }
 
@@ -92,11 +96,23 @@ public class Path : IEnumerable<Vector2Int>
 
                 g = current.G + 1 + Convert.ToInt32(diagonal) * 0.5f;
                 h = PathFinding.DistanceEvaluation(neighborPosition, checkpoint, diagonalsAllowed);
+                Node node = new(neighborPosition, current, g, h);
 
-                openSet.Push(new Node(neighborPosition, current, g, h));
+                if (h < minH)
+                {
+                    minH = h;
+                    closestNode = node;
+                }
+
+                openSet.Push(node);
                 openLookup.Add(neighborPosition);
             }
         }
+
+        if (success)
+            finishNode = current;
+        else
+            finishNode = closestNode;
 
         while (finishNode != null && finishNode.Parent != null)
         {

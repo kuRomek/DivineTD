@@ -77,4 +77,9 @@ public class UnitModel : Model, IDamageable, IFactionRelated
         TrySetNextTarget();
         Launched?.Invoke();
     }
+
+    public void Die()
+    {
+        Health.ChangeAmount(-Health.CurrentAmount);
+    }
 }

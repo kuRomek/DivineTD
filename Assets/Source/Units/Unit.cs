@@ -6,6 +6,7 @@ public class Unit : Presenter, IUpdatable, IInteractable
     private const float DistanceTolerance = 0.01f;
 
     private readonly GridSystem _gridSystem;
+    private readonly LevelsSystem _levelsSystem;
     private readonly PathFindingSystem _pathFindingSystem;
     private readonly Faction _enemyFaction;
 
@@ -16,6 +17,7 @@ public class Unit : Presenter, IUpdatable, IInteractable
         View view,
         Model model,
         GridSystem gridSystem,
+        LevelsSystem levelsSystem,
         PathFindingSystem pathFindingSystem,
         TriggerDetector triggerDetector)
         : base(view, model)
@@ -23,12 +25,14 @@ public class Unit : Presenter, IUpdatable, IInteractable
         _enemyFaction = 1 - Model.Faction;
 
         _gridSystem = gridSystem;
+        _levelsSystem = levelsSystem;
         _pathFindingSystem = pathFindingSystem;
         TriggerDetector = triggerDetector;
 
         _currentTarget = _gridSystem.GetWorldPosition(_enemyFaction, Model.CurrentTarget);
 
         gridSystem.ObjectPlaced += OnMapChanged;
+        levelsSystem.LevelStarted += Model.Die;
         TriggerDetector.EnteredTrigger += (this as IInteractable).OnTriggerEnter;
         Model.Health.Died += OnDied;
         Model.Launched += StartWalking;

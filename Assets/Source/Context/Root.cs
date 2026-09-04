@@ -11,6 +11,7 @@ public class Root : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
+    [SerializeField] private PauseWindow _pauseWindow;
 
     [Header("Path Splines")]
     [SerializeField] private SerializedDictionary<Faction, SpriteShapeController> _pathSplines;
@@ -36,6 +37,7 @@ public class Root : MonoBehaviour
         PathFindingSystem pathFinding = new(grid, _pathSplines);
         BuildingSystem building = new(grid, _gridObjectsFactory, economy, _mainCamera);
         RecruitingSystem recruiting = new(_unitFactory, economy, grid);
+        PauseSystem pause = new(_pauseWindow);
 
         Container.Register(_levelsSystem);
         Container.Register(economy);
@@ -43,6 +45,7 @@ public class Root : MonoBehaviour
         Container.Register(grid);
         Container.Register(building);
         Container.Register(recruiting);
+        Container.Register(pause);
         Container.Register(_widgetCanvas);
         Container.Register(_mainCamera);
         Container.Register(_gridObjectsFactory);

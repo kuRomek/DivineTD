@@ -71,7 +71,7 @@ public class Tower : GridObject, IInteractable
         StopShooting();
 
         Shoot();
-        _shooting = DOVirtual.DelayedCall(1f / Model.Params.AttackRate, Shoot).SetLoops(-1, LoopType.Restart);
+        _shooting = DOVirtual.DelayedCall(1f / Model.Params.AttackRate, Shoot, false).SetLoops(-1, LoopType.Restart);
     }
 
     private void Shoot()

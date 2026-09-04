@@ -37,7 +37,7 @@ public class ButtonsMenu : MonoBehaviour
         return _slidingAnimation;
     }
 
-    public void FillButtons()
+    public void InitializeButtons()
     {
         var availableTowers = Configs.Levels.GetAvailableTowers(
             GameState.CurrentPlayerFaction,
