@@ -33,6 +33,7 @@ public class LevelsScreen : MonoBehaviour
     private void OnDisable()
     {
         _closeButton.onClick.RemoveListener(Close);
+        //_fading?.Kill();
     }
 
     public void Open(bool editorMode)
@@ -83,7 +84,7 @@ public class LevelsScreen : MonoBehaviour
     {
         gameObject.SetActive(false);
         _fading?.Kill();
-        _fading = _currentBackground.DOFade(0, FadeDuration);
+        _fading = _currentBackground.DOFade(0f, FadeDuration);
         _widgetsParent.gameObject.SetActive(true);
     }
 }

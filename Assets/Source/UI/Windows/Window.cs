@@ -4,16 +4,10 @@ using UnityEngine.UI;
 
 public class Window : MonoBehaviour
 {
-    [Header("Buttons")]
-    [SerializeField] private Button _closeButton;
+    [field: SerializeField] public Button CloseButton { get; private set; }
 
     public event Action Opened;
     public event Action Closed;
-
-    private void Start()
-    {
-        SubscribeToButtons();
-    }
 
     public void Open()
     {
@@ -33,8 +27,4 @@ public class Window : MonoBehaviour
         }
     }
 
-    protected virtual void SubscribeToButtons()
-    {
-        _closeButton.onClick.AddListener(Close);
-    }
 }

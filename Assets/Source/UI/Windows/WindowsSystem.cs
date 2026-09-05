@@ -28,12 +28,14 @@ public class WindowsSystem
         }
     }
 
-    private void CloseCurrentWindow()
+    public void CloseCurrentWindow()
     {
         if (_currentWindow != null)
+        {
             _currentWindow.Close();
-
-        _currentWindow = null;
+            _currentWindow.CloseButton.onClick.RemoveListener(CloseCurrentWindow);
+            _currentWindow = null;
+        }
 
         _pauseSystem.Unpause();
     }
@@ -59,6 +61,7 @@ public class WindowsSystem
         _pauseSystem.Pause();
         _currentWindow = window;
         window.Open();
+        window.CloseButton.onClick.AddListener(CloseCurrentWindow);
     }
 
     private void OnLevelEnded(bool win)

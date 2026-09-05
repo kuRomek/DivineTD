@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ButtonsMenu : MonoBehaviour
 {
+    private const float SlidingDuration = 0.4f;
+
     [SerializeField] private RectTransform _towersButtonContainer;
     [SerializeField] private RectTransform _unitsButtonContainer;
     [SerializeField] private TowerButton _towerButtonPrefab;
@@ -11,8 +13,6 @@ public class ButtonsMenu : MonoBehaviour
 
     private readonly List<TowerButton> _towerButtons = new();
     private readonly List<UnitButton> _unitButtons = new();
-
-    private const float SlidingDuration = 0.4f;
 
     private RectTransform _rect;
     private Tween _slidingAnimation;
