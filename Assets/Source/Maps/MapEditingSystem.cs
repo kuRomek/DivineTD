@@ -108,7 +108,7 @@ public class MapEditingSystem : IUpdatable
 
     private void CreateCastle(Vector2Int cell)
     {
-        CastleModel targetCastle = _gridSystem.Map.Castles[_camera.TargetFaction].Item2;
+        CastleModel targetCastle = _gridSystem.Map.Castles[_camera.TargetFaction].Model;
 
         if (targetCastle == null && _gridSystem.CheckTileAvailability(cell, _camera.TargetFaction))
         {

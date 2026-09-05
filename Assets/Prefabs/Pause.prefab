@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7963036035675582043}
   - component: {fileID: 1931937909867330770}
   - component: {fileID: 8117717114686121421}
+  - component: {fileID: 4147920894236661454}
   m_Layer: 0
   m_Name: '[MainMenu]'
   m_TagString: Untagged
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &4147920894236661454
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2006253695488083921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 554eda087bef8889997f808abb6ad123, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenuButton
+  _button: {fileID: 8117717114686121421}
 --- !u!1 &2966269883081572709
 GameObject:
   m_ObjectHideFlags: 0
@@ -354,51 +368,16 @@ PrefabInstance:
       propertyPath: m_text
       value: Pause
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5360102023801419311, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 2023211319982379832, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
       insertIndex: 1
       addedObject: {fileID: 7690472032309078120}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3498215459135243651, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1404837106024328699}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
---- !u!1 &271741010952163922 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3498215459135243651, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
-  m_PrefabInstance: {fileID: 3695559111127914449}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1404837106024328699
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 271741010952163922}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b322013f927385dac1ace0073cab51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseWindow
-  _closeButton: {fileID: 8105084470265324469}
-  _mainMenuButton: {fileID: 8117717114686121421}
-  _mainMenuScene: Menu
 --- !u!224 &3412216239700149481 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2023211319982379832, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
   m_PrefabInstance: {fileID: 3695559111127914449}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &8105084470265324469 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4842011768262751332, guid: 2d48274d73537743f91d634d3c6a9203, type: 3}
-  m_PrefabInstance: {fileID: 3695559111127914449}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button

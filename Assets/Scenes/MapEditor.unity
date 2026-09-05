@@ -2428,15 +2428,15 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
 --- !u!114 &1175679741 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1404837106024328699, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
+  m_CorrespondingSourceObject: {fileID: 8731260365275783678, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
   m_PrefabInstance: {fileID: 1175679739}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b322013f927385dac1ace0073cab51, type: 3}
+  m_Script: {fileID: 11500000, guid: d84a49b99e7d7e5dab6186f0d47284f3, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PauseWindow
+  m_EditorClassIdentifier: Assembly-CSharp::Window
 --- !u!1 &1197663903
 GameObject:
   m_ObjectHideFlags: 0
@@ -3881,6 +3881,7 @@ MonoBehaviour:
   _cursor: {fileID: 1114899250}
   _map: {fileID: 1818131248}
   _widgetCanvas: {fileID: 2012643619}
+  _pauseWindow: {fileID: 1175679741}
   _pathSplines:
     _serializedList:
     - Key: 0
@@ -4918,7 +4919,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WidgetsCanvasEditor
   _pauseButton: {fileID: 1504767211}
-  _pauseWindow: {fileID: 1175679741}
+  _pauseWindow: {fileID: 0}
   _switchFactionButton: {fileID: 79524696}
   _switchButtonSprite: {fileID: 1394981558}
   <MainCamera>k__BackingField: {fileID: 782009023}

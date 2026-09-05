@@ -579,8 +579,8 @@ MonoBehaviour:
           Buildings:
             CastleHealthOnStart: 100
           Economy:
-            IncomeOnStart: 50
-            FundsAmountOnStart: 250
+            IncomeOnStart: 5000
+            FundsAmountOnStart: 10000
       - Key: 1
         Value:
           _availableTowerTypes: 0000000001000000
@@ -1448,22 +1448,22 @@ MonoBehaviour:
       _serializedList:
       - Key: 0
         Value:
-          _availableTowerTypes: 
-          _availableUnitTypes: 
+          _availableTowerTypes: 0000000001000000
+          _availableUnitTypes: 0000000001000000
           Buildings:
-            CastleHealthOnStart: 0
+            CastleHealthOnStart: 100
           Economy:
-            IncomeOnStart: 0
-            FundsAmountOnStart: 0
+            IncomeOnStart: 5000
+            FundsAmountOnStart: 10000
       - Key: 1
         Value:
-          _availableTowerTypes: 
-          _availableUnitTypes: 
+          _availableTowerTypes: 0000000001000000
+          _availableUnitTypes: 0000000001000000
           Buildings:
-            CastleHealthOnStart: 0
+            CastleHealthOnStart: 100
           Economy:
-            IncomeOnStart: 0
-            FundsAmountOnStart: 0
+            IncomeOnStart: 50
+            FundsAmountOnStart: 100
   <LevelButtonPrefab>k__BackingField: {fileID: 1760751679759957783, guid: f6bc39b54a3d9aa74b81672a2c7262b4, type: 3}
   references:
     version: 2

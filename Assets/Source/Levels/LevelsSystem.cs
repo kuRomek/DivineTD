@@ -8,15 +8,15 @@ public class LevelsSystem
     }
 
     public event Action LevelStarted;
-    public event Action LevelEnded;
+    public event Action<bool> LevelEnded;
 
     public void StartLevel()
     {
         LevelStarted?.Invoke();
     }
 
-    public void EndLevel()
+    public void EndLevel(bool win)
     {
-        LevelEnded?.Invoke();
+        LevelEnded?.Invoke(win);
     }
 }

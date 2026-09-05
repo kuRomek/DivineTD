@@ -19,7 +19,7 @@ MonoBehaviour:
         Cost: 50
         AttackRate: 10
         Radius: 3
-        Damage: 0
+        Damage: 0.2
     - Key: 1
       Value:
         Cost: 75

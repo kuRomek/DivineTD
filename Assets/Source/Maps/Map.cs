@@ -46,7 +46,7 @@ public class Map : MonoBehaviour
     public IReadOnlyDictionary<Faction, Transform> CameraSpots => _cameraSpots;
     public IReadOnlyDictionary<Faction, Tilemap> Tilemaps => _tilemaps;
     public IReadOnlyDictionary<Faction, (Vector2Int, SpawnPointModel)> SpawnPoints => _spawnPoints;
-    public IReadOnlyDictionary<Faction, (Vector2Int, CastleModel)> Castles => _castles;
+    public IReadOnlyDictionary<Faction, (Vector2Int Position, CastleModel Model)> Castles => _castles;
     public IReadOnlyDictionary<Faction, int> CheckpointNumbers => _checkpointNumbers;
 
     public IReadOnlyDictionary<Vector2Int, Tile> this[Faction faction]

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4895745024263766645}
   - component: {fileID: 3653421619670044447}
   - component: {fileID: 8457952196263143686}
+  - component: {fileID: 5408919446246747939}
   m_Layer: 0
   m_Name: '[Restart]'
   m_TagString: Untagged
@@ -121,6 +122,19 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &5408919446246747939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 674599559755443326}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51cd2bab6f69678d6836b5e6f2c5012e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RestartLevelButton
+  _button: {fileID: 8457952196263143686}
 --- !u!1 &8619444271208042942
 GameObject:
   m_ObjectHideFlags: 0
@@ -270,7 +284,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 271741010952163922, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
       propertyPath: m_Name
-      value: PauseRuntime Variant
+      value: PauseRuntime
       objectReference: {fileID: 0}
     - target: {fileID: 5899147639624109622, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
       propertyPath: m_Pivot.x
@@ -363,54 +377,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3412216239700149481, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
       insertIndex: 2
       addedObject: {fileID: 4058882262459236880}
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 271741010952163922, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 568655100355875276}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
---- !u!114 &2320529578220019949 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8117717114686121421, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
-  m_PrefabInstance: {fileID: 5806197579526882592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!114 &2371367913096341141 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8105084470265324469, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
-  m_PrefabInstance: {fileID: 5806197579526882592}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Button
---- !u!1 &6005175091851908978 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 271741010952163922, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}
-  m_PrefabInstance: {fileID: 5806197579526882592}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &568655100355875276
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6005175091851908978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e64abf67f35554a0b9da8d24f51cd586, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::RuntimePauseWindow
-  _closeButton: {fileID: 2371367913096341141}
-  _mainMenuButton: {fileID: 2320529578220019949}
-  _mainMenuScene: Menu
-  _restartButton: {fileID: 8457952196263143686}
 --- !u!224 &9207998085442781641 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3412216239700149481, guid: b4f73d35e12480e1aad07d6789b34515, type: 3}

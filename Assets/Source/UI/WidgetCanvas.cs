@@ -14,13 +14,13 @@ public abstract class WidgetCanvas : MonoBehaviour
 
     [field: SerializeField] public MainCamera MainCamera { get; private set; }
 
-    private PauseSystem _pauseSystem;
+    private WindowsSystem _windowsSystem;
 
     private Tween _switchButtonRotation;
 
-    private void Construct(PauseSystem pauseSystem)
+    private void Construct(WindowsSystem windowsSystem)
     {
-        _pauseSystem = pauseSystem;
+        _windowsSystem = windowsSystem;
     }
 
     private void Start()
@@ -52,6 +52,6 @@ public abstract class WidgetCanvas : MonoBehaviour
 
     private void OnPauseWindowClicked()
     {
-        _pauseSystem.Pause();
+        _windowsSystem.ShowPauseWindow();
     }
 }

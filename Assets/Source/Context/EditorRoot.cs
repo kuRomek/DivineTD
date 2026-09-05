@@ -12,6 +12,7 @@ public class EditorRoot : MonoBehaviour
 
     [Header("UI")]
     [SerializeField] private WidgetCanvas _widgetCanvas;
+    [SerializeField] private Window _pauseWindow;
 
     [Header("Path Splines")]
     [SerializeField] private SerializedDictionary<Faction, SpriteShapeController> _pathSplines;
@@ -30,10 +31,14 @@ public class EditorRoot : MonoBehaviour
         GridSystem grid = new(null, _map, _gridObjectsFactory, _mainCamera.Camera);
         PathFindingSystem pathFinding = new(grid, _pathSplines);
         MapEditingSystem mapEditing = new(_mainCamera, grid, _gridObjectsFactory, _cursor);
+        PauseSystem pause = new();
+        WindowsSystem windows = new(pause, null, _pauseWindow, null, null);
 
         Container.Register(grid);
         Container.Register(pathFinding);
         Container.Register(mapEditing);
+        Container.Register(pause);
+        Container.Register(windows);
         Container.Register(_mainCamera);
         Container.Register(_widgetCanvas);
         Container.Register(_gridObjectsFactory);
